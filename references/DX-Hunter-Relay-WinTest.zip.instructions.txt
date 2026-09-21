@@ -1,0 +1,75 @@
+============================================================
+  DX Hunter — Relay Cluster pour Win-Test / DXLog
+  Instructions d'installation
+============================================================
+
+ÉTAPE 1 — Installer Python (si pas déjà fait)
+----------------------------------------------
+Télécharger Python 3.x depuis : https://www.python.org/downloads/
+Cocher "Add Python to PATH" pendant l'installation.
+
+
+ÉTAPE 2 — Installer la dépendance
+----------------------------------
+Ouvrir un terminal (CMD ou PowerShell) et taper :
+
+    pip uninstall websocket
+    pip uninstall websocket-client
+    pip install websocket-client
+
+IMPORTANT : Il faut installer "websocket-client" (avec le tiret),
+PAS "websocket" tout seul. Si tu as l'erreur "module 'websocket'
+has no attribute 'WebSocketApp'", c'est que le mauvais package
+est installé. Désinstalle les deux et réinstalle websocket-client.
+
+
+ÉTAPE 3 — Lancer le relay
+--------------------------
+Dans le terminal, naviguer vers le dossier où se trouve le script :
+
+    cd C:\Users\TonNom\Documents\  (ou là où tu as mis le fichier)
+    python dxhunter-cluster-relay.py
+
+Tu devrais voir :
+    [WebSocket] Connecte au serveur DX Hunter
+    [Telnet] Serveur en ecoute sur 127.0.0.1:7300
+
+
+ÉTAPE 4 — Configurer Win-Test
+------------------------------
+Dans Win-Test :
+    Options → DX Cluster → Telnet
+    Host : 127.0.0.1
+    Port : 7300
+    Cliquer "Connect"
+
+Les spots DX apparaîtront automatiquement dans le bandmap.
+
+
+ÉTAPE 4 bis — Configurer DXLog (alternative)
+----------------------------------------------
+Dans DXLog :
+    Config → Packet/Cluster → Telnet
+    Host : 127.0.0.1
+    Port : 7300
+
+
+ARRÊTER LE RELAY
+-----------------
+Appuyer sur Ctrl+C dans le terminal.
+
+
+EN CAS DE PROBLÈME
+-------------------
+1. "module 'websocket' has no attribute 'WebSocketApp'"
+   → pip uninstall websocket && pip install websocket-client
+
+2. "Impossible d'écouter sur le port 7300"
+   → Un autre programme utilise déjà ce port. Ferme-le ou
+     lance avec un autre port : python dxhunter-cluster-relay.py --port 7301
+
+3. Le relay se déconnecte/reconnecte en boucle
+   → Vérifie ta connexion internet. Le relay se reconnecte
+     automatiquement toutes les 5 secondes.
+
+============================================================

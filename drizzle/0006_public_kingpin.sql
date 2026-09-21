@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `locator` varchar(8);

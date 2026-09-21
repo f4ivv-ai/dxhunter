@@ -1,0 +1,16 @@
+{
+  "name": "dx-daruma-cat-bridge",
+  "version": "1.0.0",
+  "description": "DX Daruma CAT Bridge — Contrôle FlexRadio 6000 series via SmartSDR TCP/IP API",
+  "type": "module",
+  "main": "bridge.mjs",
+  "scripts": {
+    "start": "node bridge.mjs",
+    "discover": "node bridge.mjs --discover"
+  },
+  "keywords": ["flexradio", "smartsdr", "cat", "ham-radio", "dx"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

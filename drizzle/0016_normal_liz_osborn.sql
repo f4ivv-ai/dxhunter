@@ -1,0 +1,1 @@
+ALTER TABLE `cat_relay_state` MODIFY COLUMN `updatedAt` timestamp(3) NOT NULL;

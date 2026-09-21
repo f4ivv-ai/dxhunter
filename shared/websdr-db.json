@@ -1,0 +1,2213 @@
+[
+  {
+    "name": "DG8NGN",
+    "url": "http://anwanden.ddns.net:8901/",
+    "locator": "JN59lj",
+    "lat": 49.396,
+    "lon": 10.958,
+    "country": "DE",
+    "city": "Oberasbach",
+    "type": "websdr"
+  },
+  {
+    "name": "WebSDR of DK0TE - Friedrichshafen - Germany - Lake Constance",
+    "url": "http://dk0te.dhbw-ravensburg.de:8901/",
+    "locator": "JN47rp",
+    "lat": 47.648,
+    "lon": 9.462,
+    "country": "DE",
+    "city": "Friedrichshafen",
+    "type": "websdr"
+  },
+  {
+    "name": "WebSDR for QO-100, 160/80m, 60/40m, 20m, 6m and local VHF/UHF/SHF bands 2m/70cm/",
+    "url": "http://sdr.homeip.net:8901/",
+    "locator": "JO40ib",
+    "lat": 50.062,
+    "lon": 8.708,
+    "country": "DE",
+    "city": "Neu-Isenburg",
+    "type": "websdr"
+  },
+  {
+    "name": "CX1AAO Websdr Playa Hermosa,Maldonado, Uruguay",
+    "url": "http://phermosa.dyndns.org:8901/",
+    "locator": "GF25id",
+    "lat": -34.852,
+    "lon": -55.288,
+    "country": "UY",
+    "city": "Piriápolis",
+    "type": "websdr"
+  },
+  {
+    "name": "0-32 MHz SDR, Montevideo, Uruguay",
+    "url": "http://cx8bit.proxy.kiwisdr.com:8073/",
+    "locator": "GF15wc",
+    "lat": -34.9,
+    "lon": -56.156,
+    "country": "UY",
+    "city": "Montevideo",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR, Montevideo, Uruguay",
+    "url": "http://cx8bit.proxy.kiwisdr.com/",
+    "locator": "GF15wc",
+    "lat": -34.9,
+    "lon": -56.156,
+    "country": "UY",
+    "city": "Montevideo",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "22dx.ru WebSDR in Barnaul city, Altai region, Russia",
+    "url": "http://46.241.39.39:8901/",
+    "locator": "NO13th",
+    "lat": 53.312,
+    "lon": 83.625,
+    "country": "RU",
+    "city": "Novosilikatnyy",
+    "type": "websdr"
+  },
+  {
+    "name": "UA6EH WebSDR Server",
+    "url": "http://85.173.189.23:8901/",
+    "locator": "LN03su",
+    "lat": 43.869,
+    "lon": 41.579,
+    "country": "RU",
+    "city": "Zelenchukskaya",
+    "type": "websdr"
+  },
+  {
+    "name": "Russia, the Lipetsk city, WebSDR 2m, 40m, 80m (144-146 Mhz, 7 Mhz, 3 Mhz)",
+    "url": "http://stream.sdr48.ru/",
+    "locator": "KO92so",
+    "lat": 52.604,
+    "lon": 39.542,
+    "country": "RU",
+    "city": "Lipetsk",
+    "type": "websdr"
+  },
+  {
+    "name": "HB9AZT SIGINT REUTE/SWITZERLAND",
+    "url": "http://62.2.184.6:8073/",
+    "locator": "JN47sj",
+    "lat": 47.41,
+    "lon": 9.58,
+    "country": "CH",
+    "city": "Rebstein",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR, HB9FLO, Obere Warte ZH (Strahlegg) Switzerland, optimized for 20-3",
+    "url": "http://80.75.112.98:8073/",
+    "locator": "JN47lh",
+    "lat": 47.329,
+    "lon": 8.962,
+    "country": "CH",
+    "city": "Goldingen",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR, HB9FLO, Obere Warte ZH (Strahlegg) Switzerland, optimized for 20-3",
+    "url": "http://80.75.112.98:8074/",
+    "locator": "JN47lh",
+    "lat": 47.329,
+    "lon": 8.962,
+    "country": "CH",
+    "city": "Goldingen",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "NA5B WebSDR in Washington DC area USA. VLF-MF-HF: MW-SW-CB Bands, 160-80-40-30-2",
+    "url": "http://na5b.com:8901/",
+    "locator": "FM18js",
+    "lat": 38.771,
+    "lon": -77.208,
+    "country": "US",
+    "city": "West Springfield",
+    "type": "websdr"
+  },
+  {
+    "name": "KB5AVY WebSDR -NEW ORLEANS LOUISIANA- Raspberry PI FUNcube Pro Rcvr 5 HF BANDS",
+    "url": "http://kb5avy.hopto.org:8903/",
+    "locator": "EM40wa",
+    "lat": 30.021,
+    "lon": -90.125,
+    "country": "US",
+    "city": "Metairie",
+    "type": "websdr"
+  },
+  {
+    "name": "RTLSDR on Raspberry Pi EM12ho W2DB",
+    "url": "http://sdr.ddns.net:8901/",
+    "locator": "EM12ho",
+    "lat": 32.604,
+    "lon": -97.375,
+    "country": "US",
+    "city": "Crowley",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Alberta",
+    "url": "http://72.172.110.98:8175/",
+    "locator": "DO42ce",
+    "lat": 52.2,
+    "lon": -111.8,
+    "country": "CA",
+    "city": "Hanna",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "VE6JY | Lamont, ALberta",
+    "url": "http://ciw321.cfars.ca:8174/",
+    "locator": "DO33or",
+    "lat": 53.74,
+    "lon": -112.83,
+    "country": "CA",
+    "city": "Lamont",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "VE6JY | Lamont, ALberta",
+    "url": "http://kiwisdr.ve6slp.ca:8173/",
+    "locator": "DO33or",
+    "lat": 53.74,
+    "lon": -112.83,
+    "country": "CA",
+    "city": "Lamont",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, TF3GZ Raufarhofn Iceland",
+    "url": "http://78.40.253.65:80/",
+    "locator": "IP26ak",
+    "lat": 66.45,
+    "lon": -15.95,
+    "country": "IS",
+    "city": "Húsavík",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, TF3GZ Raufarhofn Iceland",
+    "url": "http://78.40.253.65/",
+    "locator": "IP26ak",
+    "lat": 66.45,
+    "lon": -15.95,
+    "country": "IS",
+    "city": "Húsavík",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Orlygshofn; Iceland",
+    "url": "http://157.157.21.239:8080/",
+    "locator": "HP75wn",
+    "lat": 65.58,
+    "lon": -24.138,
+    "country": "IS",
+    "city": "Ólafsvík",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "some RTL dongles with converter",
+    "url": "http://websdr.printf.cc:8901/",
+    "locator": "KO04sd",
+    "lat": 54.146,
+    "lon": 21.542,
+    "country": "PL",
+    "city": "Srokowo",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz KIWIsdr SP1EXB | Stare Wierzchowo, POLAND",
+    "url": "http://87.251.229.127:8073/",
+    "locator": "JO83iu",
+    "lat": 53.85,
+    "lon": 16.68,
+    "country": "PL",
+    "city": "Bobolice",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "\\- 0-30MHz HF SDR PLONSK- 161OS344 | 2.5m+0.8m Two active copper tube loop anten",
+    "url": "http://plonsk.proxy.kiwisdr.com:8073/",
+    "locator": "KO02eo",
+    "lat": 52.615,
+    "lon": 20.36,
+    "country": "PL",
+    "city": "Płońsk",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "FAIRS WEBSDR in Lvov Ukraine",
+    "url": "http://91.201.190.4:8901/",
+    "locator": "KN29au",
+    "lat": 49.854,
+    "lon": 24.042,
+    "country": "UA",
+    "city": "Lviv",
+    "type": "websdr"
+  },
+  {
+    "name": "FAIRS WEBSDR in Western Ukraine",
+    "url": "http://194.44.134.212:8901/",
+    "locator": "KN19xm",
+    "lat": 49.521,
+    "lon": 23.958,
+    "country": "UA",
+    "city": "Rozvadiv",
+    "type": "websdr"
+  },
+  {
+    "name": "SDR Алушта, Крым",
+    "url": "https://rikmotik.ru/",
+    "locator": "KN74eq",
+    "lat": 44.676,
+    "lon": 34.408,
+    "country": "UA",
+    "city": "Alushta",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-30 MHz SDR | Kawasaki, JAPAN",
+    "url": "http://aa842.jp:8073/",
+    "locator": "PM95um",
+    "lat": 35.54,
+    "lon": 139.69,
+    "country": "JP",
+    "city": "Kawasaki",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, JA0VEU, MINOWA, NAGANO, JAPAN",
+    "url": "http://ja0veu.proxy.kiwisdr.com:8073/",
+    "locator": "PM85xv",
+    "lat": 35.915,
+    "lon": 137.982,
+    "country": "JP",
+    "city": "Tatsuno",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, Azumino-city, NAGANO JAPAN",
+    "url": "http://jf0fumkiwi.ddns.net:8073/",
+    "locator": "PM86wh",
+    "lat": 36.304,
+    "lon": 137.906,
+    "country": "JP",
+    "city": "Toyoshina",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "BATC & AMSAT-UK QO-100 (Es'Hail-2) Geostationary Satellite WebSDR",
+    "url": "http://eshail.batc.org.uk:8901/",
+    "locator": "IO70jb",
+    "lat": 50.062,
+    "lon": -5.208,
+    "country": "GB",
+    "city": "Mullion",
+    "type": "websdr"
+  },
+  {
+    "name": "Muti-band webSDR located at the former RAF Hack Green in Cheshire",
+    "url": "http://hackgreensdr.org:8901/",
+    "locator": "IO83ra",
+    "lat": 53.021,
+    "lon": -2.542,
+    "country": "GB",
+    "city": "Audlem",
+    "type": "websdr"
+  },
+  {
+    "name": "Barney's Websdr #1 LF/MF/80m & 40m Bedford England",
+    "url": "http://remoteradio.changeip.org:8073/",
+    "locator": "IO92sc",
+    "lat": 52.117,
+    "lon": -0.45,
+    "country": "GB",
+    "city": "Elstow",
+    "type": "websdr"
+  },
+  {
+    "name": "\\- Ham - Bordeaux (France) 80m / 40m / 20m / 15m / 10m / 144 Mhz / 433 Mhz / Es'",
+    "url": "http://ham.websdrbordeaux.fr:8000/",
+    "locator": "IN94rp",
+    "lat": 44.648,
+    "lon": -0.538,
+    "country": "FR",
+    "city": "Saint-Morillon",
+    "type": "websdr"
+  },
+  {
+    "name": "RASPBERRY+SoftRock 6.1 : Sysop F5CES",
+    "url": "http://37.64.57.142:8901/",
+    "locator": "JN18hn",
+    "lat": 48.564,
+    "lon": 2.609,
+    "country": "FR",
+    "city": "Cesson",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR, 14HAM01 / Daviken - Chantilly (60) North France",
+    "url": "http://daviken.ddns.net:8073/",
+    "locator": "JN19fe",
+    "lat": 49.193,
+    "lon": 2.469,
+    "country": "FR",
+    "city": "Chantilly",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "25 meter radio telescope near Dwingeloo, The Netherlands",
+    "url": "http://websdr.camras.nl:8901/",
+    "locator": "JO32et",
+    "lat": 52.812,
+    "lon": 6.375,
+    "country": "NL",
+    "city": "Dwingeloo",
+    "type": "websdr"
+  },
+  {
+    "name": "WebSDR at the University of Twente, Enschede, NL",
+    "url": "http://websdr.ewi.utwente.nl:8901/",
+    "locator": "JO32kf",
+    "lat": 52.229,
+    "lon": 6.875,
+    "country": "NL",
+    "city": "Twekkelerveld",
+    "type": "websdr"
+  },
+  {
+    "name": "10 GHz websdr @ 60m agl",
+    "url": "http://websdr.pi2ehv.ampr.org:8901/",
+    "locator": "JO21rl",
+    "lat": 51.479,
+    "lon": 5.458,
+    "country": "NL",
+    "city": "Woenselse Heide",
+    "type": "websdr"
+  },
+  {
+    "name": "Red Pitaya SDR",
+    "url": "http://es4o.ee:8901/",
+    "locator": "KO39dc",
+    "lat": 59.104,
+    "lon": 26.292,
+    "country": "EE",
+    "city": "Väike-Maarja",
+    "type": "websdr"
+  },
+  {
+    "name": "ES-SVL 30m SDR | Tallinn, Estonia",
+    "url": "http://21712.proxy.kiwisdr.com:8073/",
+    "locator": "KO29hi",
+    "lat": 59.372,
+    "lon": 24.628,
+    "country": "EE",
+    "city": "Laagri",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "ES-SWL 30m SDR | Tallinn, Estonia",
+    "url": "http://21712.proxy.kiwisdr.com/",
+    "locator": "KO29hi",
+    "lat": 59.372,
+    "lon": 24.628,
+    "country": "EE",
+    "city": "Laagri",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "IS0GRB QO-100 (Es'Hail-2) Geostationary SAT 26Est (10489 Ham NB Transponder)",
+    "url": "http://websdr.is0grb.it:8901/",
+    "locator": "JM49oj",
+    "lat": 39.396,
+    "lon": 9.208,
+    "country": "IT",
+    "city": "Dolianova",
+    "type": "websdr"
+  },
+  {
+    "name": "IS0GRB VHF 144-146 MHz WebSDR in south Sardinia, Italy (SSB DX, Local FM, Satell",
+    "url": "http://websdr.is0grb.it:8902/",
+    "locator": "JM49oj",
+    "lat": 39.396,
+    "lon": 9.208,
+    "country": "IT",
+    "city": "Dolianova",
+    "type": "websdr"
+  },
+  {
+    "name": "IS0GRB SHF 1296-1297 MHz WebSDR in south Sardinia, Italy",
+    "url": "http://websdr.is0grb.it:8903/",
+    "locator": "JM49oj",
+    "lat": 39.396,
+    "lon": 9.208,
+    "country": "IT",
+    "city": "Dolianova",
+    "type": "websdr"
+  },
+  {
+    "name": "0\\.02-32 MHz SDR at Szekesfehervar, Hungary [2x27m HF Dipole]",
+    "url": "http://fsdr.duckdns.org:80/",
+    "locator": "JN97ed",
+    "lat": 47.15,
+    "lon": 18.39,
+    "country": "HU",
+    "city": "Szabadbattyán",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "1\\.7-30 MHz SDR, HG5ACZ, Hungary, JN87pq, FD4 windom",
+    "url": "http://hg5acz.ddns.net:8073/",
+    "locator": "JN87pq",
+    "lat": 47.691,
+    "lon": 17.253,
+    "country": "HU",
+    "city": "Bősárkány",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "KiwiSDR with Dipole | Szekesfehervar, Hungary",
+    "url": "http://fsdr.duckdns.org/",
+    "locator": "JN97ed",
+    "lat": 47.152,
+    "lon": 18.39,
+    "country": "HU",
+    "city": "Szabadbattyán",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Ireland North West.....Ireland",
+    "url": "http://irelandnorthwest.proxy.kiwisdr.com:8073/",
+    "locator": "IO54if",
+    "lat": 54.229,
+    "lon": -9.312,
+    "country": "IE",
+    "city": "Crossmolina",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Ireland North West 2 📻",
+    "url": "http://irelandnorthwest2.proxy.kiwisdr.com:8073/",
+    "locator": "IO54if",
+    "lat": 54.229,
+    "lon": -9.312,
+    "country": "IE",
+    "city": "Crossmolina",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "EI6IZ SDR #1 KiwiSDR V2 | Castlebar, Co Mayo, Ireland",
+    "url": "http://kiwi.minish.org:8073/",
+    "locator": "IO53hu",
+    "lat": 53.84,
+    "lon": -9.37,
+    "country": "IE",
+    "city": "Castlebar",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, BM2KVV Taiwan #1",
+    "url": "http://jplin53a.proxy.kiwisdr.com:8073/",
+    "locator": "PL05vc",
+    "lat": 25.106,
+    "lon": 121.817,
+    "country": "TW",
+    "city": "Keelung",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, BM2KVV Taiwan #2",
+    "url": "http://jplin53c.proxy.kiwisdr.com:8073/",
+    "locator": "PL05mc",
+    "lat": 25.11,
+    "lon": 121.0,
+    "country": "TW",
+    "city": "Zhubei",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, BV7YA | Kaohsiung, Taiwan",
+    "url": "http://59.125.133.73:8073/",
+    "locator": "PL02dp",
+    "lat": 22.64,
+    "lon": 120.303,
+    "country": "TW",
+    "city": "Kaohsiung",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz KiwiSDR • Bonito Megaloop FX • aprs.fi, Kuopio, Finland, Europe",
+    "url": "http://kiwi-kuo.aprs.fi:8073/",
+    "locator": "KP33pb",
+    "lat": 63.075,
+    "lon": 27.275,
+    "country": "FI",
+    "city": "Maaninka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, OH6LSL, Finland",
+    "url": "http://kiwisdr.oh6ai.fi:8073/",
+    "locator": "KP13lu",
+    "lat": 63.836,
+    "lon": 22.957,
+    "country": "FI",
+    "city": "Kronoby",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "SUOMEN DX-LIITTO (SDXL-PAR) вҖў FINNISH DX-ASSOCIATION (FDXA) вҖў 80M HORISONTAL",
+    "url": "http://oh1rj.proxy.kiwisdr.com:8073/",
+    "locator": "KP10ei",
+    "lat": 60.339,
+    "lon": 22.365,
+    "country": "FI",
+    "city": "Kaarina",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Radiohill, Alberschwende, Austria, 995m asl, Loop",
+    "url": "http://kiwi.oe9.at:8074/",
+    "locator": "JN47wk",
+    "lat": 47.443,
+    "lon": 9.844,
+    "country": "AT",
+    "city": "Egg",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, OE3KDC, AUSTRIA",
+    "url": "http://kiwi.web-sdr.at:8073/",
+    "locator": "JN77lt",
+    "lat": 47.802,
+    "lon": 14.933,
+    "country": "AT",
+    "city": "Göstling an der Ybbs",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR, OE1XTU, Austria",
+    "url": "http://oe1xtu.proxy.kiwisdr.com:8073/",
+    "locator": "JN88ee",
+    "lat": 48.197,
+    "lon": 16.371,
+    "country": "AT",
+    "city": "Vienna",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "SBSA SiljansbygdensSandareamatorer, SK4KO, Mora, Sweden",
+    "url": "http://websdr.sk4ko.com:8901/",
+    "locator": "JP71ga",
+    "lat": 61.021,
+    "lon": 14.542,
+    "country": "SE",
+    "city": "Mora",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR, SA0CAM, Sweden",
+    "url": "http://kiwicam.sk3w.se:8073/",
+    "locator": "JO89wl",
+    "lat": 59.46,
+    "lon": 17.885,
+    "country": "SE",
+    "city": "Jakobsberg",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, SK2HG, Siknas Fortress, Sweden",
+    "url": "http://kiwisdr.sk2hg.se:8073/",
+    "locator": "KP15hu",
+    "lat": 65.868,
+    "lon": 22.644,
+    "country": "SE",
+    "city": "Töre",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0\\.5-30 MHz SDR (KiwiSDR 1 of 5), Marahau, Tasman District, New Zealand",
+    "url": "http://kiwisdr.owdjim.gen.nz:8073/",
+    "locator": "RE68mx",
+    "lat": -41.006,
+    "lon": 173.01,
+    "country": "NZ",
+    "city": "Motueka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, ZL1KFM, North Waikato, New Zealand (SDR Upgrade, 80mtr Full Wave C",
+    "url": "http://kiwisdrzl1kfm.ddns.net:8073/",
+    "locator": "RF72no",
+    "lat": -37.4,
+    "lon": 175.13,
+    "country": "NZ",
+    "city": "Te Kauwhata",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, ZL2QF - Banch 87, New Zealand",
+    "url": "http://sdr.zapto.org:8073/",
+    "locator": "RF70fk",
+    "lat": -39.575,
+    "lon": 174.435,
+    "country": "NZ",
+    "city": "Hawera",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, VK3TLW, Burwood East, Melborne, Australia",
+    "url": "http://kiwisdr.vk3tlw.net:8073/",
+    "locator": "QF22nd",
+    "lat": -37.854,
+    "lon": 145.133,
+    "country": "AU",
+    "city": "Burwood",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "🗲 0-30MHz 8 x Kiwi Card SDR, VK3KHZ, Victoria, Australia 🗲",
+    "url": "http://sdr-amradioantennas.com:8071/",
+    "locator": "QF22pf",
+    "lat": -37.763,
+    "lon": 145.318,
+    "country": "AU",
+    "city": "Mooroolbark",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "🗲 0-30MHz 8 x Kiwi Card SDR, VK3KHZ, Victoria, Australia 🗲",
+    "url": "http://sdr-amradioantennas.com:8072/",
+    "locator": "QF22pf",
+    "lat": -37.763,
+    "lon": 145.318,
+    "country": "AU",
+    "city": "Mooroolbark",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, LA2G, Norway",
+    "url": "http://la2g.ddns.net:8072/",
+    "locator": "JP50nd",
+    "lat": 60.147,
+    "lon": 11.146,
+    "country": "NO",
+    "city": "Jessheim",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "KiwiSDR LA3RK | Oslo, Norway",
+    "url": "http://la3rk.dyndns.org:8073/",
+    "locator": "JO59hw",
+    "lat": 59.94,
+    "lon": 10.64,
+    "country": "NO",
+    "city": "Lysaker",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HurumKiwiSDR | Sætre, Norway",
+    "url": "http://lb5va.proxy.kiwisdr.com:8073/",
+    "locator": "JO59gp",
+    "lat": 59.63,
+    "lon": 10.57,
+    "country": "NO",
+    "city": "Sætre",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "LU5DNP PhantomSDR+",
+    "url": "http://lu5dnpwebsdr.sytes.net:8901/",
+    "locator": "GF04ci",
+    "lat": -35.646,
+    "lon": -59.792,
+    "country": "AR",
+    "city": "Saladillo",
+    "type": "websdr"
+  },
+  {
+    "name": "LU2DSA WebSDR",
+    "url": "http://garypaucha.ddns.net:8901/",
+    "locator": "GF05pl",
+    "lat": -34.521,
+    "lon": -58.708,
+    "country": "AR",
+    "city": "Los Polvorines",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR, LU4EEC, Ramos Mejia, Buenos Aires, ARGENTINA",
+    "url": "http://lu4eec.ddns.net:8073/",
+    "locator": "GF05ri",
+    "lat": -34.656,
+    "lon": -58.541,
+    "country": "AR",
+    "city": "San Justo",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Doha, Qatar",
+    "url": "http://midskiwi.ddns.net:8073/",
+    "locator": "LL55sg",
+    "lat": 25.285,
+    "lon": 51.531,
+    "country": "QA",
+    "city": "Doha",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Doha, Qatar",
+    "url": "http://89.211.89.213:8073/",
+    "locator": "LL55sg",
+    "lat": 25.285,
+    "lon": 51.531,
+    "country": "QA",
+    "city": "Doha",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR by OZ1BFM | Vejby, Denmark",
+    "url": "http://oz1bfm.proxy.kiwisdr.com:8073/",
+    "locator": "JO66bb",
+    "lat": 56.08,
+    "lon": 12.16,
+    "country": "DK",
+    "city": "Helsinge",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz KIWI SDR RECIVER | OZ1KVB Soenderborg Denmark",
+    "url": "http://86.52.211.220:8073/",
+    "locator": "JO44vv",
+    "lat": 54.903,
+    "lon": 9.806,
+    "country": "DK",
+    "city": "Sønderborg",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "SDR Esbjerg - Denmark - 0-30 MHz",
+    "url": "http://21086.proxy.kiwisdr.com:8073/",
+    "locator": "JO45em",
+    "lat": 55.501,
+    "lon": 8.416,
+    "country": "DK",
+    "city": "Esbjerg",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "WEBSDR - Pardinho, SP - Brasil",
+    "url": "http://pardinho.websdr.com.br:8901/",
+    "locator": "GG56tv",
+    "lat": -23.104,
+    "lon": -48.375,
+    "country": "BR",
+    "city": "Botucatu",
+    "type": "websdr"
+  },
+  {
+    "name": "WEBSDR - Pardinho, SP - Brasil",
+    "url": "http://appr.org.br:8901/",
+    "locator": "GG56tv",
+    "lat": -23.104,
+    "lon": -48.375,
+    "country": "BR",
+    "city": "Botucatu",
+    "type": "websdr"
+  },
+  {
+    "name": "Receptor SDR de Pocos de Caldas, MG - Brasil",
+    "url": "http://pocosdecaldas.websdr.com.br:8901/",
+    "locator": "GG68rf",
+    "lat": -21.771,
+    "lon": -46.542,
+    "country": "BR",
+    "city": "Poços de Caldas",
+    "type": "websdr"
+  },
+  {
+    "name": "WEB-SDR en Madrid - Spain REM-ESP",
+    "url": "http://rem-esp.spdns.org:8901/",
+    "locator": "IN80bh",
+    "lat": 40.312,
+    "lon": -3.875,
+    "country": "ES",
+    "city": "Móstoles",
+    "type": "websdr"
+  },
+  {
+    "name": "EA3HRU - HF Experimental SDR receiver - Barcelona, Spain",
+    "url": "http://sdrbcn.duckdns.org:8073/",
+    "locator": "JN01xj",
+    "lat": 41.411,
+    "lon": 2.0,
+    "country": "ES",
+    "city": "Pallejà",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "EA3HRU - HF Experimental SDR receiver - Barcelona, Spain",
+    "url": "http://z-ha-dum.duckdns.org:8073/",
+    "locator": "JN01xj",
+    "lat": 41.411,
+    "lon": 2.0,
+    "country": "ES",
+    "city": "Pallejà",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "ROMA2 WEBSDR RADIO Italy Rome CB HF VHF UHF",
+    "url": "http://roma2sdr.ddns.net/",
+    "locator": "JN61fw",
+    "lat": 41.938,
+    "lon": 12.458,
+    "country": "VA",
+    "city": "Vatican City",
+    "type": "websdr"
+  },
+  {
+    "name": "\\-- IZ0FKE --",
+    "url": "http://sdr.noantri.org/sdr/",
+    "locator": "JN61fw",
+    "lat": 41.927,
+    "lon": 12.48,
+    "country": "VA",
+    "city": "Vatican City",
+    "type": "openwebrx"
+  },
+  {
+    "name": "NOANTRI SDR 🛰️",
+    "url": "https://sdr.noantri.org/sdr/",
+    "locator": "JN61fw",
+    "lat": 41.936,
+    "lon": 12.476,
+    "country": "VA",
+    "city": "Vatican City",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-32 MHz SDR, S5/S57BIT, Slovenia",
+    "url": "http://s57bit.proxy.kiwisdr.com:8073/",
+    "locator": "JN76de",
+    "lat": 46.17,
+    "lon": 14.3,
+    "country": "SI",
+    "city": "Škofja Loka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, S59GCD, JN76OE | Malic, Slovenia",
+    "url": "http://sdr.radioklub-lasko.si:8073/",
+    "locator": "JN76oe",
+    "lat": 46.183,
+    "lon": 15.208,
+    "country": "SI",
+    "city": "Laško",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR, S5/S57BIT, Slovenia",
+    "url": "http://93.103.150.64:8073/",
+    "locator": "JN76de",
+    "lat": 46.17,
+    "lon": 14.3,
+    "country": "SI",
+    "city": "Škofja Loka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Airband station",
+    "url": "http://sdr.hkfree.org:8901/",
+    "locator": "JO70we",
+    "lat": 50.188,
+    "lon": 15.875,
+    "country": "CZ",
+    "city": "Hradec Králové",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Olomouc, Czech Republic",
+    "url": "http://sdr.ok2kyj.cz:8073/",
+    "locator": "JN89po",
+    "lat": 49.586,
+    "lon": 17.254,
+    "country": "CZ",
+    "city": "Olomouc",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, OK1CPR-OK6IK, Czech Republic",
+    "url": "http://sdr.vebik.cz:8073/",
+    "locator": "JN79md",
+    "lat": 49.143,
+    "lon": 15.007,
+    "country": "CZ",
+    "city": "Jindřichův Hradec",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Websdr receiver by SV3YY in Rion GREECE",
+    "url": "http://sv3yy1.no-ip.org:8901/",
+    "locator": "KM08vh",
+    "lat": 38.301,
+    "lon": 21.789,
+    "country": "GR",
+    "city": "Aktaío",
+    "type": "websdr"
+  },
+  {
+    "name": "Websdr Receiver Operated by SV2HNH",
+    "url": "http://sv2hnh.no-ip.org:8901/",
+    "locator": "KN10lp",
+    "lat": 40.646,
+    "lon": 22.958,
+    "country": "GR",
+    "city": "Ágios Pávlos",
+    "type": "websdr"
+  },
+  {
+    "name": "WEB SDR station by SV8FXN in NAXOS island GREECE",
+    "url": "http://sv8fxn-naxos.ddns.net:8901/",
+    "locator": "KM27rb",
+    "lat": 37.064,
+    "lon": 25.471,
+    "country": "GR",
+    "city": "Filótion",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR, VR2BG | Hong Kong",
+    "url": "http://vr2bg.proxy.kiwisdr.com:8073/",
+    "locator": "OL72bi",
+    "lat": 22.35,
+    "lon": 114.13,
+    "country": "HK",
+    "city": "Tsuen Wan",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "[Feline] 0-30MHz SDR | Waterfall Bay, Hong Kong",
+    "url": "http://felineyogi.ydns.eu:8073/",
+    "locator": "OL72bg",
+    "lat": 22.25,
+    "lon": 114.135,
+    "country": "HK",
+    "city": "Ka Lung Court",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, VR2BG | Hong Kong",
+    "url": "http://vr2bg.proxy.kiwisdr.com/",
+    "locator": "OL72bi",
+    "lat": 22.35,
+    "lon": 114.13,
+    "country": "HK",
+    "city": "Kau Wa Keng",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "WebSDR by LZ7AA based on Redpitaya on the 6 major bands",
+    "url": "http://websdr.info:8901/",
+    "locator": "KN12qp",
+    "lat": 42.646,
+    "lon": 23.375,
+    "country": "BG",
+    "city": "Sofia",
+    "type": "websdr"
+  },
+  {
+    "name": "WebSDR by LZ7AA based on NooElec nano on upper UHF bands",
+    "url": "http://websdr.info:8902/",
+    "locator": "KN12rr",
+    "lat": 42.729,
+    "lon": 23.458,
+    "country": "BG",
+    "city": "Buhovo",
+    "type": "websdr"
+  },
+  {
+    "name": "LZ2KAC WEBSDR RTL2832U/R820T-Receiver",
+    "url": "http://websdr.lz2kac.org:8901/",
+    "locator": "KN22pv",
+    "lat": 42.896,
+    "lon": 25.292,
+    "country": "BG",
+    "city": "Gabrovo",
+    "type": "websdr"
+  },
+  {
+    "name": "Experimental 8KHz-30 MHz SDR, YO3BN | Bucharest, Romania",
+    "url": "http://yo3bn.go.ro:8073/",
+    "locator": "KN34cm",
+    "lat": 44.53,
+    "lon": 26.23,
+    "country": "RO",
+    "city": "Ştefăneştii de Jos",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "The Real VLF-HF SDR Receiver 8KHz-30MHz | 16m LongWire@8m Height | Ground | Blee",
+    "url": "http://www.yo3bn.ro:8073/",
+    "locator": "KN34cm",
+    "lat": 44.53,
+    "lon": 26.23,
+    "country": "RO",
+    "city": "Ştefăneştii de Jos",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "The Real VLF-HF SDR Receiver 8KHz-30MHz | 16m LongWire@8m Height | Ground | Blee",
+    "url": "http://kiwisdr.yo3bn.ro:8073/",
+    "locator": "KN34cm",
+    "lat": 44.53,
+    "lon": 26.23,
+    "country": "RO",
+    "city": "Ştefăneştii de Jos",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Mbu KiwiSDR Paraguay",
+    "url": "http://mbu.proxy.kiwisdr.com:8073/",
+    "locator": "GG15ua",
+    "lat": -24.975,
+    "lon": -56.306,
+    "country": "PY",
+    "city": "Mbutuý",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz Paraguay KiwiSDR",
+    "url": "http://paraguay.proxy.kiwisdr.com:8073/",
+    "locator": "GG14fq",
+    "lat": -25.312,
+    "lon": -57.505,
+    "country": "PY",
+    "city": "San Lorenzo",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Mbutuy, Paraguay. LF/MW antenna only!",
+    "url": "http://mbu.proxy.kiwisdr.com/",
+    "locator": "GG15ua",
+    "lat": -24.972,
+    "lon": -56.31,
+    "country": "PY",
+    "city": "Mbutuý",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "SDRPT 0-32 MHz SDR - https://sdrpt.pt | Santarem, Portugal",
+    "url": "http://sdrpt.ddns.net/",
+    "locator": "IM59ph",
+    "lat": 39.294,
+    "lon": -8.746,
+    "country": "PT",
+    "city": "Santarém",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Coimbra, Portugal",
+    "url": "http://hjf2021.ddns.net:8073/",
+    "locator": "IN50tf",
+    "lat": 40.235,
+    "lon": -8.415,
+    "country": "PT",
+    "city": "Coimbra",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Coimbra, Portugal",
+    "url": "http://hjf2014.ddns.net:8074/",
+    "locator": "IN50sf",
+    "lat": 40.222,
+    "lon": -8.43,
+    "country": "PT",
+    "city": "Coimbra",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "TWR | Johannesburg",
+    "url": "http://jnb.twrmon.net:8073/",
+    "locator": "KG43cu",
+    "lat": -26.13,
+    "lon": 28.2,
+    "country": "ZA",
+    "city": "Eden Glen",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, ZS6BKW Antenna, KiwiSDR2 | Centurion, South Africa",
+    "url": "http://kiwisdr.r7d.xyz:8073/",
+    "locator": "KG44cd",
+    "lat": -25.85,
+    "lon": 28.21,
+    "country": "ZA",
+    "city": "Centurion",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "TWR | Johannesburg",
+    "url": "http://41.71.35.66:8073/",
+    "locator": "KG43cu",
+    "lat": -26.13,
+    "lon": 28.2,
+    "country": "ZA",
+    "city": "Eden Glen",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "10 kHZ - 30 MHz, Hainaut | Brunehaut, Belgium",
+    "url": "http://hainaut-picardie.ddns.net:8075/",
+    "locator": "JO10vl",
+    "lat": 50.47,
+    "lon": 3.78,
+    "country": "BE",
+    "city": "Hautrage",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, ON1AFF, Belgium",
+    "url": "http://sdr1.on1aff.be/",
+    "locator": "JO21gc",
+    "lat": 51.094,
+    "lon": 4.514,
+    "country": "BE",
+    "city": "Duffel",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, ON1AFF, Belgium",
+    "url": "http://sdr1.on1aff.be:80/",
+    "locator": "JO21gc",
+    "lat": 51.094,
+    "lon": 4.514,
+    "country": "BE",
+    "city": "Duffel",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR | BI4ACT",
+    "url": "http://radio.proxy.kiwisdr.com:8073/",
+    "locator": "PM01sh",
+    "lat": 31.302,
+    "lon": 121.511,
+    "country": "CN",
+    "city": "Yangpu",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | ShangHai,China",
+    "url": "http://sdr.7z8d.com:8073/",
+    "locator": "PM01sf",
+    "lat": 31.21,
+    "lon": 121.51,
+    "country": "CN",
+    "city": "Hongkou",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-32 MHz SDR | 1008611",
+    "url": "http://radio.proxy.kiwisdr.com/",
+    "locator": "OM87dl",
+    "lat": 37.47,
+    "lon": 116.31,
+    "country": "CN",
+    "city": "Decheng",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "YG1AIG 0-30 MHz SDR | Bandung - Indonesia",
+    "url": "http://ptlen.proxy.kiwisdr.com:8073/",
+    "locator": "OI33sa",
+    "lat": -6.97,
+    "lon": 107.55,
+    "country": "ID",
+    "city": "Margahayukencana",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "YG1AIG 0-30 MHz SDR | Bandung - Indonesia",
+    "url": "http://ptlen.proxy.kiwisdr.com/",
+    "locator": "OI33sa",
+    "lat": -6.97,
+    "lon": 107.55,
+    "country": "ID",
+    "city": "Margahayukencana",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Bogor, Indonesia",
+    "url": "http://opalindo.proxy.kiwisdr.com:8073/",
+    "locator": "OI33jk",
+    "lat": -6.579,
+    "lon": 106.769,
+    "country": "ID",
+    "city": "Bogor",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "TWR Kenya",
+    "url": "http://nbo.twrmon.net:8073/",
+    "locator": "KI88jq",
+    "lat": -1.3,
+    "lon": 36.8,
+    "country": "KE",
+    "city": "Nairobi",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "TWR Kenya",
+    "url": "http://197.237.50.19:8073/",
+    "locator": "KI88jq",
+    "lat": -1.3,
+    "lon": 36.8,
+    "country": "KE",
+    "city": "Nairobi",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "5Z4GO | Mombasa / Kenya",
+    "url": "http://web888.mombasa-gokart.com/",
+    "locator": "KI96ua",
+    "lat": -3.984,
+    "lon": 39.739,
+    "country": "KE",
+    "city": "Mtwapa",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Santiago, Chile",
+    "url": "http://ce3pbr.proxy.kiwisdr.com:8073/",
+    "locator": "FF46pn",
+    "lat": -33.457,
+    "lon": -70.671,
+    "country": "CL",
+    "city": "Santiago",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | La Serena, Chile",
+    "url": "http://22352.proxy.kiwisdr.com:8073/",
+    "locator": "FG40ja",
+    "lat": -29.96,
+    "lon": -71.23,
+    "country": "CL",
+    "city": "La Serena",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | La Serena, Chile",
+    "url": "http://22352.proxy.kiwisdr.com/",
+    "locator": "FG40ja",
+    "lat": -29.96,
+    "lon": -71.23,
+    "country": "CL",
+    "city": "La Serena",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "TA2OM MW, LW, HF, VHF, UHF FM Broadcasting",
+    "url": "http://ta2om.mywire.org:8073/",
+    "locator": "KM69ju",
+    "lat": 39.859,
+    "lon": 32.812,
+    "country": "TR",
+    "city": "Gaziosmanpaşa",
+    "type": "openwebrx"
+  },
+  {
+    "name": "TA2OM MW, LW, HF, VHF, UHF FM Broadcasting",
+    "url": "http://ta2om.ddnsfree.com:8073/",
+    "locator": "KM69ju",
+    "lat": 39.859,
+    "lon": 32.812,
+    "country": "TR",
+    "city": "Gaziosmanpaşa",
+    "type": "openwebrx"
+  },
+  {
+    "name": "TA2ETL",
+    "url": "https://websdr.bahadirhamza.keenetic.pro/",
+    "locator": "KN50dq",
+    "lat": 40.687,
+    "lon": 30.264,
+    "country": "TR",
+    "city": "Sapanca",
+    "type": "openwebrx"
+  },
+  {
+    "name": "SDR.Gudynas.lt",
+    "url": "http://sdr.gudynas.lt:2052/",
+    "locator": "KO35di",
+    "lat": 55.37,
+    "lon": 26.288,
+    "country": "LT",
+    "city": "Ignalina",
+    "type": "openwebrx"
+  },
+  {
+    "name": "SDR.Gudynas.lt",
+    "url": "https://sdr.gudynas.lt/",
+    "locator": "KO35di",
+    "lat": 55.37,
+    "lon": 26.288,
+    "country": "LT",
+    "city": "Ignalina",
+    "type": "openwebrx"
+  },
+  {
+    "name": "LY5AT-1",
+    "url": "http://ly5at.qsl.lt:8073/",
+    "locator": "KO15df",
+    "lat": 55.245,
+    "lon": 22.277,
+    "country": "LT",
+    "city": "Taurage",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-30 MHz SDR | Kralendijk, Bonaire BES",
+    "url": "http://bon.twrmon.net:8073/",
+    "locator": "FK52ue",
+    "lat": 12.17,
+    "lon": -68.29,
+    "country": "BQ",
+    "city": "Dorp Antriol",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Kralendijk, Bonaire BES",
+    "url": "http://200.6.147.7:8073/",
+    "locator": "FK52ue",
+    "lat": 12.17,
+    "lon": -68.29,
+    "country": "BQ",
+    "city": "Dorp Antriol",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz KiwiSDR, VE3HLS, So Phisai, Thailand",
+    "url": "http://ve3hls.proxy.kiwisdr.com:8073/",
+    "locator": "OK18sc",
+    "lat": 18.095,
+    "lon": 103.51,
+    "country": "TH",
+    "city": "So Phisai",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "LA6LU KiwiSDR - Cha-Am, Thailand (0-30 MHz SDR)",
+    "url": "http://la6lukiwisdrth.ddns.net:8073/",
+    "locator": "NK92xs",
+    "lat": 12.79,
+    "lon": 99.97,
+    "country": "TH",
+    "city": "Cha-am",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | HS0ZGZ, Udon Thani, Thailand 🇹🇭",
+    "url": "http://21023.proxy.kiwisdr.com:8073/",
+    "locator": "OK16px",
+    "lat": 16.972,
+    "lon": 103.262,
+    "country": "TH",
+    "city": "Tha Khantho",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz KIWI SDR( 8ch ), HL5NTR, Daegu\\_City Republic of Korea. 85M Loop-type A",
+    "url": "http://hl5ntr.ddns.net:8073/",
+    "locator": "PM45gv",
+    "lat": 35.889,
+    "lon": 128.575,
+    "country": "KR",
+    "city": "Daegu",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0\\.1-30 MHz SDR at HL3AMO - Daejeon, Rep. of KOREA",
+    "url": "http://hik.iptime.org:8075/",
+    "locator": "PM36pj",
+    "lat": 36.387,
+    "lon": 127.321,
+    "country": "KR",
+    "city": "Yuseong",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0\\.1-30 MHz SDR at HL3AMO - Daejeon, Rep. of KOREA",
+    "url": "http://hik.iptime.org:8074/",
+    "locator": "PM36pj",
+    "lat": 36.387,
+    "lon": 127.321,
+    "country": "KR",
+    "city": "Yuseong",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "GRMS BLR | BENGALURU",
+    "url": "http://183.83.51.104:8073/",
+    "locator": "MK83tb",
+    "lat": 13.064,
+    "lon": 77.652,
+    "country": "IN",
+    "city": "Yelahanka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "GRMS BLR | BENGALURU",
+    "url": "http://blr.twrmon.net:8073/",
+    "locator": "MK83tb",
+    "lat": 13.064,
+    "lon": 77.652,
+    "country": "IN",
+    "city": "Yelahanka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "GRMS HYD | HYDERABAD",
+    "url": "http://hyd.twrmon.net:8073/",
+    "locator": "MK97fj",
+    "lat": 17.385,
+    "lon": 78.487,
+    "country": "IN",
+    "city": "Hyderabad",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, DU6/PE1NSQ, Negros Occidental, Philippines",
+    "url": "http://rick-kiwi.ddns.net:8073/",
+    "locator": "PK10lr",
+    "lat": 10.724,
+    "lon": 122.974,
+    "country": "PH",
+    "city": "Talisay",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, DX6RAN, Negros Occidental, Philippines",
+    "url": "http://dx6ran.ddns.net:8073/",
+    "locator": "PK10lr",
+    "lat": 10.724,
+    "lon": 122.973,
+    "country": "PH",
+    "city": "Talisay",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Manila KiwiSDR 0-30 MHz",
+    "url": "http://kiwi.manilasdr.net/",
+    "locator": "PK04lj",
+    "lat": 14.406,
+    "lon": 120.941,
+    "country": "PH",
+    "city": "Imus",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "9A6NDZ - HF, VHF, UHF, PMR",
+    "url": "http://9a6ndz.ddns.net:8073/",
+    "locator": "JN85kv",
+    "lat": 45.891,
+    "lon": 16.837,
+    "country": "HR",
+    "city": "Bjelovar",
+    "type": "openwebrx"
+  },
+  {
+    "name": "LX0XP",
+    "url": "http://lx0bce.rl.lu:8073/",
+    "locator": "JN39dr",
+    "lat": 49.733,
+    "lon": 6.319,
+    "country": "LU",
+    "city": "Bech",
+    "type": "openwebrx"
+  },
+  {
+    "name": "LX0XP",
+    "url": "http://skylink.ath.cx:8073/",
+    "locator": "JN39dr",
+    "lat": 49.733,
+    "lon": 6.319,
+    "country": "LU",
+    "city": "Bech",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-30 MHz SDR, HA2NA - HA2QE (GRANTE Tower), Hungary",
+    "url": "http://194.36.182.122:8073/",
+    "locator": "JN97is",
+    "lat": 47.753,
+    "lon": 18.706,
+    "country": "SK",
+    "city": "Štúrovo",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "OM5AKC, Marian Nemčič, 0-30 MHz SDR | Nitra",
+    "url": "http://62.197.223.84:8073/",
+    "locator": "JN98bh",
+    "lat": 48.328,
+    "lon": 18.099,
+    "country": "SK",
+    "city": "Nitra",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, HA2NA - HA2QE (GRANTE Tower), Hungary",
+    "url": "http://kiwisdr.ha2na.com:8073/",
+    "locator": "JN97is",
+    "lat": 47.753,
+    "lon": 18.706,
+    "country": "SK",
+    "city": "Štúrovo",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "FR4KM Radio Club de l'association ARRA (portail.arra.re)",
+    "url": "http://fr5fc.ddns.net:8074/",
+    "locator": "LG78pt",
+    "lat": -21.203,
+    "lon": 55.294,
+    "country": "RE",
+    "city": "Piton Saint-Leu",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Ecuador HC3 Loja Radio Club - WebSDR",
+    "url": "http://sdrhc3.ddns.net:8901/",
+    "locator": "FI06ja",
+    "lat": -3.977,
+    "lon": -79.204,
+    "country": "EC",
+    "city": "Loja",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Cyprus",
+    "url": "http://cyp.twrmon.net:8073/",
+    "locator": "KM64gs",
+    "lat": 34.76,
+    "lon": 32.53,
+    "country": "CY",
+    "city": "Koloni",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Cyprus Amateur Radio Society (0-30 MHZ SDR)",
+    "url": "http://sdr.cyhams.org/",
+    "locator": "KM65kb",
+    "lat": 35.082,
+    "lon": 32.912,
+    "country": "CY",
+    "city": "Léfka",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "5B4CY",
+    "url": "https://sdrvu.remotemsi.com/",
+    "locator": "KM65kc",
+    "lat": 35.09,
+    "lon": 32.88,
+    "country": "CY",
+    "city": "Léfka",
+    "type": "openwebrx"
+  },
+  {
+    "name": "GRMS KTM | Kathmandu, Nepal",
+    "url": "http://ktm.twrmon.net:8073/",
+    "locator": "NL27pr",
+    "lat": 27.73,
+    "lon": 85.301,
+    "country": "NP",
+    "city": "Kathmandu",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "YT1GS",
+    "url": "https://sdr.voxgalactica.com/",
+    "locator": "KN03wh",
+    "lat": 43.321,
+    "lon": 21.895,
+    "country": "RS",
+    "city": "Niš",
+    "type": "openwebrx"
+  },
+  {
+    "name": "YT2DT",
+    "url": "http://yu1ado.duckdns.org:443/",
+    "locator": "KN03qn",
+    "lat": 43.577,
+    "lon": 21.337,
+    "country": "RS",
+    "city": "Kruševac",
+    "type": "openwebrx"
+  },
+  {
+    "name": "YT3IN",
+    "url": "http://sdr.yt3in.com/",
+    "locator": "KN03xi",
+    "lat": 43.356,
+    "lon": 21.92,
+    "country": "RS",
+    "city": "Niš",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Antz Kiwisdr2 no3 | Jersey UK",
+    "url": "http://21181.proxy.kiwisdr.com:8073/",
+    "locator": "IN89vf",
+    "lat": 49.216,
+    "lon": -2.19,
+    "country": "JE",
+    "city": "Saint Helier",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "antsz kiwisdr2 no4 | Jersey, United Kingdom",
+    "url": "http://21182.proxy.kiwisdr.com:8073/",
+    "locator": "IN89vf",
+    "lat": 49.216,
+    "lon": -2.19,
+    "country": "JE",
+    "city": "Saint Helier",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Jersey United Kingdom",
+    "url": "http://antskiwisdr.zapto.org:8077/",
+    "locator": "IN89vf",
+    "lat": 49.216,
+    "lon": -2.19,
+    "country": "JE",
+    "city": "Saint John",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "🇮🇱 4X1FK WEB-888 Web SDR | Rishon Leziyon, ISRAEL",
+    "url": "http://94.159.134.215:8074/",
+    "locator": "KM71jx",
+    "lat": 31.97,
+    "lon": 34.79,
+    "country": "IL",
+    "city": "Rishon LeTsiyyon",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "4X1FK\\_Nir",
+    "url": "http://94.159.134.215:8073/",
+    "locator": "KM71jx",
+    "lat": 31.97,
+    "lon": 34.791,
+    "country": "IL",
+    "city": "Rishon LeTsiyyon",
+    "type": "openwebrx"
+  },
+  {
+    "name": "VP9NI KiwiSDR | Smiths Parish, Bermuda",
+    "url": "http://21778.proxy.kiwisdr.com:8073/",
+    "locator": "FM72ph",
+    "lat": 32.31,
+    "lon": -64.75,
+    "country": "BM",
+    "city": "Hamilton",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "VP9NI KiwiSDR | Smiths Parish, Bermuda",
+    "url": "http://21778.proxy.kiwisdr.com/",
+    "locator": "FM72ph",
+    "lat": 32.31,
+    "lon": -64.75,
+    "country": "BM",
+    "city": "Hamilton",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "VP9NI KiwiSDR2 | Smiths Parish, Bermuda",
+    "url": "http://22701.proxy.kiwisdr.com/",
+    "locator": "FM72ph",
+    "lat": 32.31,
+    "lon": -64.75,
+    "country": "BM",
+    "city": "Hamilton",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "E71JC",
+    "url": "https://dojavnik.bhdroid.eu/",
+    "locator": "JN84ph",
+    "lat": 44.33,
+    "lon": 17.27,
+    "country": "BA",
+    "city": "Jajce",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-30 MHz San Juan del Rio | Grupo Diexista Mexico SDR",
+    "url": "http://grupodiexistamx-sdr.proxy.kiwisdr.com:8073/",
+    "locator": "EL00aj",
+    "lat": 20.389,
+    "lon": -99.996,
+    "country": "MX",
+    "city": "San Juan del Río",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Luis Gtz Monterrey MX",
+    "url": "http://dxmty.proxy.kiwisdr.com:8073/",
+    "locator": "DL95sq",
+    "lat": 25.677,
+    "lon": -100.46,
+    "country": "MX",
+    "city": "Santa Catarina",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Luis Gtz Monterrey MX",
+    "url": "http://dxmty.proxy.kiwisdr.com/",
+    "locator": "DL95sq",
+    "lat": 25.677,
+    "lon": -100.46,
+    "country": "MX",
+    "city": "Santa Catarina",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "9M2AMH KiwiSDR-KL | Kuala Lumpur, Malaysia",
+    "url": "http://21439.proxy.kiwisdr.com:8073/",
+    "locator": "OJ03td",
+    "lat": 3.152,
+    "lon": 101.667,
+    "country": "MY",
+    "city": "Kuala Lumpur",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "9M2AMH KiwiSDR-KL | Kuala Lumpur, Malaysia",
+    "url": "http://21439.proxy.kiwisdr.com/",
+    "locator": "OJ03uc",
+    "lat": 3.12,
+    "lon": 101.68,
+    "country": "MY",
+    "city": "Seputeh",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HZ1SF | Riyadh, Saudi Arabia",
+    "url": "http://21472.proxy.kiwisdr.com:8073/",
+    "locator": "LL34ir",
+    "lat": 24.722,
+    "lon": 46.724,
+    "country": "SA",
+    "city": "Riyadh",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HZ1SF | Riyadh, Saudi Arabia",
+    "url": "http://21472.proxy.kiwisdr.com/",
+    "locator": "LL34ir",
+    "lat": 24.722,
+    "lon": 46.724,
+    "country": "SA",
+    "city": "Riyadh",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "OA4DFF | LIMA - PERU",
+    "url": "http://200.123.27.181:8073/",
+    "locator": "FH17mw",
+    "lat": -12.07,
+    "lon": -76.99,
+    "country": "PE",
+    "city": "San Luis",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "OA4EJG",
+    "url": "http://sdr.oa4ejg.net/",
+    "locator": "FH17mu",
+    "lat": -12.157,
+    "lon": -76.971,
+    "country": "PE",
+    "city": "Santiago de Surco",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-30 MHz SDR | Baghdad, IRAQ",
+    "url": "http://21987.proxy.kiwisdr.com:8073/",
+    "locator": "LM23ei",
+    "lat": 33.336,
+    "lon": 44.388,
+    "country": "IQ",
+    "city": "Baghdad",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Baghdad, IRAQ",
+    "url": "http://21987.proxy.kiwisdr.com/",
+    "locator": "LM23ei",
+    "lat": 33.336,
+    "lon": 44.388,
+    "country": "IQ",
+    "city": "Baghdad",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Kirk Michael, Isle of Man",
+    "url": "http://21793.proxy.kiwisdr.com:8073/",
+    "locator": "IO74qg",
+    "lat": 54.28,
+    "lon": -4.59,
+    "country": "IM",
+    "city": "Kirkmichael",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Kirk Michael, Isle of Man",
+    "url": "http://21793.proxy.kiwisdr.com/",
+    "locator": "IO74qg",
+    "lat": 54.28,
+    "lon": -4.59,
+    "country": "IM",
+    "city": "Kirkmichael",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "9V1KG",
+    "url": "http://9v1kg.bpmsg.com:8074/",
+    "locator": "OJ11xi",
+    "lat": 1.338,
+    "lon": 103.934,
+    "country": "SG",
+    "city": "Ulu Bedok",
+    "type": "openwebrx"
+  },
+  {
+    "name": "RADIOCLUB COSTA RICA | San Jose",
+    "url": "http://ti0rc.proxy.kiwisdr.com:8073/",
+    "locator": "EJ79xw",
+    "lat": 9.921,
+    "lon": -84.059,
+    "country": "CR",
+    "city": "San Pedro",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "RADIOCLUB COSTA RICA | San Jose",
+    "url": "http://ti0rc.proxy.kiwisdr.com/",
+    "locator": "EJ79xw",
+    "lat": 9.921,
+    "lon": -84.059,
+    "country": "CR",
+    "city": "San Pedro",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "RADIOCLUB COSTA RICA | San Jose",
+    "url": "http://168.181.162.250:8073/",
+    "locator": "EJ79xw",
+    "lat": 9.921,
+    "lon": -84.059,
+    "country": "CR",
+    "city": "San Pedro",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "GEORGIA (country), Tbilisi",
+    "url": "http://80.83.137.102:8901/",
+    "locator": "LN21jr",
+    "lat": 41.729,
+    "lon": 44.792,
+    "country": "GE",
+    "city": "Tbilisi",
+    "type": "websdr"
+  },
+  {
+    "name": "GEORGIA Country, Tbilisi",
+    "url": "http://sdr.ge:8901/",
+    "locator": "LN21jr",
+    "lat": 41.729,
+    "lon": 44.792,
+    "country": "GE",
+    "city": "Tbilisi",
+    "type": "websdr"
+  },
+  {
+    "name": "0-30 MHz SDR | Città di San Marino, Republic of San Marino",
+    "url": "http://22416.proxy.kiwisdr.com/",
+    "locator": "JN63fw",
+    "lat": 43.938,
+    "lon": 12.445,
+    "country": "SM",
+    "city": "San Marino",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "SDR RIMINI - SAN MARINO",
+    "url": "http://sdrsanmarino.freeddns.org:8073/",
+    "locator": "JN63fw",
+    "lat": 43.947,
+    "lon": 12.461,
+    "country": "SM",
+    "city": "Domagnano",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Experimental WebSDR by Z31ALN",
+    "url": "https://openwebrx-server.tortoise-mine.ts.net/",
+    "locator": "KN01rx",
+    "lat": 41.98,
+    "lon": 21.465,
+    "country": "MK",
+    "city": "Usje",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Z32VSA",
+    "url": "https://sdr.dot.mk/",
+    "locator": "KN01rx",
+    "lat": 41.994,
+    "lon": 21.444,
+    "country": "MK",
+    "city": "Skopje",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Z36CRP",
+    "url": "https://sdr.home.crypter.mk/",
+    "locator": "KN01rx",
+    "lat": 41.989,
+    "lon": 21.428,
+    "country": "MK",
+    "city": "Skopje",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Wings Kiwi SDR | Alderney Channel Islands",
+    "url": "http://21789.proxy.kiwisdr.com/",
+    "locator": "IN89vr",
+    "lat": 49.719,
+    "lon": -2.194,
+    "country": "GG",
+    "city": "St Anne",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HK4RAU SDR 0-30 MHz. | HK4RAU.",
+    "url": "http://hk4rau.proxy.kiwisdr.com/",
+    "locator": "FJ25dq",
+    "lat": 5.675,
+    "lon": -75.724,
+    "country": "CO",
+    "city": "Támesis",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "0-30 MHz SDR, VN/SWL, Vietnam",
+    "url": "http://42.116.161.49:8073/",
+    "locator": "OL21va",
+    "lat": 21.037,
+    "lon": 105.813,
+    "country": "VN",
+    "city": "Cầu Giấy",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "XV4HT - Fullband OpenWebRX",
+    "url": "https://openwebrx.bluecylabs.com/",
+    "locator": "OL20vx",
+    "lat": 20.973,
+    "lon": 105.754,
+    "country": "VN",
+    "city": "Hà Đông",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Vietanh's SDR",
+    "url": "https://sdr.maytinhvietanh.id.vn/",
+    "locator": "OL20ww",
+    "lat": 20.956,
+    "lon": 105.845,
+    "country": "VN",
+    "city": "Văn Điển",
+    "type": "openwebrx"
+  },
+  {
+    "name": "Sunny's HP 202 G2 MT - LF,HF,VHF,UHF SDR",
+    "url": "http://sunnyai.asuscomm.com:8059/",
+    "locator": "OL62se",
+    "lat": 22.191,
+    "lon": 113.536,
+    "country": "MO",
+    "city": "Macau",
+    "type": "openwebrx"
+  },
+  {
+    "name": "0-30 MHz Janis Alnis, Riga, Latvia",
+    "url": "http://22891.proxy.kiwisdr.com/",
+    "locator": "KO26bw",
+    "lat": 56.936,
+    "lon": 24.097,
+    "country": "LV",
+    "city": "Riga",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Los Gallinas",
+    "url": "http://losgallinas.ddns.net:8073/",
+    "locator": "FK67mx",
+    "lat": 17.968,
+    "lon": -66.932,
+    "country": "PR",
+    "city": "Guánica",
+    "type": "openwebrx"
+  },
+  {
+    "name": "linkz - kiwi 1 | Isere, France",
+    "url": "http://linkz.ddns.net:8073/",
+    "locator": "JN25pj",
+    "lat": 45.4028,
+    "lon": 5.2774,
+    "country": "FR",
+    "city": "Isère",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "KiwiSDR F4IVV | Marcilloles (38)",
+    "url": "http://23147.proxy.kiwisdr.com:8073/",
+    "locator": "JN25oi",
+    "lat": 45.3399,
+    "lon": 5.18347,
+    "country": "FR",
+    "city": "Marcilloles",
+    "type": "kiwisdr",
+    "priority": true
+  },
+  {
+    "name": "linkz - kiwi 2 | Isere, France",
+    "url": "http://linkz.ddns.net:8074/",
+    "locator": "JN25pj",
+    "lat": 45.4028,
+    "lon": 5.2775,
+    "country": "FR",
+    "city": "Isère",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "linkz - kiwi 3 | Isere, France",
+    "url": "http://linkz.ddns.net:8075/",
+    "locator": "JN25pj",
+    "lat": 45.4028,
+    "lon": 5.2775,
+    "country": "FR",
+    "city": "Isère",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "F6ABJ KiwiSDR | Pommier de Beaurepaire (38)",
+    "url": "http://f6abj-kiwihf.ddns.net:8073/",
+    "locator": "JN25nj",
+    "lat": 45.384,
+    "lon": 5.0935,
+    "country": "FR",
+    "city": "Pommier de Beaurepaire",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "F6ABJ KiwiSDR #2 | Pommier de Beaurepaire (38)",
+    "url": "http://f6abj-kiwihf.ddns.net:8074/",
+    "locator": "JN25nj",
+    "lat": 45.384,
+    "lon": 5.0935,
+    "country": "FR",
+    "city": "Pommier de Beaurepaire",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "F6ABJ KiwiSDR #3 | Pommier de Beaurepaire (38)",
+    "url": "http://f6abj-kiwihf.ddns.net:8075/",
+    "locator": "JN25nj",
+    "lat": 45.384,
+    "lon": 5.0935,
+    "country": "FR",
+    "city": "Pommier de Beaurepaire",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "F4VUK | Maconnex, France",
+    "url": "http://samoro.hopto.org:32073/",
+    "locator": "JN36bg",
+    "lat": 46.29,
+    "lon": 6.09,
+    "country": "FR",
+    "city": "Maconnex",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HB3YQQ CHOCO69 | Vérossaz, Switzerland",
+    "url": "http://178.237.95.113:8073/",
+    "locator": "JN36lf",
+    "lat": 46.2134,
+    "lon": 6.9792,
+    "country": "CH",
+    "city": "Vérossaz",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HB9EXC Loop 95m | Fully VS, Switzerland",
+    "url": "http://81.13.254.159:8073/",
+    "locator": "JN36nd",
+    "lat": 46.1351,
+    "lon": 7.116,
+    "country": "CH",
+    "city": "Fully",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HB9ADJ | Roche VD, Switzerland",
+    "url": "http://22579.proxy.kiwisdr.com/",
+    "locator": "JN36li",
+    "lat": 46.36,
+    "lon": 6.92,
+    "country": "CH",
+    "city": "Roche VD",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "F4JOY | Pradiers (15), France",
+    "url": "http://f4joy.ddns.net:8073/",
+    "locator": "JN15lg",
+    "lat": 45.2697,
+    "lon": 2.9241,
+    "country": "FR",
+    "city": "Pradiers",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "Ecublens-FR, Switzerland",
+    "url": "http://21625.proxy.kiwisdr.com/",
+    "locator": "JN36jo",
+    "lat": 46.609,
+    "lon": 6.8115,
+    "country": "CH",
+    "city": "Ecublens",
+    "type": "kiwisdr"
+  },
+  {
+    "name": "HB9HZW | Ayent, Switzerland",
+    "url": "http://kiwisdr.hb9hzw.ch/",
+    "locator": "JN36qg",
+    "lat": 46.2728,
+    "lon": 7.3968,
+    "country": "CH",
+    "city": "Ayent",
+    "type": "kiwisdr"
+  }
+]
