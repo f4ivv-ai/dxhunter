@@ -74,10 +74,16 @@ interface CatState {
   station: string;
   /** Modèle réel annoncé par le bridge, par ex. FLEX-6600M. */
   model: string;
-  /** monitor = télémétrie uniquement ; operate = commandes non-TX autorisées par le bridge. */
-  operationMode: "monitor" | "operate";
+  /** monitor = télémétrie ; receive = QSY/RX ; operate = commandes contrôlées. */
+  operationMode: "monitor" | "receive" | "operate";
   /** Les commandes MOX/TUNE ne sont admises par le bridge que si cette valeur est vraie. */
   txControlAllowed: boolean;
+  /** Déclaration du profil audio appliqué dans SmartSDR for Mac. */
+  audioProfile: string;
+  audioInputDevice: string;
+  audioOutputDevice: string;
+  audioDaxEnabled: boolean;
+  audioListenOnly: boolean;
   // Flex control state
   rfPower: number;
   tuneActive: boolean;
@@ -152,6 +158,30 @@ export function isCatStateStale(updatedAt: number, now = Date.now()): boolean {
   return now - updatedAt > STALE_MS;
 }
 
+export function getCatCommandBlockReason(
+  operationMode: CatState["operationMode"],
+  txControlAllowed: boolean,
+  action: CatCommand["action"]
+): string | null {
+  if (operationMode === "monitor") {
+    return "Pilotage CAT bloqué : le bridge Maison est en lecture seule.";
+  }
+  const receiveSafeActions = new Set([
+    "qsy",
+    "dsp",
+    "setfilter",
+    "setpreset",
+    "status",
+  ]);
+  if (operationMode === "receive" && !receiveSafeActions.has(action)) {
+    return "Pilotage CAT limité au QSY et aux réglages RX en mode receive.";
+  }
+  if ((action === "mox" || action === "tune") && !txControlAllowed) {
+    return "Contrôle TX bloqué : le bridge Maison n’a pas reçu une autorisation explicite.";
+  }
+  return null;
+}
+
 function defaultRadioState(name: string): RadioState {
   return {
     connected: false,
@@ -185,6 +215,11 @@ let catState: CatState = {
   model: "FLEX-6600M",
   operationMode: "monitor",
   txControlAllowed: false,
+  audioProfile: "unconfigured",
+  audioInputDevice: "",
+  audioOutputDevice: "",
+  audioDaxEnabled: false,
+  audioListenOnly: true,
   rfPower: 100,
   tuneActive: false,
   moxActive: false,
@@ -267,8 +302,13 @@ export const catRelayRouter = router({
         version: z.string().optional(),
         station: z.string().min(1).max(64).optional(),
         model: z.string().min(1).max(64).optional(),
-        operationMode: z.enum(["monitor", "operate"]).optional(),
+        operationMode: z.enum(["monitor", "receive", "operate"]).optional(),
         txControlAllowed: z.boolean().optional(),
+        audioProfile: z.string().min(1).max(80).optional(),
+        audioInputDevice: z.string().max(160).optional(),
+        audioOutputDevice: z.string().max(160).optional(),
+        audioDaxEnabled: z.boolean().optional(),
+        audioListenOnly: z.boolean().optional(),
         // Flex control state (optional — bridge sends when available)
         rfPower: z.number().min(0).max(100).optional(),
         tuneActive: z.boolean().optional(),
@@ -319,6 +359,12 @@ export const catRelayRouter = router({
         model: input.model ?? catState.model,
         operationMode: input.operationMode ?? catState.operationMode,
         txControlAllowed: input.txControlAllowed ?? catState.txControlAllowed,
+        audioProfile: input.audioProfile ?? catState.audioProfile,
+        audioInputDevice: input.audioInputDevice ?? catState.audioInputDevice,
+        audioOutputDevice:
+          input.audioOutputDevice ?? catState.audioOutputDevice,
+        audioDaxEnabled: input.audioDaxEnabled ?? catState.audioDaxEnabled,
+        audioListenOnly: input.audioListenOnly ?? catState.audioListenOnly,
         rfPower: input.rfPower ?? catState.rfPower,
         tuneActive: input.tuneActive ?? catState.tuneActive,
         moxActive: input.moxActive ?? catState.moxActive,
@@ -470,6 +516,11 @@ export const catRelayRouter = router({
       model: sharedState.model,
       operationMode: sharedState.operationMode,
       txControlAllowed: sharedState.txControlAllowed,
+      audioProfile: sharedState.audioProfile,
+      audioInputDevice: sharedState.audioInputDevice,
+      audioOutputDevice: sharedState.audioOutputDevice,
+      audioDaxEnabled: sharedState.audioDaxEnabled,
+      audioListenOnly: sharedState.audioListenOnly,
       bridgeAlive: !isStale,
       updatedAt: sharedState.updatedAt,
       // Flex control state
@@ -554,14 +605,15 @@ export const catRelayRouter = router({
       })
     )
     .mutation(async ({ input }) => {
-      if (
-        (input.action === "mox" || input.action === "tune") &&
-        !catState.txControlAllowed
-      ) {
+      const blockReason = getCatCommandBlockReason(
+        catState.operationMode,
+        catState.txControlAllowed,
+        input.action
+      );
+      if (blockReason) {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message:
-            "Contrôle TX bloqué : le bridge Maison n’a pas reçu une autorisation explicite.",
+          message: blockReason,
         });
       }
       const cmd: CatCommand = {

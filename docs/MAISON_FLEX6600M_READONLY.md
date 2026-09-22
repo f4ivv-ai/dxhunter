@@ -73,7 +73,7 @@ launchctl print gui/$(id -u)/com.dxhunter.maison-flex-6600m
 
 ## Actions ultérieures
 
-Une fois la télémétrie validée, les étapes suivantes sont : intégrer le ou les ARCO de Maison par un agent local dédié ; documenter les chemins d’antenne, filtres, amplificateurs et interverrouillages ; puis proposer les commandes non émissives sous contrôle. Le passage à un mode de pilotage ou toute capacité d’émission doit se faire seulement après validation explicite de la configuration matérielle et des règles de sécurité.
+Une fois la télémétrie validée, la phase suivante est le mode CAT `receive` avec le profil audio SmartSDR for Mac déclaré dans DX Hunter. Cette phase autorise QSY et réglages RX mais pas l’émission. Consulter [`MAISON_FLEX6600M_CAT_AUDIO.md`](MAISON_FLEX6600M_CAT_AUDIO.md) avant de modifier le fichier de configuration. L’intégration ARCO est documentée séparément dans [`MAISON_ARCO_READONLY.md`](MAISON_ARCO_READONLY.md). Le passage à une capacité d’émission reste exclu tant que la configuration matérielle et les interverrouillages n’ont pas été validés explicitement.
 
 ## Arrêt et désinstallation
 

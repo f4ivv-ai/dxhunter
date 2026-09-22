@@ -28,8 +28,11 @@
  *   AG_ENABLED      — Activer Antenna Genius (défaut: false)
  *   STATION_NAME    — Libellé de station (défaut: Maison)
  *   RADIO_MODEL     — Modèle Flex annoncé à DX Hunter (défaut: FLEX-6600M)
- *   OPERATION_MODE  — monitor (défaut, télémétrie seule) ou operate
+ *   OPERATION_MODE  — monitor (télémétrie), receive (QSY et RX), ou operate
  *   ALLOW_TX_CONTROL — true uniquement après validation matérielle ; sinon MOX/TUNE bloqués
+ *   AUDIO_PROFILE    — nom déclaratif du routage audio macOS/SmartSDR
+ *   AUDIO_INPUT_DEVICE / AUDIO_OUTPUT_DEVICE — périphériques sélectionnés dans SmartSDR for Mac
+ *   AUDIO_DAX_ENABLED / AUDIO_LISTEN_ONLY — état déclaré de l'intégration audio
  */
 import net from "node:net";
 
@@ -53,10 +56,18 @@ const AG_PORT = parseInt(process.env.AG_PORT || "9007");
 const AG_ENABLED = (process.env.AG_ENABLED || "false") === "true";
 const STATION_NAME = process.env.STATION_NAME || "Maison";
 const RADIO_MODEL = process.env.RADIO_MODEL || "FLEX-6600M";
-const OPERATION_MODE =
-  process.env.OPERATION_MODE === "operate" ? "operate" : "monitor";
+const OPERATION_MODE = ["monitor", "receive", "operate"].includes(
+  process.env.OPERATION_MODE
+)
+  ? process.env.OPERATION_MODE
+  : "monitor";
 const TX_CONTROL_ALLOWED =
   OPERATION_MODE === "operate" && process.env.ALLOW_TX_CONTROL === "true";
+const AUDIO_PROFILE = process.env.AUDIO_PROFILE || "unconfigured";
+const AUDIO_INPUT_DEVICE = process.env.AUDIO_INPUT_DEVICE || "";
+const AUDIO_OUTPUT_DEVICE = process.env.AUDIO_OUTPUT_DEVICE || "";
+const AUDIO_DAX_ENABLED = process.env.AUDIO_DAX_ENABLED === "true";
+const AUDIO_LISTEN_ONLY = process.env.AUDIO_LISTEN_ONLY !== "false";
 
 const PUSH_INTERVAL_MS = 800;
 const PING_INTERVAL_MS = 4000;
@@ -484,6 +495,24 @@ async function executeCommand(cmd) {
     );
     return;
   }
+  const receiveSafeActions = new Set([
+    "qsy",
+    "dsp",
+    "apf",
+    "setfilter",
+    "setrfgain",
+    "seteq",
+    "setpreset",
+    "spot",
+    "clearspots",
+    "status",
+  ]);
+  if (OPERATION_MODE === "receive" && !receiveSafeActions.has(cmd.action)) {
+    console.log(
+      `[Sécurité] Commande ${cmd.action} refusée : le mode receive ne permet que le pilotage RX.`
+    );
+    return;
+  }
   if ((cmd.action === "mox" || cmd.action === "tune") && !TX_CONTROL_ALLOWED) {
     console.log(
       `[Sécurité] Commande ${cmd.action} refusée : ALLOW_TX_CONTROL=true est requis.`
@@ -820,6 +849,11 @@ async function pushCatState() {
         model: RADIO_MODEL,
         operationMode: OPERATION_MODE,
         txControlAllowed: TX_CONTROL_ALLOWED,
+        audioProfile: AUDIO_PROFILE,
+        audioInputDevice: AUDIO_INPUT_DEVICE,
+        audioOutputDevice: AUDIO_OUTPUT_DEVICE,
+        audioDaxEnabled: AUDIO_DAX_ENABLED,
+        audioListenOnly: AUDIO_LISTEN_ONLY,
         // Flex control
         rfPower,
         tuneActive,
@@ -916,7 +950,7 @@ console.log(
 );
 console.log(`║  Slice      : ${SLICE_ID}`.padEnd(64) + "║");
 console.log(
-  `║  Mode       : ${OPERATION_MODE === "monitor" ? "LECTURE SEULE" : "PILOTAGE"}`.padEnd(
+  `║  Mode CAT   : ${OPERATION_MODE === "monitor" ? "LECTURE SEULE" : OPERATION_MODE === "receive" ? "PILOTAGE RX" : "PILOTAGE"}`.padEnd(
     64
   ) + "║"
 );
@@ -931,7 +965,8 @@ if (AG_ENABLED) {
   console.log("║  Ant Genius : DÉSACTIVÉ".padEnd(64) + "║");
 }
 console.log(`║  Serveur    : ${SERVER_URL}`.padEnd(64) + "║");
-console.log(`║  Token      : ${TOKEN.substring(0, 8)}...`.padEnd(64) + "║");
+console.log(`║  Audio      : ${AUDIO_PROFILE}`.padEnd(64) + "║");
+console.log("║  Token      : CONFIGURÉ (Trousseau macOS)                    ║");
 console.log("╠══════════════════════════════════════════════════════════════╣");
 console.log("║  Fonctions (API native FlexRadio) :                        ║");
 console.log("║    ✓ Fréquence, mode, QSY, Split (XIT)                     ║");
@@ -952,6 +987,11 @@ console.log("║  [Info] SmartSDR doit tourner pour les spots panadapter     ║
 if (OPERATION_MODE === "monitor") {
   console.log(
     "║  [Sûreté] Toutes les commandes radio sont bloquées           ║"
+  );
+}
+if (OPERATION_MODE === "receive") {
+  console.log(
+    "║  [Sûreté] QSY/RX autorisés ; PTT, TUNE, puissance et TX bloqués ║"
   );
 }
 console.log("╚══════════════════════════════════════════════════════════════╝");

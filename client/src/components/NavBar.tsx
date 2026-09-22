@@ -10,6 +10,7 @@ import {
   Crown,
   Settings,
   Terminal,
+  AudioLines,
 } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useI18n } from "@/contexts/I18nContext";
@@ -119,7 +120,7 @@ export function NavBar({
                     ? "border-orange-500/40 bg-orange-500/10 text-orange-400 hover:border-orange-400/60"
                     : "border-border/50 bg-card/30 text-muted-foreground/50 hover:border-border"
               )}
-              title={`${status.station} — ${status.model} · ${status.operationMode === "monitor" ? "lecture seule" : "pilotage"}`}
+              title={`${status.station} — ${status.model} · ${status.operationMode === "monitor" ? "lecture seule" : status.operationMode === "receive" ? "pilotage RX" : "pilotage"}`}
             >
               <Radio className="h-3 w-3" />
               {radioConnected && currentFreq > 0 ? (
@@ -197,6 +198,43 @@ export function NavBar({
                       : "Bloquée — lecture seule"}
                   </span>
                 </div>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-muted-foreground">CAT :</span>
+                  <span
+                    className={cn(
+                      "font-bold",
+                      status.operationMode === "receive"
+                        ? "text-green-300"
+                        : "text-cyan-300"
+                    )}
+                  >
+                    {status.operationMode === "monitor"
+                      ? "Télémétrie seule"
+                      : status.operationMode === "receive"
+                        ? "QSY + réglages RX"
+                        : "Pilotage étendu"}
+                  </span>
+                </div>
+                <div className="mt-2 rounded border border-border/60 bg-background/40 px-2 py-1.5">
+                  <div className="flex items-center gap-1.5 font-mono text-[10px] font-bold text-foreground">
+                    <AudioLines className="h-3 w-3 text-cyan-300" />
+                    Audio · {status.audioProfile}
+                  </div>
+                  <div className="mt-1 text-[10px] text-muted-foreground">
+                    {status.audioOutputDevice
+                      ? `Sortie : ${status.audioOutputDevice}`
+                      : "Sortie SmartSDR à déclarer"}
+                    {status.audioInputDevice
+                      ? ` · Entrée : ${status.audioInputDevice}`
+                      : ""}
+                  </div>
+                  <div className="mt-0.5 text-[9px] text-muted-foreground/80">
+                    {status.audioListenOnly
+                      ? "Écoute seule"
+                      : "Microphone déclaré"}
+                    {status.audioDaxEnabled ? " · DAX actif" : " · DAX inactif"}
+                  </div>
+                </div>
                 {radioConnected && currentFreq > 0 && (
                   <div className="flex items-center justify-between mt-1">
                     <span className="text-muted-foreground">Fréquence :</span>
@@ -211,9 +249,10 @@ export function NavBar({
               <div className="space-y-2">
                 <p className="text-[10px] text-muted-foreground leading-relaxed">
                   Le bridge Maison se connecte directement au FLEX-6600M par
-                  l’API SmartSDR sur le réseau local. Son mode initial est la
-                  lecture seule : il affiche la télémétrie sans changer la radio
-                  ni activer l’émission.
+                  l’API SmartSDR sur le réseau local. Le profil audio déclaré
+                  ici doit correspondre aux périphériques réellement
+                  sélectionnés dans SmartSDR for Mac ; le bridge ne modifie
+                  jamais CoreAudio.
                 </p>
 
                 {/* === Bridge v7 unique === */}
@@ -227,17 +266,19 @@ export function NavBar({
                     ./install-maison-autostart.sh
                   </code>
                   <div className="text-[9px] text-muted-foreground">
-                    Le service démarre au login, reste en lecture seule et se
-                    reconnecte automatiquement au FLEX-6600M.
+                    Le service démarre au login et se reconnecte automatiquement
+                    au FLEX-6600M. Le mode <strong>receive</strong> autorise le
+                    QSY et les réglages RX, jamais l’émission.
                   </div>
                 </div>
 
                 <div className="rounded border border-amber-500/30 bg-amber-500/5 px-2.5 py-1.5 text-[10px] text-amber-300/90">
                   <strong>Avant le pilotage :</strong> renseigner l’adresse
                   locale du FLEX-6600M, le jeton dans le Trousseau macOS et
-                  vérifier le mode <strong>monitor</strong>. Ne pas activer{" "}
-                  <strong>operate</strong> ou les contrôles TX avant validation
-                  de l’installation.
+                  vérifier d’abord le mode <strong>monitor</strong>, puis passer
+                  à <strong>receive</strong> pour QSY et réglages RX. Ne pas
+                  activer <strong>operate</strong> ou les contrôles TX avant
+                  validation de l’installation.
                 </div>
               </div>
 

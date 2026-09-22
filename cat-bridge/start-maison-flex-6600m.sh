@@ -29,12 +29,17 @@ export SLICE_ID="${SLICE_ID:-0}"
 export SERVER_URL="${SERVER_URL:-https://dxclusterf4ivv.manus.space}"
 export OPERATION_MODE="${OPERATION_MODE:-monitor}"
 export ALLOW_TX_CONTROL="${ALLOW_TX_CONTROL:-false}"
+export AUDIO_PROFILE="${AUDIO_PROFILE:-unconfigured}"
+export AUDIO_INPUT_DEVICE="${AUDIO_INPUT_DEVICE:-}"
+export AUDIO_OUTPUT_DEVICE="${AUDIO_OUTPUT_DEVICE:-}"
+export AUDIO_DAX_ENABLED="${AUDIO_DAX_ENABLED:-false}"
+export AUDIO_LISTEN_ONLY="${AUDIO_LISTEN_ONLY:-true}"
 export AG_ENABLED="${AG_ENABLED:-false}"
 export AG_HOST="${AG_HOST:-127.0.0.1}"
 export AG_PORT="${AG_PORT:-9007}"
 
-if [[ "$OPERATION_MODE" != "monitor" && "$OPERATION_MODE" != "operate" ]]; then
-  echo "[ERREUR] OPERATION_MODE doit être monitor ou operate." >&2
+if [[ "$OPERATION_MODE" != "monitor" && "$OPERATION_MODE" != "receive" && "$OPERATION_MODE" != "operate" ]]; then
+  echo "[ERREUR] OPERATION_MODE doit être monitor, receive ou operate." >&2
   exit 78
 fi
 
@@ -53,6 +58,8 @@ export TOKEN
 
 if [[ "$OPERATION_MODE" == "monitor" ]]; then
   echo "[Maison] Bridge FLEX-6600M démarré en LECTURE SEULE. Aucune commande radio ne sera exécutée."
+elif [[ "$OPERATION_MODE" == "receive" ]]; then
+  echo "[Maison] Bridge FLEX-6600M démarré en PILOTAGE RX. QSY et réglages RX seulement ; TX, TUNE et puissance sont bloqués."
 else
   echo "[Maison] Bridge FLEX-6600M démarré en mode PILOTAGE. MOX/TUNE restent bloqués sans ALLOW_TX_CONTROL=true."
 fi

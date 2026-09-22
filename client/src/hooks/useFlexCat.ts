@@ -16,8 +16,13 @@ export interface FlexStatus {
   version?: string;
   station: string;
   model: string;
-  operationMode: "monitor" | "operate";
+  operationMode: "monitor" | "receive" | "operate";
   txControlAllowed: boolean;
+  audioProfile: string;
+  audioInputDevice: string;
+  audioOutputDevice: string;
+  audioDaxEnabled: boolean;
+  audioListenOnly: boolean;
 }
 
 export interface So2rInfo {
@@ -65,6 +70,11 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
     model: "FLEX-6600M",
     operationMode: "monitor",
     txControlAllowed: false,
+    audioProfile: "unconfigured",
+    audioInputDevice: "",
+    audioOutputDevice: "",
+    audioDaxEnabled: false,
+    audioListenOnly: true,
   });
   const [lastQsy, setLastQsy] = useState<{
     freq: number;
@@ -99,6 +109,11 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       model: data.model,
       operationMode: data.operationMode,
       txControlAllowed: data.txControlAllowed,
+      audioProfile: data.audioProfile,
+      audioInputDevice: data.audioInputDevice,
+      audioOutputDevice: data.audioOutputDevice,
+      audioDaxEnabled: data.audioDaxEnabled,
+      audioListenOnly: data.audioListenOnly,
     });
     // SO2R state
     setSo2r({
@@ -126,12 +141,17 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       model: "FLEX-6600M",
       operationMode: "monitor",
       txControlAllowed: false,
+      audioProfile: "unconfigured",
+      audioInputDevice: "",
+      audioOutputDevice: "",
+      audioDaxEnabled: false,
+      audioListenOnly: true,
     });
   }, []);
 
   const qsy = useCallback(
     (freq: number, mode?: string, slice?: number) => {
-      if (!radioConnected) return false;
+      if (!radioConnected || status.operationMode === "monitor") return false;
       commandMutation.mutate(
         { action: "qsy", freq, mode, slice },
         {
@@ -142,11 +162,12 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       );
       return true;
     },
-    [commandMutation, radioConnected]
+    [commandMutation, radioConnected, status.operationMode]
   );
 
   const split = useCallback(
     (rxFreq: number, txFreq: number, mode?: string) => {
+      if (status.operationMode !== "operate") return false;
       commandMutation.mutate(
         { action: "split", rxFreq, txFreq, mode },
         {
@@ -157,12 +178,13 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       );
       return true;
     },
-    [commandMutation]
+    [commandMutation, status.operationMode]
   );
 
   /** QSY vers le poste MULTI (SO2R) */
   const qsyMulti = useCallback(
     (freq: number, mode?: string) => {
+      if (!radioConnected || status.operationMode === "monitor") return false;
       commandMutation.mutate(
         { action: "qsy_multi", freq, mode },
         {
@@ -173,12 +195,13 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       );
       return true;
     },
-    [commandMutation]
+    [commandMutation, radioConnected, status.operationMode]
   );
 
   /** SWAP + QSY (SO2R) : QSY le MULTI puis inverse les rôles */
   const swapAndQsy = useCallback(
     (freq: number, mode?: string) => {
+      if (status.operationMode !== "operate") return false;
       commandMutation.mutate(
         { action: "swap_and_qsy", freq, mode },
         {
@@ -189,13 +212,15 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       );
       return true;
     },
-    [commandMutation]
+    [commandMutation, status.operationMode]
   );
 
   /** SWAP les rôles RUN/MULTI */
   const swap = useCallback(() => {
+    if (status.operationMode !== "operate") return false;
     commandMutation.mutate({ action: "swap" });
-  }, [commandMutation]);
+    return true;
+  }, [commandMutation, status.operationMode]);
 
   return {
     /** Activer le polling */
