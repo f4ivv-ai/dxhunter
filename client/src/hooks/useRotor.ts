@@ -1,20 +1,20 @@
 /**
- * useRotor — Hook React pour la commande du rotor via l'API tRPC proxy.
+ * useRotor — état et commandes du rotor Maison via le relais ARCO local.
  *
- * Poll l'état du rotor toutes les 2s.
- * Expose goTo(azimuth) et stop().
+ * La télémétrie est disponible en lecture seule. Un déplacement ne peut être
+ * demandé que lorsque le bridge, la politique et l'absence de priorité locale
+ * l'autorisent explicitement. STOP reste disponible en cas de mouvement actif.
  */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { trpc } from "@/lib/trpc";
 
 export function useRotor() {
-  const [active, setActive] = useState(true);
+  const [active] = useState(true);
   const [lastGoTo, setLastGoTo] = useState<number | null>(null);
 
-  // Poll rotor.state every 2s
   const { data } = trpc.rotor.state.useQuery(undefined, {
     enabled: active,
-    refetchInterval: 2000,
+    refetchInterval: 2_000,
     refetchIntervalInBackground: false,
   });
 
@@ -23,6 +23,8 @@ export function useRotor() {
 
   const goTo = useCallback(
     (azimuth: number) => {
+      if (!data?.motionAllowed || data.localControl || !data.connected)
+        return false;
       const az = ((Math.round(azimuth) % 360) + 360) % 360;
       goToMutation.mutate(
         { azimuth: az },
@@ -30,8 +32,9 @@ export function useRotor() {
           onSuccess: () => setLastGoTo(az),
         }
       );
+      return true;
     },
-    [goToMutation]
+    [data?.connected, data?.localControl, data?.motionAllowed, goToMutation]
   );
 
   const stop = useCallback(() => {
@@ -39,21 +42,22 @@ export function useRotor() {
   }, [stopMutation]);
 
   return {
-    /** Azimut actuel du rotor (0-360°) */
     azimuth: data?.azimuth ?? 0,
-    /** Statut brut de l'API rotor */
+    targetAzimuth: data?.targetAzimuth ?? null,
     status: data?.status ?? "unknown",
-    /** Le rotor est-il connecté au matériel ? */
     connected: data?.connected ?? false,
-    /** L'API rotor est-elle joignable ? */
     reachable: data?.reachable ?? false,
-    /** Envoyer le rotor vers un azimut */
+    bridgeAlive: data?.bridgeAlive ?? false,
+    station: data?.station ?? "Maison",
+    controller: data?.controller ?? "microHAM ARCO",
+    operationMode: data?.operationMode ?? "monitor",
+    motionAllowed: data?.motionAllowed ?? false,
+    localControl: data?.localControl ?? false,
+    moving: data?.moving ?? false,
+    errorMessage: data?.errorMessage ?? null,
     goTo,
-    /** Arrêter le rotor */
     stop,
-    /** Dernier azimut commandé */
     lastGoTo,
-    /** En cours d'envoi */
-    isPending: goToMutation.isPending,
+    isPending: goToMutation.isPending || stopMutation.isPending,
   };
 }

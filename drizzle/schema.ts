@@ -27,7 +27,9 @@ export const users = mysqlTable("users", {
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
   /** Subscription level: free = cluster only, premium = full access */
-  subscription: mysqlEnum("subscription", ["free", "premium"]).default("free").notNull(),
+  subscription: mysqlEnum("subscription", ["free", "premium"])
+    .default("free")
+    .notNull(),
   /** Premium expiry date (null = never expires once set by admin) */
   subscriptionExpiry: timestamp("subscriptionExpiry"),
   /** Date de début de la période d'essai (10 jours). Initialisée à la première connexion. */
@@ -86,13 +88,19 @@ export const calibrationSnapshots = mysqlTable(
     source: mysqlEnum("source", ["auto", "manual"]).default("auto").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (t) => ({
-    slotUniq: uniqueIndex("slot_uniq").on(t.snapDate, t.hourUtc, t.band, t.zoneId),
-  }),
+  t => ({
+    slotUniq: uniqueIndex("slot_uniq").on(
+      t.snapDate,
+      t.hourUtc,
+      t.band,
+      t.zoneId
+    ),
+  })
 );
 
 export type CalibrationSnapshot = typeof calibrationSnapshots.$inferSelect;
-export type InsertCalibrationSnapshot = typeof calibrationSnapshots.$inferInsert;
+export type InsertCalibrationSnapshot =
+  typeof calibrationSnapshots.$inferInsert;
 
 /**
  * WebSDR Favoris — SDR marqués comme favoris par un visiteur.
@@ -110,9 +118,9 @@ export const websdrFavorites = mysqlTable(
     note: text("note"),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (t) => ({
+  t => ({
     visitorSdrUniq: uniqueIndex("visitor_sdr_uniq").on(t.visitorId, t.sdrName),
-  }),
+  })
 );
 
 export type WebsdrFavorite = typeof websdrFavorites.$inferSelect;
@@ -131,9 +139,9 @@ export const websdrDeleted = mysqlTable(
     sdrUrl: varchar("sdrUrl", { length: 512 }).notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (t) => ({
+  t => ({
     visitorDelUniq: uniqueIndex("visitor_del_uniq").on(t.visitorId, t.sdrName),
-  }),
+  })
 );
 
 export type WebsdrDeleted = typeof websdrDeleted.$inferSelect;
@@ -151,17 +159,23 @@ export const workedCalls = mysqlTable(
     visitorId: varchar("visitorId", { length: 128 }).notNull(),
     dxCall: varchar("dxCall", { length: 32 }).notNull(),
     band: varchar("band", { length: 8 }),
-    contestId: varchar("contestId", { length: 64 }).notNull().default("IARU-HF-2026"),
+    contestId: varchar("contestId", { length: 64 })
+      .notNull()
+      .default("IARU-HF-2026"),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (t) => ({
-    visitorCallBandUniq: uniqueIndex("visitor_call_band_uniq").on(t.visitorId, t.dxCall, t.band, t.contestId),
-  }),
+  t => ({
+    visitorCallBandUniq: uniqueIndex("visitor_call_band_uniq").on(
+      t.visitorId,
+      t.dxCall,
+      t.band,
+      t.contestId
+    ),
+  })
 );
 
 export type WorkedCall = typeof workedCalls.$inferSelect;
 export type InsertWorkedCall = typeof workedCalls.$inferInsert;
-
 
 /**
  * Spots "Hors Bande" (HB) — fréquences non accessibles pour l'opérateur.
@@ -176,12 +190,19 @@ export const oobSpots = mysqlTable(
     visitorId: varchar("visitorId", { length: 128 }).notNull(),
     dxCall: varchar("dxCall", { length: 32 }).notNull(),
     freqKhz: int("freqKhz").notNull(),
-    contestId: varchar("contestId", { length: 64 }).notNull().default("IARU-HF-2026"),
+    contestId: varchar("contestId", { length: 64 })
+      .notNull()
+      .default("IARU-HF-2026"),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (t) => ({
-    visitorCallFreqUniq: uniqueIndex("visitor_call_freq_uniq").on(t.visitorId, t.dxCall, t.freqKhz, t.contestId),
-  }),
+  t => ({
+    visitorCallFreqUniq: uniqueIndex("visitor_call_freq_uniq").on(
+      t.visitorId,
+      t.dxCall,
+      t.freqKhz,
+      t.contestId
+    ),
+  })
 );
 
 export type OobSpot = typeof oobSpots.$inferSelect;
@@ -207,11 +228,14 @@ export const dxccWorked = mysqlTable(
     dxCall: varchar("dxCall", { length: 32 }),
     workedAt: timestamp("workedAt").defaultNow().notNull(),
   },
-  (t) => ({
+  t => ({
     visitorDxccBandModeUniq: uniqueIndex("visitor_dxcc_band_mode_uniq").on(
-      t.visitorId, t.dxccCode, t.band, t.mode
+      t.visitorId,
+      t.dxccCode,
+      t.band,
+      t.mode
     ),
-  }),
+  })
 );
 export type DxccWorked = typeof dxccWorked.$inferSelect;
 export type InsertDxccWorked = typeof dxccWorked.$inferInsert;
@@ -221,36 +245,33 @@ export type InsertDxccWorked = typeof dxccWorked.$inferInsert;
  * Compatible export ADIF pour QRZ.com / LoTW.
  * Chaque QSO met automatiquement à jour le suivi DXCC.
  */
-export const qsoLog = mysqlTable(
-  "qso_log",
-  {
-    id: int("id").autoincrement().primaryKey(),
-    visitorId: varchar("visitorId", { length: 128 }).notNull(),
-    /** Indicatif de la station DX travaillée */
-    dxCall: varchar("dxCall", { length: 32 }).notNull(),
-    /** Fréquence en kHz */
-    freqKhz: double("freqKhz").notNull(),
-    /** Bande (ex: "20m", "40m") */
-    band: varchar("band", { length: 8 }).notNull(),
-    /** Mode (ex: "SSB", "CW", "FT8") */
-    mode: varchar("mode", { length: 16 }).notNull().default("SSB"),
-    /** Pays / entité DX */
-    dxCountry: varchar("dxCountry", { length: 128 }),
-    /** Code entité DXCC (préfixe, ex: "JA", "W", "F") */
-    dxccCode: varchar("dxccCode", { length: 16 }),
-    /** RST envoyé (ex: "59", "599") */
-    rstSent: varchar("rstSent", { length: 8 }).default("59"),
-    /** RST reçu */
-    rstRcvd: varchar("rstRcvd", { length: 8 }).default("59"),
-    /** Nom de l'opérateur DX (si connu) */
-    operatorName: varchar("operatorName", { length: 64 }),
-    /** Notes libres */
-    notes: text("notes"),
-    /** Date/heure UTC du QSO (timestamp Unix ms) */
-    qsoDateUtc: timestamp("qsoDateUtc").notNull(),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-  },
-);
+export const qsoLog = mysqlTable("qso_log", {
+  id: int("id").autoincrement().primaryKey(),
+  visitorId: varchar("visitorId", { length: 128 }).notNull(),
+  /** Indicatif de la station DX travaillée */
+  dxCall: varchar("dxCall", { length: 32 }).notNull(),
+  /** Fréquence en kHz */
+  freqKhz: double("freqKhz").notNull(),
+  /** Bande (ex: "20m", "40m") */
+  band: varchar("band", { length: 8 }).notNull(),
+  /** Mode (ex: "SSB", "CW", "FT8") */
+  mode: varchar("mode", { length: 16 }).notNull().default("SSB"),
+  /** Pays / entité DX */
+  dxCountry: varchar("dxCountry", { length: 128 }),
+  /** Code entité DXCC (préfixe, ex: "JA", "W", "F") */
+  dxccCode: varchar("dxccCode", { length: 16 }),
+  /** RST envoyé (ex: "59", "599") */
+  rstSent: varchar("rstSent", { length: 8 }).default("59"),
+  /** RST reçu */
+  rstRcvd: varchar("rstRcvd", { length: 8 }).default("59"),
+  /** Nom de l'opérateur DX (si connu) */
+  operatorName: varchar("operatorName", { length: 64 }),
+  /** Notes libres */
+  notes: text("notes"),
+  /** Date/heure UTC du QSO (timestamp Unix ms) */
+  qsoDateUtc: timestamp("qsoDateUtc").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
 export type QsoLog = typeof qsoLog.$inferSelect;
 export type InsertQsoLog = typeof qsoLog.$inferInsert;
 
@@ -258,16 +279,13 @@ export type InsertQsoLog = typeof qsoLog.$inferInsert;
  * Paramètres personnalisés par visiteur.
  * Stocke les préférences comme l'objectif DXCC.
  */
-export const userSettings = mysqlTable(
-  "user_settings",
-  {
-    id: int("id").autoincrement().primaryKey(),
-    visitorId: varchar("visitorId", { length: 128 }).notNull().unique(),
-    /** Objectif DXCC personnalisé (ex: 100, 200, 340) */
-    dxccGoal: int("dxccGoal").default(100),
-    updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-  }
-);
+export const userSettings = mysqlTable("user_settings", {
+  id: int("id").autoincrement().primaryKey(),
+  visitorId: varchar("visitorId", { length: 128 }).notNull().unique(),
+  /** Objectif DXCC personnalisé (ex: 100, 200, 340) */
+  dxccGoal: int("dxccGoal").default(100),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
 export type UserSettings = typeof userSettings.$inferSelect;
 export type InsertUserSettings = typeof userSettings.$inferInsert;
 
@@ -305,20 +323,29 @@ export const propagationFt8Hourly = mysqlTable(
     /** Kp planétaire au moment de la capture. */
     kp: double("kp"),
     /** Source géographique retenue : F4IVV, JN25, ITU27 ou WORLD. */
-    receiverSource: varchar("receiverSource", { length: 12 }).notNull().default("WORLD"),
+    receiverSource: varchar("receiverSource", { length: 12 })
+      .notNull()
+      .default("WORLD"),
     /** Indicatif du récepteur prioritaire quand disponible. */
     receiverCall: varchar("receiverCall", { length: 16 }),
     /** Origine : "auto" (Heartbeat) ou "manual". */
     source: mysqlEnum("source", ["auto", "manual"]).default("auto").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
-  (t) => ({
-    slotUniq: uniqueIndex("ft8_quarter_slot_uniq").on(t.snapDate, t.hourUtc, t.minuteUtc, t.band, t.continent),
-  }),
+  t => ({
+    slotUniq: uniqueIndex("ft8_quarter_slot_uniq").on(
+      t.snapDate,
+      t.hourUtc,
+      t.minuteUtc,
+      t.band,
+      t.continent
+    ),
+  })
 );
 
 export type PropagationFt8Hourly = typeof propagationFt8Hourly.$inferSelect;
-export type InsertPropagationFt8Hourly = typeof propagationFt8Hourly.$inferInsert;
+export type InsertPropagationFt8Hourly =
+  typeof propagationFt8Hourly.$inferInsert;
 
 // ─── Contest Mode ────────────────────────────────────────────────────────────
 
@@ -429,3 +456,32 @@ export const catRelayStates = mysqlTable("cat_relay_state", {
 
 export type CatRelayState = typeof catRelayStates.$inferSelect;
 export type InsertCatRelayState = typeof catRelayStates.$inferInsert;
+
+/**
+ * Commandes de rotor échangées entre DX Hunter et le bridge local ARCO.
+ * Elles restent séparées des commandes CAT afin que l'arrêt ou la perte de
+ * liaison d'un sous-système ne puisse pas rejouer une commande de l'autre.
+ */
+export const rotorCommands = mysqlTable("rotor_commands", {
+  id: int("id").autoincrement().primaryKey(),
+  /** JSON sérialisé de la commande ARCO. */
+  payload: text("payload").notNull(),
+  /** Les commandes de mouvement expirent rapidement et ne sont jamais rejouées. */
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type RotorCommand = typeof rotorCommands.$inferSelect;
+export type InsertRotorCommand = typeof rotorCommands.$inferInsert;
+
+/**
+ * Dernière télémétrie confirmée par le bridge local ARCO. Une ligne `maison`
+ * suffit pendant la phase mono-station ; la clé permet d'ajouter Étang plus tard.
+ */
+export const rotorRelayStates = mysqlTable("rotor_relay_state", {
+  stateKey: varchar("stateKey", { length: 32 }).primaryKey(),
+  payload: text("payload").notNull(),
+  updatedAt: timestamp("updatedAt", { fsp: 3 }).notNull(),
+});
+
+export type RotorRelayState = typeof rotorRelayStates.$inferSelect;
+export type InsertRotorRelayState = typeof rotorRelayStates.$inferInsert;
