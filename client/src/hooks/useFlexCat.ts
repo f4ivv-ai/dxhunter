@@ -14,6 +14,15 @@ export interface FlexStatus {
   connected: boolean;
   radio?: string;
   version?: string;
+  station: string;
+  model: string;
+  operationMode: "monitor" | "receive" | "operate";
+  txControlAllowed: boolean;
+  audioProfile: string;
+  audioInputDevice: string;
+  audioOutputDevice: string;
+  audioDaxEnabled: boolean;
+  audioListenOnly: boolean;
 }
 
 export interface So2rInfo {
@@ -55,9 +64,28 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
   const [radioConnected, setRadioConnected] = useState(false);
   const [currentFreq, setCurrentFreq] = useState<number>(0);
   const [currentMode, setCurrentMode] = useState<string>("");
-  const [status, setStatus] = useState<FlexStatus>({ connected: false });
-  const [lastQsy, setLastQsy] = useState<{ freq: number; mode?: string } | null>(null);
-  const [so2r, setSo2r] = useState<So2rInfo>({ enabled: false, roles: { run: "A", multi: "B" }, radioA: null, radioB: null });
+  const [status, setStatus] = useState<FlexStatus>({
+    connected: false,
+    station: "Maison",
+    model: "FLEX-6600M",
+    operationMode: "monitor",
+    txControlAllowed: false,
+    audioProfile: "unconfigured",
+    audioInputDevice: "",
+    audioOutputDevice: "",
+    audioDaxEnabled: false,
+    audioListenOnly: true,
+  });
+  const [lastQsy, setLastQsy] = useState<{
+    freq: number;
+    mode?: string;
+  } | null>(null);
+  const [so2r, setSo2r] = useState<So2rInfo>({
+    enabled: false,
+    roles: { run: "A", multi: "B" },
+    radioA: null,
+    radioB: null,
+  });
 
   // Poll cat.state every 1.5s when active
   const { data } = trpc.cat.state.useQuery(undefined, {
@@ -77,6 +105,15 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
       connected: data.connected,
       radio: data.radio ?? undefined,
       version: data.version ?? undefined,
+      station: data.station,
+      model: data.model,
+      operationMode: data.operationMode,
+      txControlAllowed: data.txControlAllowed,
+      audioProfile: data.audioProfile,
+      audioInputDevice: data.audioInputDevice,
+      audioOutputDevice: data.audioOutputDevice,
+      audioDaxEnabled: data.audioDaxEnabled,
+      audioListenOnly: data.audioListenOnly,
     });
     // SO2R state
     setSo2r({
@@ -98,64 +135,92 @@ export function useFlexCat(options: { autoConnect?: boolean } = {}) {
     setActive(false);
     setBridgeConnected(false);
     setRadioConnected(false);
-    setStatus({ connected: false });
+    setStatus({
+      connected: false,
+      station: "Maison",
+      model: "FLEX-6600M",
+      operationMode: "monitor",
+      txControlAllowed: false,
+      audioProfile: "unconfigured",
+      audioInputDevice: "",
+      audioOutputDevice: "",
+      audioDaxEnabled: false,
+      audioListenOnly: true,
+    });
   }, []);
 
-  const qsy = useCallback((freq: number, mode?: string, slice?: number) => {
-    if (!radioConnected) return false;
-    commandMutation.mutate(
-      { action: "qsy", freq, mode, slice },
-      {
-        onSuccess: () => {
-          setLastQsy({ freq, mode });
-        },
-      }
-    );
-    return true;
-  }, [commandMutation, radioConnected]);
+  const qsy = useCallback(
+    (freq: number, mode?: string, slice?: number) => {
+      if (!radioConnected || status.operationMode === "monitor") return false;
+      commandMutation.mutate(
+        { action: "qsy", freq, mode, slice },
+        {
+          onSuccess: () => {
+            setLastQsy({ freq, mode });
+          },
+        }
+      );
+      return true;
+    },
+    [commandMutation, radioConnected, status.operationMode]
+  );
 
-  const split = useCallback((rxFreq: number, txFreq: number, mode?: string) => {
-    commandMutation.mutate(
-      { action: "split", rxFreq, txFreq, mode },
-      {
-        onSuccess: () => {
-          setLastQsy({ freq: rxFreq, mode });
-        },
-      }
-    );
-    return true;
-  }, [commandMutation]);
+  const split = useCallback(
+    (rxFreq: number, txFreq: number, mode?: string) => {
+      if (status.operationMode !== "operate") return false;
+      commandMutation.mutate(
+        { action: "split", rxFreq, txFreq, mode },
+        {
+          onSuccess: () => {
+            setLastQsy({ freq: rxFreq, mode });
+          },
+        }
+      );
+      return true;
+    },
+    [commandMutation, status.operationMode]
+  );
 
   /** QSY vers le poste MULTI (SO2R) */
-  const qsyMulti = useCallback((freq: number, mode?: string) => {
-    commandMutation.mutate(
-      { action: "qsy_multi", freq, mode },
-      {
-        onSuccess: () => {
-          setLastQsy({ freq, mode });
-        },
-      }
-    );
-    return true;
-  }, [commandMutation]);
+  const qsyMulti = useCallback(
+    (freq: number, mode?: string) => {
+      if (!radioConnected || status.operationMode === "monitor") return false;
+      commandMutation.mutate(
+        { action: "qsy_multi", freq, mode },
+        {
+          onSuccess: () => {
+            setLastQsy({ freq, mode });
+          },
+        }
+      );
+      return true;
+    },
+    [commandMutation, radioConnected, status.operationMode]
+  );
 
   /** SWAP + QSY (SO2R) : QSY le MULTI puis inverse les rôles */
-  const swapAndQsy = useCallback((freq: number, mode?: string) => {
-    commandMutation.mutate(
-      { action: "swap_and_qsy", freq, mode },
-      {
-        onSuccess: () => {
-          setLastQsy({ freq, mode });
-        },
-      }
-    );
-    return true;
-  }, [commandMutation]);
+  const swapAndQsy = useCallback(
+    (freq: number, mode?: string) => {
+      if (status.operationMode !== "operate") return false;
+      commandMutation.mutate(
+        { action: "swap_and_qsy", freq, mode },
+        {
+          onSuccess: () => {
+            setLastQsy({ freq, mode });
+          },
+        }
+      );
+      return true;
+    },
+    [commandMutation, status.operationMode]
+  );
 
   /** SWAP les rôles RUN/MULTI */
   const swap = useCallback(() => {
+    if (status.operationMode !== "operate") return false;
     commandMutation.mutate({ action: "swap" });
-  }, [commandMutation]);
+    return true;
+  }, [commandMutation, status.operationMode]);
 
   return {
     /** Activer le polling */

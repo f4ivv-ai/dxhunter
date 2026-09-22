@@ -70,6 +70,20 @@ interface CatState {
   mode: string;
   radio?: string;
   version?: string;
+  /** Identité de station confirmée par le bridge local. */
+  station: string;
+  /** Modèle réel annoncé par le bridge, par ex. FLEX-6600M. */
+  model: string;
+  /** monitor = télémétrie ; receive = QSY/RX ; operate = commandes contrôlées. */
+  operationMode: "monitor" | "receive" | "operate";
+  /** Les commandes MOX/TUNE ne sont admises par le bridge que si cette valeur est vraie. */
+  txControlAllowed: boolean;
+  /** Déclaration du profil audio appliqué dans SmartSDR for Mac. */
+  audioProfile: string;
+  audioInputDevice: string;
+  audioOutputDevice: string;
+  audioDaxEnabled: boolean;
+  audioListenOnly: boolean;
   // Flex control state
   rfPower: number;
   tuneActive: boolean;
@@ -121,11 +135,16 @@ export interface CatCommand {
   createdAt: number;
 }
 
-export function createCatCommandId(now = Date.now(), uuid = randomUUID()): string {
+export function createCatCommandId(
+  now = Date.now(),
+  uuid = randomUUID()
+): string {
   return `cmd-${now}-${uuid.slice(0, 8)}`;
 }
 
-export function mergeUniqueCatCommands(...queues: CatCommand[][]): CatCommand[] {
+export function mergeUniqueCatCommands(
+  ...queues: CatCommand[][]
+): CatCommand[] {
   const merged = new Map<string, CatCommand>();
   for (const queue of queues) {
     for (const command of queue) {
@@ -137,6 +156,30 @@ export function mergeUniqueCatCommands(...queues: CatCommand[][]): CatCommand[] 
 
 export function isCatStateStale(updatedAt: number, now = Date.now()): boolean {
   return now - updatedAt > STALE_MS;
+}
+
+export function getCatCommandBlockReason(
+  operationMode: CatState["operationMode"],
+  txControlAllowed: boolean,
+  action: CatCommand["action"]
+): string | null {
+  if (operationMode === "monitor") {
+    return "Pilotage CAT bloqué : le bridge Maison est en lecture seule.";
+  }
+  const receiveSafeActions = new Set([
+    "qsy",
+    "dsp",
+    "setfilter",
+    "setpreset",
+    "status",
+  ]);
+  if (operationMode === "receive" && !receiveSafeActions.has(action)) {
+    return "Pilotage CAT limité au QSY et aux réglages RX en mode receive.";
+  }
+  if ((action === "mox" || action === "tune") && !txControlAllowed) {
+    return "Contrôle TX bloqué : le bridge Maison n’a pas reçu une autorisation explicite.";
+  }
+  return null;
 }
 
 function defaultRadioState(name: string): RadioState {
@@ -168,6 +211,15 @@ let catState: CatState = {
   connected: false,
   freq: 0,
   mode: "",
+  station: "Maison",
+  model: "FLEX-6600M",
+  operationMode: "monitor",
+  txControlAllowed: false,
+  audioProfile: "unconfigured",
+  audioInputDevice: "",
+  audioOutputDevice: "",
+  audioDaxEnabled: false,
+  audioListenOnly: true,
   rfPower: 100,
   tuneActive: false,
   moxActive: false,
@@ -205,7 +257,11 @@ let inMemoryCommands: CatCommand[] = [];
 function parsePersistedState(payload: string): CatState | null {
   try {
     const parsed = JSON.parse(payload) as Partial<CatState>;
-    if (typeof parsed.updatedAt !== "number" || typeof parsed.connected !== "boolean") return null;
+    if (
+      typeof parsed.updatedAt !== "number" ||
+      typeof parsed.connected !== "boolean"
+    )
+      return null;
     return { ...catState, ...parsed };
   } catch {
     return null;
@@ -244,6 +300,15 @@ export const catRelayRouter = router({
         mode: z.string().optional(),
         radio: z.string().optional(),
         version: z.string().optional(),
+        station: z.string().min(1).max(64).optional(),
+        model: z.string().min(1).max(64).optional(),
+        operationMode: z.enum(["monitor", "receive", "operate"]).optional(),
+        txControlAllowed: z.boolean().optional(),
+        audioProfile: z.string().min(1).max(80).optional(),
+        audioInputDevice: z.string().max(160).optional(),
+        audioOutputDevice: z.string().max(160).optional(),
+        audioDaxEnabled: z.boolean().optional(),
+        audioListenOnly: z.boolean().optional(),
         // Flex control state (optional — bridge sends when available)
         rfPower: z.number().min(0).max(100).optional(),
         tuneActive: z.boolean().optional(),
@@ -277,7 +342,10 @@ export const catRelayRouter = router({
     )
     .mutation(async ({ input }) => {
       if (!verifyToken(input.token, "CAT_BRIDGE_TOKEN")) {
-        throw new TRPCError({ code: "UNAUTHORIZED", message: "Invalid bridge token" });
+        throw new TRPCError({
+          code: "UNAUTHORIZED",
+          message: "Invalid bridge token",
+        });
       }
 
       // Update single-radio state (always, for backward compat)
@@ -287,6 +355,16 @@ export const catRelayRouter = router({
         mode: input.mode ?? catState.mode,
         radio: input.radio ?? catState.radio,
         version: input.version ?? catState.version,
+        station: input.station ?? catState.station,
+        model: input.model ?? catState.model,
+        operationMode: input.operationMode ?? catState.operationMode,
+        txControlAllowed: input.txControlAllowed ?? catState.txControlAllowed,
+        audioProfile: input.audioProfile ?? catState.audioProfile,
+        audioInputDevice: input.audioInputDevice ?? catState.audioInputDevice,
+        audioOutputDevice:
+          input.audioOutputDevice ?? catState.audioOutputDevice,
+        audioDaxEnabled: input.audioDaxEnabled ?? catState.audioDaxEnabled,
+        audioListenOnly: input.audioListenOnly ?? catState.audioListenOnly,
         rfPower: input.rfPower ?? catState.rfPower,
         tuneActive: input.tuneActive ?? catState.tuneActive,
         moxActive: input.moxActive ?? catState.moxActive,
@@ -357,21 +435,26 @@ export const catRelayRouter = router({
         const db = await getDb();
         if (db) {
           // Partage l'état radio entre toutes les instances Autoscale.
-          await db.insert(catRelayStates).values({
-            stateKey: "primary",
-            payload: JSON.stringify(catState),
-            updatedAt: new Date(catState.updatedAt),
-          }).onDuplicateKeyUpdate({
-            set: {
+          await db
+            .insert(catRelayStates)
+            .values({
+              stateKey: "primary",
               payload: JSON.stringify(catState),
               updatedAt: new Date(catState.updatedAt),
-            },
-          });
+            })
+            .onDuplicateKeyUpdate({
+              set: {
+                payload: JSON.stringify(catState),
+                updatedAt: new Date(catState.updatedAt),
+              },
+            });
 
           // Fenêtre assez large pour absorber un délai réseau. Les lignes sont
           // supprimées dès la première lecture : la livraison reste one-shot.
           const thirtySecsAgo = new Date(Date.now() - 30000);
-          const rows = await db.select().from(catCommands)
+          const rows = await db
+            .select()
+            .from(catCommands)
             .where(gt(catCommands.createdAt, thirtySecsAgo))
             .limit(20);
           if (rows.length > 0) {
@@ -385,7 +468,9 @@ export const catRelayRouter = router({
           }
           // Cleanup any stale commands (older than 10s)
           const tenSecsAgo = new Date(Date.now() - 10000);
-          await db.delete(catCommands).where(lt(catCommands.createdAt, tenSecsAgo));
+          await db
+            .delete(catCommands)
+            .where(lt(catCommands.createdAt, tenSecsAgo));
         }
       } catch (err) {
         console.warn("[CAT] DB command fetch error:", err);
@@ -407,11 +492,14 @@ export const catRelayRouter = router({
     try {
       const db = await getDb();
       if (db) {
-        const rows = await db.select().from(catRelayStates)
+        const rows = await db
+          .select()
+          .from(catRelayStates)
           .where(eq(catRelayStates.stateKey, "primary"))
           .limit(1);
         const persisted = rows[0] ? parsePersistedState(rows[0].payload) : null;
-        if (persisted && persisted.updatedAt > sharedState.updatedAt) sharedState = persisted;
+        if (persisted && persisted.updatedAt > sharedState.updatedAt)
+          sharedState = persisted;
       }
     } catch (err) {
       console.warn("[CAT] DB state read error:", err);
@@ -424,6 +512,15 @@ export const catRelayRouter = router({
       mode: sharedState.mode,
       radio: sharedState.radio,
       version: sharedState.version,
+      station: sharedState.station,
+      model: sharedState.model,
+      operationMode: sharedState.operationMode,
+      txControlAllowed: sharedState.txControlAllowed,
+      audioProfile: sharedState.audioProfile,
+      audioInputDevice: sharedState.audioInputDevice,
+      audioOutputDevice: sharedState.audioOutputDevice,
+      audioDaxEnabled: sharedState.audioDaxEnabled,
+      audioListenOnly: sharedState.audioListenOnly,
       bridgeAlive: !isStale,
       updatedAt: sharedState.updatedAt,
       // Flex control state
@@ -466,13 +563,22 @@ export const catRelayRouter = router({
     .input(
       z.object({
         action: z.enum([
-          "qsy", "split", "status",
+          "qsy",
+          "split",
+          "status",
           // Flex control commands (WAN-safe)
-          "setpower", "tune", "mox", "dsp",
+          "setpower",
+          "tune",
+          "mox",
+          "dsp",
           // RX Filter commands
-          "setfilter", "setpreset",
+          "setfilter",
+          "setpreset",
           // SO2R commands
-          "swap", "qsy_multi", "qsy_run", "swap_and_qsy",
+          "swap",
+          "qsy_multi",
+          "qsy_run",
+          "swap_and_qsy",
         ]),
         freq: z.number().optional(),
         txFreq: z.number().optional(),
@@ -499,6 +605,17 @@ export const catRelayRouter = router({
       })
     )
     .mutation(async ({ input }) => {
+      const blockReason = getCatCommandBlockReason(
+        catState.operationMode,
+        catState.txControlAllowed,
+        input.action
+      );
+      if (blockReason) {
+        throw new TRPCError({
+          code: "FORBIDDEN",
+          message: blockReason,
+        });
+      }
       const cmd: CatCommand = {
         id: createCatCommandId(),
         action: input.action,
@@ -525,14 +642,18 @@ export const catRelayRouter = router({
 
       // Store command in memory (always) + database (for cross-instance)
       inMemoryCommands.push(cmd);
-      console.log(`[CAT] Command ${cmd.id} queued in memory (${inMemoryCommands.length} total)`);
+      console.log(
+        `[CAT] Command ${cmd.id} queued in memory (${inMemoryCommands.length} total)`
+      );
       try {
         const db = await getDb();
         if (db) {
           await db.insert(catCommands).values({ payload: JSON.stringify(cmd) });
           console.log(`[CAT] Command ${cmd.id} inserted in DB`);
         } else {
-          console.warn(`[CAT] DB unavailable — command ${cmd.id} only in memory`);
+          console.warn(
+            `[CAT] DB unavailable — command ${cmd.id} only in memory`
+          );
         }
       } catch (err) {
         console.warn("[CAT] DB command insert error:", err);

@@ -26,16 +26,26 @@
  *   AG_HOST         — IP de l'Antenna Genius (défaut: 127.0.0.1)
  *   AG_PORT         — Port Antenna Genius GSCP (défaut: 9007)
  *   AG_ENABLED      — Activer Antenna Genius (défaut: false)
+ *   STATION_NAME    — Libellé de station (défaut: Maison)
+ *   RADIO_MODEL     — Modèle Flex annoncé à DX Hunter (défaut: FLEX-6600M)
+ *   OPERATION_MODE  — monitor (télémétrie), receive (QSY et RX), ou operate
+ *   ALLOW_TX_CONTROL — true uniquement après validation matérielle ; sinon MOX/TUNE bloqués
+ *   AUDIO_PROFILE    — nom déclaratif du routage audio macOS/SmartSDR
+ *   AUDIO_INPUT_DEVICE / AUDIO_OUTPUT_DEVICE — périphériques sélectionnés dans SmartSDR for Mac
+ *   AUDIO_DAX_ENABLED / AUDIO_LISTEN_ONLY — état déclaré de l'intégration audio
  */
 import net from "node:net";
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════════
-const SERVER_URL = process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space";
+const SERVER_URL =
+  process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space";
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
-  console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");
+  console.error(
+    "ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur."
+  );
   process.exit(1);
 }
 const FLEX_IP = process.env.FLEX_IP || "192.168.1.100";
@@ -44,6 +54,20 @@ const SLICE_ID = parseInt(process.env.SLICE_ID || "0");
 const AG_HOST = process.env.AG_HOST || "127.0.0.1";
 const AG_PORT = parseInt(process.env.AG_PORT || "9007");
 const AG_ENABLED = (process.env.AG_ENABLED || "false") === "true";
+const STATION_NAME = process.env.STATION_NAME || "Maison";
+const RADIO_MODEL = process.env.RADIO_MODEL || "FLEX-6600M";
+const OPERATION_MODE = ["monitor", "receive", "operate"].includes(
+  process.env.OPERATION_MODE
+)
+  ? process.env.OPERATION_MODE
+  : "monitor";
+const TX_CONTROL_ALLOWED =
+  OPERATION_MODE === "operate" && process.env.ALLOW_TX_CONTROL === "true";
+const AUDIO_PROFILE = process.env.AUDIO_PROFILE || "unconfigured";
+const AUDIO_INPUT_DEVICE = process.env.AUDIO_INPUT_DEVICE || "";
+const AUDIO_OUTPUT_DEVICE = process.env.AUDIO_OUTPUT_DEVICE || "";
+const AUDIO_DAX_ENABLED = process.env.AUDIO_DAX_ENABLED === "true";
+const AUDIO_LISTEN_ONLY = process.env.AUDIO_LISTEN_ONLY !== "false";
 
 const PUSH_INTERVAL_MS = 800;
 const PING_INTERVAL_MS = 4000;
@@ -65,7 +89,7 @@ let guiClientHandle = null; // Handle of SmartSDR GUI client (for spot binding)
 let pingTimer = null;
 
 // Slice state
-let currentFreq = 0;       // MHz
+let currentFreq = 0; // MHz
 let currentMode = "";
 let rfPower = 100;
 let tuneActive = false;
@@ -76,22 +100,22 @@ let anfEnabled = false;
 let apfEnabled = false;
 let rxAnt = "ANT1";
 let txAnt = "ANT1";
-let filterLo = 100;        // Hz
-let filterHi = 2800;       // Hz
-let rfGain = 0;            // dB
+let filterLo = 100; // Hz
+let filterHi = 2800; // Hz
+let rfGain = 0; // dB
 let rxPreset = "manual";
 let eqEnabled = false;
 let eqBands = [0, 0, 0, 0, 0, 0, 0, 0];
 
 // Telemetry
-let smeter = -127;         // dBm
-let fwdPower = 0;          // Watts
+let smeter = -127; // dBm
+let fwdPower = 0; // Watts
 let swr = 1.0;
-let alc = 0;              // %
-let paTemp = 0;           // °C
+let alc = 0; // %
+let paTemp = 0; // °C
 
 // Meter IDs (discovered at runtime)
-let meterIds = {};         // name → id
+let meterIds = {}; // name → id
 
 // Spot tracking
 let activeSpots = new Map(); // callsign+freq → spot_index
@@ -112,7 +136,9 @@ let agAutoBand = true;
 // ═══════════════════════════════════════════════════════════════════════════════
 function connectFlex() {
   if (flexSocket) {
-    try { flexSocket.destroy(); } catch {}
+    try {
+      flexSocket.destroy();
+    } catch {}
     flexSocket = null;
   }
   radioConnected = false;
@@ -126,7 +152,7 @@ function connectFlex() {
   flexSocket.setEncoding("utf8");
   flexSocket.setKeepAlive(true, 10000);
 
-  flexSocket.on("data", (data) => {
+  flexSocket.on("data", data => {
     rxBuffer += data;
     const lines = rxBuffer.split("\n");
     rxBuffer = lines.pop() || "";
@@ -137,9 +163,11 @@ function connectFlex() {
     }
   });
 
-  flexSocket.on("error", (err) => {
+  flexSocket.on("error", err => {
     if (err.code === "ECONNREFUSED") {
-      console.log(`[Flex] Port ${FLEX_PORT} refusé — FlexRadio allumé ? IP correcte ?`);
+      console.log(
+        `[Flex] Port ${FLEX_PORT} refusé — FlexRadio allumé ? IP correcte ?`
+      );
     } else {
       console.error("[Flex] Erreur:", err.message);
     }
@@ -149,7 +177,10 @@ function connectFlex() {
     if (radioConnected) console.log("[Flex] Déconnecté");
     radioConnected = false;
     flexSocket = null;
-    if (pingTimer) { clearInterval(pingTimer); pingTimer = null; }
+    if (pingTimer) {
+      clearInterval(pingTimer);
+      pingTimer = null;
+    }
     console.log(`[Flex] Reconnexion dans ${RECONNECT_DELAY_MS / 1000}s...`);
     setTimeout(connectFlex, RECONNECT_DELAY_MS);
   });
@@ -314,14 +345,18 @@ function parseSliceStatus(data) {
   if (kv.rf_gain !== undefined) rfGain = parseInt(kv.rf_gain) || 0;
   if (kv.txant !== undefined) txAnt = kv.txant;
   if (kv.rxant !== undefined) rxAnt = kv.rxant;
-  if (kv.filter_lo !== undefined) filterLo = Math.abs(parseInt(kv.filter_lo) || 100);
-  if (kv.filter_hi !== undefined) filterHi = Math.abs(parseInt(kv.filter_hi) || 2800);
+  if (kv.filter_lo !== undefined)
+    filterLo = Math.abs(parseInt(kv.filter_lo) || 100);
+  if (kv.filter_hi !== undefined)
+    filterHi = Math.abs(parseInt(kv.filter_hi) || 2800);
 }
 
 function parseTransmitStatus(data) {
   const kv = parseKeyValues(data);
   if (kv.rfpower !== undefined) rfPower = parseInt(kv.rfpower) || 100;
-  if (kv.tunepower !== undefined) { /* store if needed */ }
+  if (kv.tunepower !== undefined) {
+    /* store if needed */
+  }
   if (kv.tune !== undefined) tuneActive = kv.tune === "1";
 }
 
@@ -454,6 +489,36 @@ async function executeCommand(cmd) {
     console.log(`[Flex] Commande ignorée (non connecté): ${cmd.action}`);
     return;
   }
+  if (OPERATION_MODE === "monitor") {
+    console.log(
+      `[Sécurité] Commande ${cmd.action} refusée : bridge en lecture seule (OPERATION_MODE=monitor).`
+    );
+    return;
+  }
+  const receiveSafeActions = new Set([
+    "qsy",
+    "dsp",
+    "apf",
+    "setfilter",
+    "setrfgain",
+    "seteq",
+    "setpreset",
+    "spot",
+    "clearspots",
+    "status",
+  ]);
+  if (OPERATION_MODE === "receive" && !receiveSafeActions.has(cmd.action)) {
+    console.log(
+      `[Sécurité] Commande ${cmd.action} refusée : le mode receive ne permet que le pilotage RX.`
+    );
+    return;
+  }
+  if ((cmd.action === "mox" || cmd.action === "tune") && !TX_CONTROL_ALLOWED) {
+    console.log(
+      `[Sécurité] Commande ${cmd.action} refusée : ALLOW_TX_CONTROL=true est requis.`
+    );
+    return;
+  }
   try {
     switch (cmd.action) {
       case "qsy": {
@@ -472,7 +537,9 @@ async function executeCommand(cmd) {
 
       case "split": {
         if (cmd.rxFreq && cmd.txFreq) {
-          console.log(`[Flex] SPLIT → RX ${cmd.rxFreq.toFixed(3)} / TX ${cmd.txFreq.toFixed(3)} MHz`);
+          console.log(
+            `[Flex] SPLIT → RX ${cmd.rxFreq.toFixed(3)} / TX ${cmd.txFreq.toFixed(3)} MHz`
+          );
           await flexSend(`slice t ${SLICE_ID} ${cmd.rxFreq.toFixed(6)}`);
           if (cmd.mode) {
             const flexMode = mapMode(cmd.mode, cmd.rxFreq);
@@ -524,7 +591,9 @@ async function executeCommand(cmd) {
       case "dsp": {
         if (cmd.param && cmd.enabled !== undefined) {
           const val = cmd.enabled ? "1" : "0";
-          console.log(`[Flex] DSP ${cmd.param} → ${cmd.enabled ? "ON" : "OFF"}`);
+          console.log(
+            `[Flex] DSP ${cmd.param} → ${cmd.enabled ? "ON" : "OFF"}`
+          );
           switch (cmd.param) {
             case "nb":
               await flexSend(`slice s ${SLICE_ID} nb=${val}`);
@@ -659,8 +728,10 @@ async function executeCommand(cmd) {
 function mapMode(mode, freqMHz) {
   const m = (mode || "").toUpperCase();
   if (m === "SSB" || m === "PHONE") return freqMHz < 10 ? "LSB" : "USB";
-  if (m === "LSB" || m === "USB" || m === "CW" || m === "AM" || m === "FM") return m;
-  if (m === "DIGU" || m === "FT8" || m === "FT4" || m === "DIGITAL") return "DIGU";
+  if (m === "LSB" || m === "USB" || m === "CW" || m === "AM" || m === "FM")
+    return m;
+  if (m === "DIGU" || m === "FT8" || m === "FT4" || m === "DIGITAL")
+    return "DIGU";
   if (m === "DIGL") return "DIGL";
   if (m === "RTTY") return "RTTY";
   if (m === "CW-R") return "CW";
@@ -673,7 +744,9 @@ function mapMode(mode, freqMHz) {
 function connectAntennaGenius() {
   if (!AG_ENABLED) return;
   if (agSocket) {
-    try { agSocket.destroy(); } catch {}
+    try {
+      agSocket.destroy();
+    } catch {}
     agSocket = null;
   }
   console.log(`[AG] Connexion à ${AG_HOST}:${AG_PORT}...`);
@@ -687,7 +760,7 @@ function connectAntennaGenius() {
   agSocket.setEncoding("utf8");
   agSocket.setKeepAlive(true, 10000);
 
-  agSocket.on("data", (data) => {
+  agSocket.on("data", data => {
     agBuffer += data;
     let idx;
     while ((idx = agBuffer.indexOf("\n")) !== -1) {
@@ -697,7 +770,7 @@ function connectAntennaGenius() {
     }
   });
 
-  agSocket.on("error", (err) => {
+  agSocket.on("error", err => {
     if (err.code === "ECONNREFUSED") {
       console.log(`[AG] Port ${AG_PORT} refusé — Antenna Genius actif ?`);
     }
@@ -728,7 +801,10 @@ function handleAgResponse(line) {
     const n = parseInt(line.slice(10));
     if (!isNaN(n)) agPortCount = n;
   } else if (line.startsWith("PORTNAMES ")) {
-    const names = line.slice(10).split(",").map(s => s.trim());
+    const names = line
+      .slice(10)
+      .split(",")
+      .map(s => s.trim());
     if (names.length > 0) agPortNames = names;
   }
 }
@@ -767,8 +843,17 @@ async function pushCatState() {
         connected: radioConnected,
         freq: currentFreq,
         mode: currentMode,
-        radio: `FlexRadio @ ${FLEX_IP}`,
+        radio: `${STATION_NAME} — ${RADIO_MODEL} @ ${FLEX_IP}`,
         version: "Native API v8.0",
+        station: STATION_NAME,
+        model: RADIO_MODEL,
+        operationMode: OPERATION_MODE,
+        txControlAllowed: TX_CONTROL_ALLOWED,
+        audioProfile: AUDIO_PROFILE,
+        audioInputDevice: AUDIO_INPUT_DEVICE,
+        audioOutputDevice: AUDIO_OUTPUT_DEVICE,
+        audioDaxEnabled: AUDIO_DAX_ENABLED,
+        audioListenOnly: AUDIO_LISTEN_ONLY,
         // Flex control
         rfPower,
         tuneActive,
@@ -793,7 +878,7 @@ async function pushCatState() {
         swr,
         alc,
         paTemp,
-      }
+      },
     };
     const res = await fetch(CAT_PUSH_URL, {
       method: "POST",
@@ -829,7 +914,7 @@ async function pushAntennaState() {
         portCount: agPortCount,
         portNames: agPortNames,
         autoBand: agAutoBand,
-      }
+      },
     };
     const res = await fetch(ANT_PUSH_URL, {
       method: "POST",
@@ -859,15 +944,29 @@ async function pushAntennaState() {
 console.log("╔══════════════════════════════════════════════════════════════╗");
 console.log("║  DX HUNTER — Bridge Relay v8.0 (FlexRadio Native API)      ║");
 console.log("╠══════════════════════════════════════════════════════════════╣");
-console.log(`║  FlexRadio  : ${FLEX_IP}:${FLEX_PORT} (API native)`.padEnd(64) + "║");
+console.log(`║  Station    : ${STATION_NAME}`.padEnd(64) + "║");
+console.log(
+  `║  FlexRadio  : ${RADIO_MODEL} @ ${FLEX_IP}:${FLEX_PORT}`.padEnd(64) + "║"
+);
 console.log(`║  Slice      : ${SLICE_ID}`.padEnd(64) + "║");
+console.log(
+  `║  Mode CAT   : ${OPERATION_MODE === "monitor" ? "LECTURE SEULE" : OPERATION_MODE === "receive" ? "PILOTAGE RX" : "PILOTAGE"}`.padEnd(
+    64
+  ) + "║"
+);
+console.log(
+  `║  MOX/TUNE   : ${TX_CONTROL_ALLOWED ? "AUTORISÉ (configuration explicite)" : "BLOQUÉ"}`.padEnd(
+    64
+  ) + "║"
+);
 if (AG_ENABLED) {
   console.log(`║  Ant Genius : ${AG_HOST}:${AG_PORT}`.padEnd(64) + "║");
 } else {
   console.log("║  Ant Genius : DÉSACTIVÉ".padEnd(64) + "║");
 }
 console.log(`║  Serveur    : ${SERVER_URL}`.padEnd(64) + "║");
-console.log(`║  Token      : ${TOKEN.substring(0, 8)}...`.padEnd(64) + "║");
+console.log(`║  Audio      : ${AUDIO_PROFILE}`.padEnd(64) + "║");
+console.log("║  Token      : CONFIGURÉ (Trousseau macOS)                    ║");
 console.log("╠══════════════════════════════════════════════════════════════╣");
 console.log("║  Fonctions (API native FlexRadio) :                        ║");
 console.log("║    ✓ Fréquence, mode, QSY, Split (XIT)                     ║");
@@ -885,6 +984,16 @@ console.log("║    ✓ Keepalive (ping toutes les 4s)                         �
 console.log("╠══════════════════════════════════════════════════════════════╣");
 console.log("║  [Info] Connexion directe au FlexRadio (pas via SmartSDR)   ║");
 console.log("║  [Info] SmartSDR doit tourner pour les spots panadapter     ║");
+if (OPERATION_MODE === "monitor") {
+  console.log(
+    "║  [Sûreté] Toutes les commandes radio sont bloquées           ║"
+  );
+}
+if (OPERATION_MODE === "receive") {
+  console.log(
+    "║  [Sûreté] QSY/RX autorisés ; PTT, TUNE, puissance et TX bloqués ║"
+  );
+}
 console.log("╚══════════════════════════════════════════════════════════════╝");
 console.log("");
 

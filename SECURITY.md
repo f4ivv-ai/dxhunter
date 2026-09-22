@@ -7,9 +7,10 @@ DX Hunter n'embarque aucun jeton par défaut. Le serveur refuse les bridges lors
 Deux variables privées doivent être configurées dans l'environnement de déploiement :
 
 - `CAT_BRIDGE_TOKEN` protège le bridge CAT et le relais Antenna Genius.
+- `ARCO_BRIDGE_TOKEN` protège le bridge local Maison et le relais des pupitres microHAM ARCO.
 - `CONTEST_TOKEN` protège l'import des QSO depuis le relais concours.
 
-Chaque valeur doit comporter au moins 24 caractères. Les deux jetons doivent être différents et ne doivent jamais être ajoutés au dépôt, dans un script ou dans une capture d'écran.
+Chaque valeur doit comporter au moins 24 caractères. Les trois jetons doivent être différents et ne doivent jamais être ajoutés au dépôt, dans un script ou dans une capture d'écran.
 
 ## Installation sécurisée sur macOS
 
