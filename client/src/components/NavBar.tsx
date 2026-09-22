@@ -1,13 +1,27 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
-import { Radio, Crosshair, LogIn, LogOut, Shield, User, Crown, Settings, Download, Terminal } from "lucide-react";
+import {
+  Radio,
+  Crosshair,
+  LogIn,
+  LogOut,
+  Shield,
+  User,
+  Crown,
+  Settings,
+  Terminal,
+} from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useI18n } from "@/contexts/I18nContext";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getLoginUrl } from "@/const";
 import { useFlexCat } from "@/hooks/useFlexCat";
 import { useState, useEffect } from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
 
@@ -15,14 +29,28 @@ const LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
  * Barre de navigation commune.
  * Inclut login/logout, badge Premium/Admin, lien profil, admin, CAT indicator + fréquence temps réel.
  */
-export function NavBar({ clock, right }: { clock: string; right?: React.ReactNode }) {
+export function NavBar({
+  clock,
+  right,
+}: {
+  clock: string;
+  right?: React.ReactNode;
+}) {
   const [loc] = useLocation();
   const { t } = useI18n();
   const { user, isAuthenticated, logout } = useAuth();
-  
+
   // CAT via relay serveur (plus besoin de configurer l'URL locale)
-  const { bridgeConnected, radioConnected, currentFreq, currentMode, connect, disconnect } = useFlexCat({ 
-    autoConnect: true 
+  const {
+    bridgeConnected,
+    radioConnected,
+    currentFreq,
+    currentMode,
+    status,
+    connect,
+    disconnect,
+  } = useFlexCat({
+    autoConnect: true,
   });
 
   const isAdmin = user?.role === "admin";
@@ -39,7 +67,11 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
 
   return (
     <div className="flex items-center gap-3 px-3 py-2 sm:px-5">
-      <img src={LOGO} alt="DX Daruma" className="h-9 w-9 shrink-0 rounded-full" />
+      <img
+        src={LOGO}
+        alt="DX Daruma"
+        className="h-9 w-9 shrink-0 rounded-full"
+      />
       <div className="min-w-0">
         <h1 className="font-mono text-base font-extrabold tracking-tight text-foreground leading-none">
           DX<span className="text-primary"> DARUMA</span>
@@ -50,10 +82,25 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
       </div>
 
       <nav className="ml-3 flex items-center gap-1">
-        <NavLink href="/app" active={loc === "/app"} icon={Radio} label="Radar" />
-        <NavLink href="/pilot" active={loc === "/pilot"} icon={Crosshair} label={t("pilot")} />
+        <NavLink
+          href="/app"
+          active={loc === "/app"}
+          icon={Radio}
+          label="Radar"
+        />
+        <NavLink
+          href="/pilot"
+          active={loc === "/pilot"}
+          icon={Crosshair}
+          label={t("pilot")}
+        />
         {user?.role === "admin" && (
-          <NavLink href="/admin" active={loc === "/admin"} icon={Shield} label="Admin" />
+          <NavLink
+            href="/admin"
+            active={loc === "/admin"}
+            icon={Shield}
+            label="Admin"
+          />
         )}
       </nav>
 
@@ -72,16 +119,20 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
                     ? "border-orange-500/40 bg-orange-500/10 text-orange-400 hover:border-orange-400/60"
                     : "border-border/50 bg-card/30 text-muted-foreground/50 hover:border-border"
               )}
-              title="Paramètres CAT — cliquez pour configurer"
+              title={`${status.station} — ${status.model} · ${status.operationMode === "monitor" ? "lecture seule" : "pilotage"}`}
             >
               <Radio className="h-3 w-3" />
               {radioConnected && currentFreq > 0 ? (
                 <span className="tabular-nums">{currentFreq.toFixed(3)}</span>
               ) : (
-                <span>{radioConnected ? "FLEX" : bridgeConnected ? "BRIDGE" : "CAT"}</span>
+                <span>
+                  {radioConnected ? "FLEX" : bridgeConnected ? "BRIDGE" : "CAT"}
+                </span>
               )}
               {radioConnected && currentMode && (
-                <span className="text-[8px] opacity-70">{currentMode.toUpperCase()}</span>
+                <span className="text-[8px] opacity-70">
+                  {currentMode.toUpperCase()}
+                </span>
               )}
               <span
                 className={cn(
@@ -99,21 +150,59 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
             <div className="space-y-3">
               <div className="flex items-center gap-2">
                 <Settings className="h-4 w-4 text-primary" />
-                <h4 className="font-mono text-sm font-bold text-foreground">Paramètres CAT</h4>
+                <h4 className="font-mono text-sm font-bold text-foreground">
+                  Paramètres CAT
+                </h4>
               </div>
-              
+
               {/* Status */}
               <div className="rounded border border-border bg-card/50 px-3 py-2 text-xs">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">État :</span>
-                  <span className={cn("font-bold", radioConnected ? "text-green-400" : bridgeConnected ? "text-orange-400" : "text-muted-foreground")}>
-                    {radioConnected ? "Radio connectée" : bridgeConnected ? "Bridge connecté" : "Déconnecté"}
+                  <span
+                    className={cn(
+                      "font-bold",
+                      radioConnected
+                        ? "text-green-400"
+                        : bridgeConnected
+                          ? "text-orange-400"
+                          : "text-muted-foreground"
+                    )}
+                  >
+                    {radioConnected
+                      ? "Radio connectée"
+                      : bridgeConnected
+                        ? "Bridge connecté"
+                        : "Déconnecté"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-muted-foreground">Station :</span>
+                  <span className="font-mono font-bold text-foreground">
+                    {status.station} · {status.model}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between mt-1">
+                  <span className="text-muted-foreground">Protection TX :</span>
+                  <span
+                    className={cn(
+                      "font-bold",
+                      status.txControlAllowed
+                        ? "text-amber-300"
+                        : "text-cyan-300"
+                    )}
+                  >
+                    {status.txControlAllowed
+                      ? "Contrôle explicite requis"
+                      : "Bloquée — lecture seule"}
                   </span>
                 </div>
                 {radioConnected && currentFreq > 0 && (
                   <div className="flex items-center justify-between mt-1">
                     <span className="text-muted-foreground">Fréquence :</span>
-                    <span className="font-mono font-bold text-primary">{currentFreq.toFixed(3)} MHz {currentMode.toUpperCase()}</span>
+                    <span className="font-mono font-bold text-primary">
+                      {currentFreq.toFixed(3)} MHz {currentMode.toUpperCase()}
+                    </span>
                   </div>
                 )}
               </div>
@@ -121,37 +210,34 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
               {/* Instructions */}
               <div className="space-y-2">
                 <p className="text-[10px] text-muted-foreground leading-relaxed">
-                  Le bridge CAT tourne sur votre Mac et connecte SmartSDR à DX Hunter via le port TCP 5001.
+                  Le bridge Maison se connecte directement au FLEX-6600M par
+                  l’API SmartSDR sur le réseau local. Son mode initial est la
+                  lecture seule : il affiche la télémétrie sans changer la radio
+                  ni activer l’émission.
                 </p>
-                
+
                 {/* === Bridge v7 unique === */}
-                <div className="rounded border border-green-500/30 bg-green-500/5 px-2.5 py-2 space-y-1">
+                <div className="rounded border border-cyan-500/30 bg-cyan-500/5 px-2.5 py-2 space-y-1">
                   <div className="flex items-center gap-1.5 text-[10px] font-bold text-green-400">
                     <Terminal className="h-3 w-3" />
-                    1. Installer / mettre à jour :
+                    Démarrage automatique Maison :
                   </div>
-                  <code className="block whitespace-pre-wrap break-all text-[10px] text-green-300/90 font-mono select-all cursor-pointer">
-                    mkdir -p ~/dxhunter-bridge && curl -L &quot;https://dxclusterf4ivv.manus.space/manus-storage/bridge-relay-v7_c8fdfdbf.mjs&quot; -o ~/dxhunter-bridge/bridge-relay-v7.mjs
+                  <code className="block whitespace-pre-wrap break-all text-[10px] text-cyan-300/90 font-mono select-all cursor-pointer">
+                    cd ~/dxhunter-bridge &amp;&amp;
+                    ./install-maison-autostart.sh
                   </code>
-                  <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-green-400">
-                    <Terminal className="h-3 w-3" />
-                    2. Enregistrer le jeton une seule fois :
+                  <div className="text-[9px] text-muted-foreground">
+                    Le service démarre au login, reste en lecture seule et se
+                    reconnecte automatiquement au FLEX-6600M.
                   </div>
-                  <code className="block whitespace-pre-wrap break-all text-[10px] text-green-300/90 font-mono select-all cursor-pointer">
-                    read -s &quot;TOKEN?Collez le jeton CAT : &quot;; echo; security add-generic-password -U -a &quot;$USER&quot; -s dxhunter-cat -w &quot;$TOKEN&quot;
-                  </code>
-                  <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-green-400">
-                    <Terminal className="h-3 w-3" />
-                    3. Lancer :
-                  </div>
-                  <code className="block whitespace-pre-wrap break-all text-[10px] text-green-300/90 font-mono select-all cursor-pointer">
-                    cd ~/dxhunter-bridge && TOKEN=&quot;$(security find-generic-password -a &quot;$USER&quot; -s dxhunter-cat -w)&quot; node bridge-relay-v7.mjs
-                  </code>
-                  <div className="text-[9px] text-muted-foreground">Bridge v7.5 sécurisé · 1 panadapteur · fréquence + QSY</div>
                 </div>
 
                 <div className="rounded border border-amber-500/30 bg-amber-500/5 px-2.5 py-1.5 text-[10px] text-amber-300/90">
-                  <strong>Pré-requis :</strong> SmartSDR ouvert et un port CAT TCP actif sur <strong>5001</strong>. Le terminal doit afficher « CAT Connecté » puis « Serveur Connecté ».
+                  <strong>Avant le pilotage :</strong> renseigner l’adresse
+                  locale du FLEX-6600M, le jeton dans le Trousseau macOS et
+                  vérifier le mode <strong>monitor</strong>. Ne pas activer{" "}
+                  <strong>operate</strong> ou les contrôles TX avant validation
+                  de l’installation.
                 </div>
               </div>
 
@@ -163,14 +249,6 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
                 >
                   Reconnecter
                 </button>
-                <a
-                  href="/manus-storage/bridge-relay-v7_c8fdfdbf.mjs"
-                  download="bridge-relay-v7.mjs"
-                  className="w-full flex items-center justify-center gap-1.5 rounded border border-green-500/40 bg-green-500/10 px-3 py-1.5 text-xs font-bold text-green-400 transition-all hover:bg-green-500/20 active:scale-[0.97]"
-                >
-                  <Download className="h-3 w-3" />
-                  Télécharger Bridge v7.5 sécurisé
-                </a>
               </div>
             </div>
           </PopoverContent>
@@ -178,8 +256,12 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
 
         <LanguageSelector />
         <div className="rounded border border-border bg-card px-2.5 py-1 text-right">
-          <div className="font-mono text-sm font-bold leading-none text-primary tabular-nums">{clock}</div>
-          <div className="text-[9px] uppercase tracking-widest text-muted-foreground">UTC</div>
+          <div className="font-mono text-sm font-bold leading-none text-primary tabular-nums">
+            {clock}
+          </div>
+          <div className="text-[9px] uppercase tracking-widest text-muted-foreground">
+            UTC
+          </div>
         </div>
 
         {/* Auth section */}
@@ -196,7 +278,11 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
                     : "bg-muted text-muted-foreground border border-border"
               )}
             >
-              {isAdmin ? <Shield className="h-3 w-3" /> : isPremium ? <Crown className="h-3 w-3" /> : null}
+              {isAdmin ? (
+                <Shield className="h-3 w-3" />
+              ) : isPremium ? (
+                <Crown className="h-3 w-3" />
+              ) : null}
               {isAdmin ? "Admin" : isPremium ? "Premium" : "Gratuit"}
             </span>
 
