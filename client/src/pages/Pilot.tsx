@@ -91,7 +91,7 @@ export default function Pilot() {
   return (
     <>
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <NavBar
           clock={clock}
           right={

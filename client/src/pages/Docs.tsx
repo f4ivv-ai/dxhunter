@@ -22,7 +22,7 @@ export default function Docs() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border/50 bg-card/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-50 border-b border-border/50 bg-card/95 backdrop-blur-md">
         <div className="container flex items-center justify-between py-3">
           <div className="flex items-center gap-3">
             <Brand section={t("documentation")} />

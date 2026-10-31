@@ -45,6 +45,7 @@ import { useVisitorId } from "@/hooks/useVisitorId";
 import { findDxccByCallsign } from "@shared/dxccEntities";
 import { Globe } from "lucide-react";
 import { Brand } from "@/components/Brand";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 
 const DEFAULT_FILTERS: Filters = {
@@ -203,7 +204,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* ===== HEADER ===== */}
-      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-2 px-4 py-2">
           {/* Logo + titre */}
           <Brand />
@@ -261,6 +262,7 @@ export default function Home() {
             </button>
 
             {/* Langue — masquée sur mobile */}
+            <ThemeToggle />
             <div className="hidden sm:block">
               <LanguageSelector />
             </div>
@@ -509,7 +511,7 @@ function RigIndicator({ radioConnected, currentFreq, currentMode, className = ""
           title="Fréquence VFO"
         />
       ) : (
-        <Lcd value="  -.---" unit="MHz" size="text-sm" tone="off" title="Radio non connectée" />
+        <Lcd value="---.---" unit="MHz" size="text-sm" tone="off" title="Radio non connectée" />
       )}
       {radioConnected && currentMode && (
         <span className="text-amber-400/90 font-semibold text-[10px] ml-0.5">{currentMode.toUpperCase()}</span>

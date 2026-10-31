@@ -10,6 +10,7 @@ import { useFlexCat } from "@/hooks/useFlexCat";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Brand } from "@/components/Brand";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 
 /**
@@ -165,6 +166,7 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
           </PopoverContent>
         </Popover>
 
+        <ThemeToggle />
         <LanguageSelector />
         <Lcd value={clock.replace("Z", "")} unit="UTC" size="text-base" title="Heure UTC" />
 

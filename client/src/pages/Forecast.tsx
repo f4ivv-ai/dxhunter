@@ -83,7 +83,7 @@ export default function Forecast() {
     <>
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-3 px-3 py-2.5 sm:px-5">
           <Link
             href="/"

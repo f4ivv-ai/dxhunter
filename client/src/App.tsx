@@ -68,7 +68,7 @@ function App() {
   return (
     <ErrorBoundary>
       <I18nProvider>
-        <ThemeProvider defaultTheme="dark">
+        <ThemeProvider defaultTheme="light" switchable>
           <TooltipProvider delayDuration={150}>
             <Toaster position="top-right" />
             <Router />
