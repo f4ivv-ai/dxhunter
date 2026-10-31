@@ -12,7 +12,7 @@
  *   node telnet-relay.mjs
  *
  * Configuration (variables d'environnement optionnelles) :
- *   SERVER_URL     — URL du serveur (defaut: https://dxhunter-4u9qguqx.manus.space)
+ *   SERVER_URL     — URL du serveur (defaut: http://localhost:3000)
  *   TELNET_PORT    — Port Telnet local (defaut: 7300)
  *   UDP_PORT       — Port UDP pour recevoir les QSO de SDC/N1MM (defaut: 12060)
  *   CONTEST_TOKEN  — Token pour poster les QSO au serveur (OBLIGATOIRE, 24 caractères minimum)
@@ -22,7 +22,7 @@ import net from "node:net";
 import dgram from "node:dgram";
 
 // === Configuration ===
-const SERVER_URL = process.env.SERVER_URL || "https://dxhunter-4u9qguqx.manus.space";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 const TELNET_PORT = parseInt(process.env.TELNET_PORT || "7300");
 const UDP_PORT = parseInt(process.env.UDP_PORT || "12060");
 const CONTEST_TOKEN = process.env.CONTEST_TOKEN;

@@ -2,7 +2,7 @@
  * Router tRPC pour les paramètres utilisateur (objectif DXCC, etc.)
  */
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { userSettings } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
@@ -22,7 +22,7 @@ export const settingsRouter = router({
     }),
 
   /** Mettre à jour l'objectif DXCC */
-  setDxccGoal: publicProcedure
+  setDxccGoal: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),

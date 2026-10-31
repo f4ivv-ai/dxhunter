@@ -47,7 +47,7 @@ import { useVisitorId } from "@/hooks/useVisitorId";
 import { findDxccByCallsign } from "@shared/dxccEntities";
 import { Globe } from "lucide-react";
 
-const LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
+const LOGO = "/images/daruma-logo.jpeg";
 
 const DEFAULT_FILTERS: Filters = {
   bands: new Set([...TRACKED_BANDS]),

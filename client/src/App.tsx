@@ -18,12 +18,14 @@ const Docs = lazy(() => import("./pages/Docs"));
 const Profile = lazy(() => import("./pages/Profile"));
 const DxInfo = lazy(() => import("./pages/DxInfo"));
 const EcouteDx = lazy(() => import("./pages/EcouteDx"));
+const Login = lazy(() => import("./pages/Login"));
 
 function Router() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-background" />}>
       <Switch>
         <Route path={"/"} component={Landing} />
+        <Route path={"/login"} component={Login} />
         <Route path={"/app"} component={Home} />
         <Route path={"/pilot"} component={Pilot} />
         <Route path={"/forecast"} component={Forecast} />

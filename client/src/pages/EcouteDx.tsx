@@ -27,7 +27,7 @@ import type { inferRouterOutputs } from "@trpc/server";
 import type { AppRouter } from "../../../server/routers";
 import { PRIMARY_KIWI } from "../../../shared/primaryKiwi";
 
-const LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
+const LOGO = "/images/daruma-logo.jpeg";
 
 type PathChoice = "SP" | "LP";
 type RouterOutputs = inferRouterOutputs<AppRouter>;

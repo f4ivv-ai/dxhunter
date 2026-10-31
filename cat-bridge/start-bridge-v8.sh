@@ -23,7 +23,7 @@ export FLEX_PORT="${FLEX_PORT:-4992}"
 export SLICE_ID="${SLICE_ID:-0}"
 
 # ─── Serveur DX Hunter ───
-export SERVER_URL="${SERVER_URL:-https://dxclusterf4ivv.manus.space}"
+export SERVER_URL="${SERVER_URL:-http://localhost:3000}"
 : "${TOKEN:?Définissez TOKEN (24 caractères minimum, identique à CAT_BRIDGE_TOKEN)}"
 export TOKEN
 

@@ -46,8 +46,8 @@ Contrairement au bridge v7.1 (Kenwood CAT via SmartSDR port 5001), il donne acc�
 cd ~/dxhunter-bridge
 
 # Télécharger le bridge v8
-curl -L -o bridge-relay-v8.mjs "https://dxclusterf4ivv.manus.space/manus-storage/bridge-relay-v8_XXXX.mjs"
-curl -L -o start-bridge-v8.sh "https://dxclusterf4ivv.manus.space/manus-storage/start-bridge-v8_XXXX.sh"
+curl -L -o bridge-relay-v8.mjs "https://VOTRE-DOMAINE/downloads/bridge-relay-v8.mjs"
+curl -L -o start-bridge-v8.sh "https://VOTRE-DOMAINE/downloads/start-bridge-v8.sh"
 chmod +x start-bridge-v8.sh
 ```
 
@@ -108,7 +108,7 @@ FLEX_IP=192.168.1.42 node bridge-relay-v8.mjs
 ║  FlexRadio  : 192.168.1.42:4992 (API native)              ║
 ║  Slice      : 0                                            ║
 ║  Ant Genius : DÉSACTIVÉ                                    ║
-║  Serveur    : https://dxclusterf4ivv.manus.space           ║
+║  Serveur    : https://VOTRE-DOMAINE           ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  Fonctions (API native FlexRadio) :                        ║
 ║    ✓ Fréquence, mode, QSY, Split (XIT)                     ║

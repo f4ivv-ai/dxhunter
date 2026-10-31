@@ -17,7 +17,7 @@
  *   node bridge-relay-v7.mjs
  *
  * Configuration (variables d'environnement) :
- *   SERVER_URL      — URL du serveur DX Hunter (défaut: https://dxclusterf4ivv.manus.space)
+ *   SERVER_URL      — URL du serveur DX Hunter (défaut: http://localhost:3000)
  *   TOKEN           — Token d'authentification (OBLIGATOIRE, 24 caractères minimum)
  *   CAT_HOST        — IP de SmartSDR (défaut: 127.0.0.1 = localhost)
  *   CAT_PORT        — Port CAT Kenwood de SmartSDR (défaut: 5001)
@@ -30,7 +30,7 @@ import net from "node:net";
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════════
-const SERVER_URL = process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
   console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");

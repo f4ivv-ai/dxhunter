@@ -12,7 +12,7 @@ import {
   Terminal,
 } from "lucide-react";
 
-const DARUMA_LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
+const DARUMA_LOGO = "/images/daruma-logo.jpeg";
 
 export default function Docs() {
   const { t, locale } = useI18n();

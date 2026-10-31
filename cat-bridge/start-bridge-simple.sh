@@ -14,7 +14,7 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # ─── Configuration ────────────────────────────────────────────────────────────
-export SERVER_URL="https://dxclusterf4ivv.manus.space"
+export SERVER_URL="http://localhost:3000"
 : "${TOKEN:?Définissez TOKEN (24 caractères minimum, identique à CAT_BRIDGE_TOKEN)}"
 export TOKEN
 export CAT_HOST="127.0.0.1"

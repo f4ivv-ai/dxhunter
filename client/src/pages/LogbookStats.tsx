@@ -21,7 +21,7 @@ import {
   Check,
 } from "lucide-react";
 
-const LOGO = "/manus-storage/dxhunter-logo_11361b71.png";
+const LOGO = "/images/dxhunter-logo.png";
 
 const BAND_COLORS: Record<string, string> = {
   "160m": "#8b5cf6",

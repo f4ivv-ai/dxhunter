@@ -14,7 +14,7 @@ import { trpc } from "@/lib/trpc";
 import { useVisitorId } from "@/hooks/useVisitorId";
 import { toast } from "sonner";
 
-const CQ_MAP_URL = "/manus-storage/cq-zone-map_2b30e4f3.png";
+const CQ_MAP_URL = "/images/cq-zone-map.png";
 
 // Image dimensions (projection équirectangulaire : -180..180 lon, -90..90 lat)
 const W = 1000;

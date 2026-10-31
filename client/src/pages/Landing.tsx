@@ -15,7 +15,7 @@ import {
   LogIn,
 } from "lucide-react";
 
-const DARUMA_LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
+const DARUMA_LOGO = "/images/daruma-logo.jpeg";
 const PAYPAL_EMAIL = "f4ivv@orange.fr";
 const PAYPAL_LINK = `https://www.paypal.com/paypalme/f4ivv`;
 

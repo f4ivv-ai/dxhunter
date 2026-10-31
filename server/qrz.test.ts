@@ -2,7 +2,8 @@ import { describe, it, expect } from "vitest";
 import { qrzTestConnection, qrzLookup } from "./qrz";
 import { scpSearch, scpCount } from "./scp";
 
-describe("QRZ XML API", () => {
+// Tests réseau : exécutés seulement si les identifiants QRZ sont fournis.
+describe.skipIf(!process.env.QRZ_USERNAME || !process.env.QRZ_PASSWORD)("QRZ XML API", () => {
   it("should authenticate with QRZ.com", async () => {
     const connected = await qrzTestConnection();
     expect(connected).toBe(true);

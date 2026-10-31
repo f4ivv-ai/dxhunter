@@ -17,7 +17,7 @@ Télécharger le bridge, puis enregistrer le jeton CAT dans le Trousseau macOS a
 
 ```zsh
 mkdir -p ~/dxhunter-bridge
-curl -L "https://dxclusterf4ivv.manus.space/manus-storage/bridge-relay-v7_c8fdfdbf.mjs" -o ~/dxhunter-bridge/bridge-relay-v7.mjs
+curl -L "https://VOTRE-DOMAINE/downloads/bridge-relay-v7.mjs" -o ~/dxhunter-bridge/bridge-relay-v7.mjs
 read -s "TOKEN?Collez le jeton CAT : "; echo
 security add-generic-password -U -a "$USER" -s dxhunter-cat -w "$TOKEN"
 unset TOKEN

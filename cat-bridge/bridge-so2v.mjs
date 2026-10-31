@@ -31,7 +31,7 @@
  *   CAT_HOST       : IP SmartSDR CAT (défaut 127.0.0.1)
  *   CAT_PORT       : Port CAT (défaut 5001)
  *   INITIAL_RUN    : Slice initial en RUN (A ou B, défaut A)
- *   SERVER_URL     : URL DX Hunter (défaut https://dxclusterf4ivv.manus.space)
+ *   SERVER_URL     : URL DX Hunter (défaut http://localhost:3000)
  *   TOKEN          : Token bridge (OBLIGATOIRE, 24 caractères minimum)
  *   PUSH_INTERVAL  : Intervalle push ms (défaut 800)
  *   POLL_INTERVAL  : Intervalle polling CAT ms (défaut 1200)
@@ -48,7 +48,7 @@ const CAT_HOST = process.env.CAT_HOST || "127.0.0.1";
 const CAT_PORT = parseInt(process.env.CAT_PORT || "5001", 10);
 const INITIAL_RUN = (process.env.INITIAL_RUN || "A").toUpperCase();
 
-const SERVER_URL = (process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space").replace(/\/$/, "");
+const SERVER_URL = (process.env.SERVER_URL || "http://localhost:3000").replace(/\/$/, "");
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
   console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");

@@ -18,7 +18,7 @@
  *   node bridge-relay-v8.mjs
  *
  * Configuration (variables d'environnement) :
- *   SERVER_URL      — URL du serveur DX Hunter (défaut: https://dxclusterf4ivv.manus.space)
+ *   SERVER_URL      — URL du serveur DX Hunter (défaut: http://localhost:3000)
  *   TOKEN           — Token d'authentification (OBLIGATOIRE, 24 caractères minimum)
  *   FLEX_IP         — IP du FlexRadio (défaut: 192.168.1.100)
  *   FLEX_PORT       — Port API native (défaut: 4992)
@@ -32,7 +32,7 @@ import net from "node:net";
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════════
-const SERVER_URL = process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
   console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");
