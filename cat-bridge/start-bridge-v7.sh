@@ -10,7 +10,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 # URL du serveur DX Hunter
-export SERVER_URL="${SERVER_URL:-https://dxclusterf4ivv.manus.space}"
+export SERVER_URL="${SERVER_URL:-http://localhost:3000}"
 
 # Token d'authentification (doit correspondre au serveur)
 : "${TOKEN:?Définissez TOKEN (24 caractères minimum, identique à CAT_BRIDGE_TOKEN)}"

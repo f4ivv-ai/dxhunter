@@ -42,7 +42,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 
-const LOGO = "/manus-storage/dxhunter-logo_11361b71.png";
+const LOGO = "/images/dxhunter-logo.png";
 
 // ---------------------------------------------------------------------------
 // localStorage helpers for "worked" mults

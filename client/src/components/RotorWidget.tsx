@@ -10,6 +10,7 @@
  */
 import { cn } from "@/lib/utils";
 import { useRotor } from "@/hooks/useRotor";
+import { trpc } from "@/lib/trpc";
 import { Square } from "lucide-react";
 import { toast } from "sonner";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -154,6 +155,7 @@ function BigCompass({ azimuth, connected, reachable }: { azimuth: number; connec
 
 export function RotorWidget() {
   const { azimuth, connected, reachable, goTo, stop, isPending } = useRotor();
+  const { data: rotorInfo } = trpc.rotor.info.useQuery(undefined, { staleTime: Infinity });
   const [open, setOpen] = useState(false);
   const [manualAz, setManualAz] = useState("");
 
@@ -296,14 +298,16 @@ export function RotorWidget() {
           </button>
 
           {/* Lien vers l'app rotor */}
+          {rotorInfo?.uiUrl && (
           <a
-            href="https://arcorotctrl-dkbitpc4.manus.space"
+            href={rotorInfo.uiUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="block text-center font-mono text-[9px] text-muted-foreground/50 hover:text-primary transition-colors"
           >
             Ouvrir l'interface rotor ↗
           </a>
+          )}
         </div>
       </PopoverContent>
     </Popover>

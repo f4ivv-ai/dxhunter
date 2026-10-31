@@ -34,7 +34,7 @@ export NAME_B="Flex 8600"
 export INITIAL_RUN="A"
 
 # URL du serveur DX Hunter
-export SERVER_URL="https://dxclusterf4ivv.manus.space"
+export SERVER_URL="http://localhost:3000"
 
 # Token d'authentification bridge
 : "${TOKEN:?Définissez TOKEN (24 caractères minimum, identique à CAT_BRIDGE_TOKEN)}"

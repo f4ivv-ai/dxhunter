@@ -14,7 +14,7 @@ Usage :
 
     Options :
         --url URL       URL WebSocket du serveur DX Hunter
-                        (défaut: wss://dxhunter-4u9qguqx.manus.space/api/ws/cluster)
+                        (défaut: wss://VOTRE-DOMAINE/api/ws/cluster)
         --port PORT     Port Telnet local (défaut: 7300)
         --local         Utiliser ws://localhost:3000/api/ws/cluster (dev)
 
@@ -44,7 +44,7 @@ except ImportError:
 
 # ─── Configuration ───────────────────────────────────────────────────────────
 
-DEFAULT_WS_URL = "wss://dxhunter-4u9qguqx.manus.space/api/ws/cluster"
+DEFAULT_WS_URL = "wss://VOTRE-DOMAINE/api/ws/cluster"
 LOCAL_WS_URL = "ws://localhost:3000/api/ws/cluster"
 DEFAULT_TELNET_PORT = 7300
 RECONNECT_DELAY = 5  # secondes entre les tentatives de reconnexion

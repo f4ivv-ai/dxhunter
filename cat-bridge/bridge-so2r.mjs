@@ -19,7 +19,7 @@
  *   NAME_A         : Nom radio A (défaut "Flex 6401")
  *   NAME_B         : Nom radio B (défaut "Flex 8600")
  *   INITIAL_RUN    : Radio initiale en RUN (A ou B, défaut A)
- *   SERVER_URL     : URL DX Hunter (défaut https://dxclusterf4ivv.manus.space)
+ *   SERVER_URL     : URL DX Hunter (défaut http://localhost:3000)
  *   TOKEN          : Token bridge (OBLIGATOIRE, 24 caractères minimum)
  *   PUSH_INTERVAL  : Intervalle push ms (défaut 800)
  *   POLL_INTERVAL  : Intervalle polling CAT ms (défaut 1500)
@@ -39,7 +39,7 @@ const NAME_A = process.env.NAME_A || "Flex 6401";
 const NAME_B = process.env.NAME_B || "Flex 8600";
 const INITIAL_RUN = (process.env.INITIAL_RUN || "A").toUpperCase();
 
-const SERVER_URL = (process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space").replace(/\/$/, "");
+const SERVER_URL = (process.env.SERVER_URL || "http://localhost:3000").replace(/\/$/, "");
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
   console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");

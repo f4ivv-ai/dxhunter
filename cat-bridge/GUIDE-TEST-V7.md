@@ -53,7 +53,7 @@ export AG_PORT="9007"
 export AG_ENABLED="false"           # "true" pour activer
 
 # URL du serveur DX Hunter
-export SERVER_URL="https://dxclusterf4ivv.manus.space"
+export SERVER_URL="https://VOTRE-DOMAINE"
 
 # Token d'authentification
 export TOKEN="<votre-jeton-secret-24-caracteres-minimum>"
@@ -90,7 +90,7 @@ Tu devrais voir :
 ╠══════════════════════════════════════════════════════════════╣
 ║  CAT        : 127.0.0.1:5001 (Kenwood protocol)            ║
 ║  Ant Genius : DÉSACTIVÉ                                     ║
-║  Serveur    : https://dxclusterf4ivv.manus.space            ║
+║  Serveur    : https://VOTRE-DOMAINE            ║
 ║  Token      : dxhunte...                                    ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  Fonctions (via Kenwood CAT) :                             ║
@@ -195,7 +195,7 @@ Créer le fichier `~/Library/LaunchAgents/com.dxhunter.bridge.plist` :
     <key>EnvironmentVariables</key>
     <dict>
         <key>SERVER_URL</key>
-        <string>https://dxclusterf4ivv.manus.space</string>
+        <string>https://VOTRE-DOMAINE</string>
         <key>TOKEN</key>
         <string><votre-jeton-secret></string>
         <key>CAT_HOST</key>

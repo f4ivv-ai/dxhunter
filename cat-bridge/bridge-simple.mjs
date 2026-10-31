@@ -26,7 +26,7 @@ import net from "node:net";
 // CONFIGURATION
 // ═══════════════════════════════════════════════════════════════════════════════
 
-const SERVER_URL = process.env.SERVER_URL || "https://dxclusterf4ivv.manus.space";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
   console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");

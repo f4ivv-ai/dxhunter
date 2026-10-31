@@ -1,10 +1,11 @@
 export const ENV = {
-  appId: process.env.VITE_APP_ID ?? "",
   cookieSecret: process.env.JWT_SECRET ?? "",
   databaseUrl: process.env.DATABASE_URL ?? "",
-  oAuthServerUrl: process.env.OAUTH_SERVER_URL ?? "",
-  ownerOpenId: process.env.OWNER_OPEN_ID ?? "",
+  adminPassword: process.env.ADMIN_PASSWORD ?? "",
+  adminName: process.env.ADMIN_NAME || "F4IVV",
+  /** URL de l'API tRPC de l'application rotor (vide = rotor désactivé). */
+  rotorApiUrl: (process.env.ROTOR_API_URL ?? "").replace(/\/$/, ""),
+  /** Active les captures planifiées intégrées (calibration, FT8). */
+  schedulerEnabled: process.env.SCHEDULER_ENABLED !== "false",
   isProduction: process.env.NODE_ENV === "production",
-  forgeApiUrl: process.env.BUILT_IN_FORGE_API_URL ?? "",
-  forgeApiKey: process.env.BUILT_IN_FORGE_API_KEY ?? "",
 };

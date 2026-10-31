@@ -5,7 +5,7 @@
  * Chaque ajout de QSO met automatiquement à jour le suivi DXCC.
  */
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { qsoLog, dxccWorked } from "../../drizzle/schema";
 import { eq, and, desc, asc, count, countDistinct, like, gte, lte, sql } from "drizzle-orm";
@@ -84,7 +84,7 @@ function generateAdif(qsos: Array<{
 
 export const logbookRouter = router({
   /** Ajouter un QSO au logbook + upsert DXCC */
-  add: publicProcedure
+  add: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),
@@ -250,7 +250,7 @@ export const logbookRouter = router({
       return { bands };
     }),
 
-  delete: publicProcedure
+  delete: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),
@@ -286,7 +286,7 @@ export const logbookRouter = router({
     }),
 
   /** Importer un fichier ADIF dans le logbook */
-  importAdif: publicProcedure
+  importAdif: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),
@@ -476,7 +476,7 @@ export const logbookRouter = router({
    * Recalcule les codes DXCC manquants (NULL) dans le logbook.
    * Utile après un import ADIF ou après une mise à jour de la table DXCC.
    */
-  rebuildDxcc: publicProcedure
+  rebuildDxcc: adminProcedure
     .input(z.object({ visitorId: z.string().min(1) }))
     .mutation(async ({ input }) => {
       const db = (await getDb())!;

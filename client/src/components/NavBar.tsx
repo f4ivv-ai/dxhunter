@@ -9,7 +9,7 @@ import { useFlexCat } from "@/hooks/useFlexCat";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
-const LOGO = "/manus-storage/daruma-logo_7b6015da.jpeg";
+const LOGO = "/images/daruma-logo.jpeg";
 
 /**
  * Barre de navigation commune.
@@ -131,7 +131,7 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
                     1. Installer / mettre à jour :
                   </div>
                   <code className="block whitespace-pre-wrap break-all text-[10px] text-green-300/90 font-mono select-all cursor-pointer">
-                    mkdir -p ~/dxhunter-bridge && curl -L &quot;https://dxclusterf4ivv.manus.space/manus-storage/bridge-relay-v7_c8fdfdbf.mjs&quot; -o ~/dxhunter-bridge/bridge-relay-v7.mjs
+                    mkdir -p ~/dxhunter-bridge && curl -L &quot;/downloads/bridge-relay-v7.mjs&quot; -o ~/dxhunter-bridge/bridge-relay-v7.mjs
                   </code>
                   <div className="mt-2 flex items-center gap-1.5 text-[10px] font-bold text-green-400">
                     <Terminal className="h-3 w-3" />
@@ -164,7 +164,7 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
                   Reconnecter
                 </button>
                 <a
-                  href="/manus-storage/bridge-relay-v7_c8fdfdbf.mjs"
+                  href="/downloads/bridge-relay-v7.mjs"
                   download="bridge-relay-v7.mjs"
                   className="w-full flex items-center justify-center gap-1.5 rounded border border-green-500/40 bg-green-500/10 px-3 py-1.5 text-xs font-bold text-green-400 transition-all hover:bg-green-500/20 active:scale-[0.97]"
                 >

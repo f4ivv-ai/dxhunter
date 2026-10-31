@@ -25,7 +25,7 @@ export CAT_PORT="5001"
 export INITIAL_RUN="A"
 
 # ─── Serveur DX Hunter ───────────────────────────────────────────────────────
-export SERVER_URL="https://dxclusterf4ivv.manus.space"
+export SERVER_URL="http://localhost:3000"
 : "${TOKEN:?Définissez TOKEN (24 caractères minimum, identique à CAT_BRIDGE_TOKEN)}"
 export TOKEN
 

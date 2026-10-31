@@ -17,7 +17,7 @@ import {
 import { countryToFlag } from "../../../shared/countryMeta";
 import { findDxccByCallsign, findDxccByCountryName } from "../../../shared/dxccEntities";
 
-const LOGO = "/manus-storage/dxhunter-logo_11361b71.png";
+const LOGO = "/images/dxhunter-logo.png";
 const MODES = ["SSB", "CW", "FT8", "FT4", "AM", "FM", "RTTY", "PSK31"];
 
 /** Couleurs par mois (0=Jan … 11=Dec) */

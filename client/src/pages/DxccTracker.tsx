@@ -24,7 +24,7 @@ import {
 import { Target, Pencil, Check } from "lucide-react";
 // (imports fusionnés ci-dessus)
 
-const LOGO = "/manus-storage/dxhunter-logo_11361b71.png";
+const LOGO = "/images/dxhunter-logo.png";
 const MODES = ["SSB", "CW", "FT8", "FT4", "AM", "FM", "RTTY"];
 
 // Continents pour filtre

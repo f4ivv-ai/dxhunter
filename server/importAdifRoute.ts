@@ -9,6 +9,19 @@ import { getDb } from "./db";
 import { qsoLog, dxccWorked } from "../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { findDxccByCallsign } from "../shared/dxccEntities";
+import { sdk } from "./_core/sdk";
+import type { NextFunction, Request, Response } from "express";
+
+/** Import réservé à l'administrateur connecté. */
+async function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  try {
+    const user = await sdk.authenticateRequest(req);
+    if (user.role !== "admin") throw new Error("forbidden");
+    next();
+  } catch {
+    res.status(401).json({ ok: false, error: "Connexion administrateur requise" });
+  }
+}
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -53,6 +66,7 @@ export function registerImportAdifRoute(app: import("express").Express) {
 
   router.post(
     "/api/import-adif",
+    requireAdmin,
     upload.single("adifFile"),
     async (req, res) => {
       try {

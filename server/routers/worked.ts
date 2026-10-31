@@ -4,7 +4,7 @@
  * de le retirer, et de lister tous les indicatifs faits.
  */
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
 import { workedCalls, oobSpots } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
@@ -13,7 +13,7 @@ const CURRENT_CONTEST = "IARU-HF-2026";
 
 export const workedRouter = router({
   /** Marquer un indicatif comme "FAIT" sur une bande */
-  add: publicProcedure
+  add: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),
@@ -42,7 +42,7 @@ export const workedRouter = router({
     }),
 
   /** Retirer un indicatif de la liste "FAIT" */
-  remove: publicProcedure
+  remove: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),
@@ -102,7 +102,7 @@ export const workedRouter = router({
   // ===== HORS BANDE (HB) =====
 
   /** Marquer un spot comme Hors Bande (fréquence inaccessible) */
-  addOob: publicProcedure
+  addOob: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),
@@ -130,7 +130,7 @@ export const workedRouter = router({
     }),
 
   /** Retirer un spot de la liste Hors Bande */
-  removeOob: publicProcedure
+  removeOob: adminProcedure
     .input(
       z.object({
         visitorId: z.string().min(1),

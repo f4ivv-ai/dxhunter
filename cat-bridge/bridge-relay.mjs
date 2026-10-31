@@ -15,7 +15,7 @@
  *   node bridge-relay.mjs
  *
  * Configuration (variables d'environnement optionnelles) :
- *   SERVER_URL  — URL du serveur (defaut: https://dxhunter-4u9qguqx.manus.space)
+ *   SERVER_URL  — URL du serveur (defaut: http://localhost:3000)
  *   TOKEN       — Token d'authentification (OBLIGATOIRE, 24 caractères minimum)
  *   CAT_PORT    — Port TCP CAT SmartSDR (defaut: 5001)
  */
@@ -23,7 +23,7 @@
 import net from "node:net";
 
 // === Configuration ===
-const SERVER_URL = process.env.SERVER_URL || "https://dxhunter-4u9qguqx.manus.space";
+const SERVER_URL = process.env.SERVER_URL || "http://localhost:3000";
 const TOKEN = process.env.TOKEN;
 if (!TOKEN || TOKEN.length < 24) {
   console.error("ERREUR : définissez TOKEN (24 caractères minimum), identique à CAT_BRIDGE_TOKEN côté serveur.");

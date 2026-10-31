@@ -1,67 +1,63 @@
 /**
- * Handlers des tâches planifiées (Heartbeat).
- * Montés dans server/_core/index.ts AVANT le fallthrough Vite/static.
+ * Captures planifiées intégrées au serveur (remplace le Heartbeat Manus).
  *
- * `/api/scheduled/calibration` : capture quotidienne automatique d'un snapshot
- * 40 m (spots réels vs prédiction). Idempotent (upsert par créneau).
+ * Sur un serveur permanent (VPS), le processus Node tourne en continu :
+ * les captures sont déclenchées par des minuteries alignées sur l'heure UTC.
+ *
+ *   - Calibration 40 m : tous les jours à 12:00 UTC
+ *   - Capture FT8 (SNR ≥ -8 dB) : toutes les 15 minutes (:00, :15, :30, :45)
+ *
+ * Désactivable avec SCHEDULER_ENABLED=false (par ex. sur une 2e instance).
  */
-import type { Request, Response } from "express";
-import { sdk } from "./_core/sdk";
 import { captureCalibration } from "./calibrationCapture";
 import { captureFt8Hourly } from "./ft8HourlyCapture";
 import { waitForFreshPskSample } from "./pskreporter";
 
-export async function calibrationScheduledHandler(req: Request, res: Response) {
-  try {
-    const user = await sdk.authenticateRequest(req);
-    if (!user.isCron || !user.taskUid) {
-      return res.status(403).json({ error: "cron-only" });
-    }
-    const r = await captureCalibration("auto");
-    return res.json({ ok: true, saved: r.saved, spotCount: r.spotCount, at: r.at });
-  } catch (e) {
-    const err = e instanceof Error ? e : new Error("unknown");
-    return res.status(500).json({
-      error: err.message,
-      stack: err.stack,
-      context: { url: req.originalUrl },
-      timestamp: new Date().toISOString(),
-    });
-  }
+const MINUTE = 60_000;
+const QUARTER = 15 * MINUTE;
+const DAY = 24 * 60 * MINUTE;
+const CALIBRATION_HOUR_UTC = 12;
+
+/** Délai jusqu'au prochain multiple de `periodMs` (+ décalage), en UTC. */
+export function msUntilNext(periodMs: number, offsetMs = 0, now = Date.now()): number {
+  const elapsed = (now - offsetMs) % periodMs;
+  const wait = periodMs - (elapsed < 0 ? elapsed + periodMs : elapsed);
+  return wait === 0 ? periodMs : wait;
 }
 
-/**
- * Handler Heartbeat : capture FT8 (SNR >= -8 dB) par bande et continent.
- * Cron : toutes les 15 minutes pour meilleure granularite.
- * Endpoint : /api/scheduled/ft8-hourly
- */
-export async function ft8HourlyScheduledHandler(req: Request, res: Response) {
-  try {
-    const user = await sdk.authenticateRequest(req);
-    if (!user.isCron || !user.taskUid) {
-      return res.status(403).json({ error: "cron-only" });
+function every(name: string, periodMs: number, offsetMs: number, job: () => Promise<unknown>) {
+  let running = false;
+  const tick = async () => {
+    schedule();
+    if (running) {
+      console.warn(`[Scheduler] ${name} : exécution précédente encore en cours, tour sauté`);
+      return;
     }
-    // Une instance Autoscale peut démarrer à froid juste avant la capture.
-    // On observe au plus un cycle FT8, puis le moteur choisit F4IVV/JN25/ITU27/monde.
+    running = true;
+    const started = Date.now();
+    try {
+      await job();
+      console.log(`[Scheduler] ${name} OK (${Date.now() - started} ms)`);
+    } catch (e) {
+      console.error(`[Scheduler] ${name} en échec :`, e instanceof Error ? e.message : e);
+    } finally {
+      running = false;
+    }
+  };
+  const schedule = () => {
+    const t = setTimeout(tick, msUntilNext(periodMs, offsetMs));
+    t.unref?.();
+  };
+  schedule();
+}
+
+export function startScheduler(): void {
+  every("Capture FT8", QUARTER, 0, async () => {
     await waitForFreshPskSample();
-    const r = await captureFt8Hourly("auto");
-    return res.json({
-      ok: true,
-      saved: r.saved,
-      totalSpots: r.totalSpots,
-      at: r.at,
-      bands: r.bands,
-      receiverSource: r.receiverSource,
-      primaryReceiverSpots: r.primaryReceiverSpots,
-      regionalSpots: r.regionalSpots,
-    });
-  } catch (e) {
-    const err = e instanceof Error ? e : new Error("unknown");
-    return res.status(500).json({
-      error: err.message,
-      stack: err.stack,
-      context: { url: req.originalUrl },
-      timestamp: new Date().toISOString(),
-    });
-  }
+    return captureFt8Hourly("auto");
+  });
+  every("Calibration 40 m", DAY, CALIBRATION_HOUR_UTC * 60 * MINUTE, () =>
+    captureCalibration("auto"),
+  );
+  console.log("[Scheduler] Captures planifiées actives (FT8 /15 min, calibration 12:00 UTC)");
 }

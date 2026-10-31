@@ -1,18 +1,28 @@
 /**
  * rotorRelay — Proxy tRPC vers l'application rotor externe (arcorotctrl).
  *
- * L'application rotor tourne sur https://arcorotctrl-dkbitpc4.manus.space
- * et expose une API tRPC. Ce router proxifie les appels depuis DX Hunter
- * pour éviter les problèmes CORS côté navigateur.
+ * L'application rotor (arcorotctrl) expose une API tRPC. Son adresse est
+ * donnée par ROTOR_API_URL (ex. https://rotor.exemple.fr/api/trpc).
+ * Vide = rotor désactivé. Ce router proxifie les appels pour éviter le CORS.
  */
 import { publicProcedure, adminProcedure, router } from "../_core/trpc";
 import { z } from "zod";
+import { ENV } from "../_core/env";
 
-const ROTOR_BASE = "https://arcorotctrl-dkbitpc4.manus.space/api/trpc";
+function rotorBase(): string {
+  if (!ENV.rotorApiUrl) throw new Error("Rotor non configuré (ROTOR_API_URL)");
+  return ENV.rotorApiUrl;
+}
+
+/** Adresse de l'interface web du rotor, déduite de l'URL de son API. */
+export function rotorUiUrl(apiUrl = ENV.rotorApiUrl): string | null {
+  if (!apiUrl) return null;
+  return apiUrl.replace(/\/api\/trpc$/, "");
+}
 
 /** Appel générique vers l'API tRPC du rotor */
 async function rotorGet<T>(procedure: string): Promise<T> {
-  const url = `${ROTOR_BASE}/${procedure}?batch=1&input=%7B%7D`;
+  const url = `${rotorBase()}/${procedure}?batch=1&input=%7B%7D`;
   const res = await fetch(url, {
     headers: { "Content-Type": "application/json" },
     signal: AbortSignal.timeout(5000),
@@ -24,7 +34,7 @@ async function rotorGet<T>(procedure: string): Promise<T> {
 }
 
 async function rotorPost<T>(procedure: string, payload: unknown): Promise<T> {
-  const url = `${ROTOR_BASE}/${procedure}?batch=1`;
+  const url = `${rotorBase()}/${procedure}?batch=1`;
   const res = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -43,6 +53,12 @@ export interface RotorState {
 }
 
 export const rotorRelayRouter = router({
+  /** Rotor configuré ? + lien vers son interface */
+  info: publicProcedure.query(() => ({
+    enabled: Boolean(ENV.rotorApiUrl),
+    uiUrl: rotorUiUrl(),
+  })),
+
   /** Lire l'état actuel du rotor (azimut + statut) */
   state: publicProcedure.query(async () => {
     try {

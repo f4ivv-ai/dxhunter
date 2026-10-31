@@ -10,7 +10,6 @@ import {
   PropagationFt8Hourly,
   users,
 } from "../drizzle/schema";
-import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -64,9 +63,6 @@ export async function upsertUser(user: InsertUser): Promise<void> {
     if (user.role !== undefined) {
       values.role = user.role;
       updateSet.role = user.role;
-    } else if (user.openId === ENV.ownerOpenId) {
-      values.role = 'admin';
-      updateSet.role = 'admin';
     }
 
     if (!values.lastSignedIn) {
@@ -194,6 +190,16 @@ export async function setUserSubscription(
     .update(users)
     .set({ subscription, subscriptionExpiry: expiryDate ?? null })
     .where(eq(users.id, userId));
+}
+
+/** Le compte administrateur local a toujours l'accès complet, sans expiration. */
+export async function ensureAdminPremium(openId: string) {
+  const db = await getDb();
+  if (!db) return;
+  await db
+    .update(users)
+    .set({ role: "admin", subscription: "premium", subscriptionExpiry: null })
+    .where(eq(users.openId, openId));
 }
 
 /** Met à jour le locator d'un utilisateur. */

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { publicProcedure, router } from "../_core/trpc";
+import { adminProcedure, publicProcedure, router } from "../_core/trpc";
 import { listCalibrationSnapshots, calibrationByDate } from "../db";
 import { captureCalibration } from "../calibrationCapture";
 import {
@@ -415,7 +415,7 @@ export const spotsRouter = router({
   /* -------------------------------------------------------------- */
 
   /** Déclenche une capture manuelle "maintenant" (spots réels vs prédiction, toutes bandes). */
-  runCalibration: publicProcedure.mutation(async () => {
+  runCalibration: adminProcedure.mutation(async () => {
     try {
       const r = await captureCalibration("manual");
       return { ok: true as const, saved: r.saved, spotCount: r.spotCount, bandCounts: r.bandCounts, solar: r.solar, at: r.at };
