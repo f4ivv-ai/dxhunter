@@ -133,7 +133,7 @@ export function MultiDetailPopover({ spot, allSpots, contestId, workedMultKeys, 
         {children}
       </PopoverTrigger>
       <PopoverContent
-        className="w-72 p-0 border-amber-400/50 bg-[oklch(0.14_0.009_250)]"
+        className="w-72 p-0 border-amber-400/50 bg-background"
         align="start"
         side="bottom"
         sideOffset={4}

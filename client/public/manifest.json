@@ -1,11 +1,10 @@
 {
-  "name": "DX Hunter",
+  "name": "DX Hunter by F4IVV",
   "short_name": "DX Hunter",
-  "description": "Traqueur DX en temps réel — Spots SSB/CW/FT8, propagation live, WebSDR intégré",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0d1117",
-  "theme_color": "#0d1117",
+  "background_color": "#050a07",
+  "theme_color": "#050a07",
   "icons": [
     {
       "src": "/icon-192.png",

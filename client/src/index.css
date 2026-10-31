@@ -1,8 +1,7 @@
 /**
- * DX Hunter — Thème dual (clair/sombre)
- * Clair : fond blanc/gris clair, couleurs vives par bande, style DX Summit
- * Sombre : fond anthracite, accent ambre, phosphore SSB
- * Typo : JetBrains Mono (fréquences), Space Grotesk (UI)
+ * DX Hunter by F4IVV — thème « instrument »
+ * Typo : IBM Plex Sans Condensed (interface), IBM Plex Mono (données),
+ * DSEG7 Classic (afficheurs LCD : fréquences, heure UTC)
  */
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -46,94 +45,87 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-sans: "IBM Plex Sans Condensed", "Arial Narrow", ui-sans-serif, system-ui, sans-serif;
+  --font-lcd: "DSEG7 Classic", "IBM Plex Mono", monospace;
   --color-amber-signal: var(--amber-signal);
   --color-phosphor: var(--phosphor);
   --color-steel: var(--steel);
+
+  /* Palette Tailwind ramenée sur l'instrument : une seule famille d'accent.
+     cyan / teal / sky / émeraude / vert → phosphore ; orange / jaune → ambre ;
+     slate → gris de façade. Les autres teintes restent pour coder les bandes. */
+  --color-phosphor-50: #eafff1; --color-phosphor-100: #c9ffdb; --color-phosphor-200: #9dffbe;
+  --color-phosphor-300: #6dff9e; --color-phosphor-400: #3dff7f; --color-phosphor-500: #22e066;
+  --color-phosphor-600: #18b351; --color-phosphor-700: #138a3f; --color-phosphor-800: #0f6630;
+  --color-phosphor-900: #0b4522; --color-phosphor-950: #062a14;
+  --color-cyan-50: var(--color-phosphor-50); --color-cyan-100: var(--color-phosphor-100); --color-cyan-200: var(--color-phosphor-200); --color-cyan-300: var(--color-phosphor-300); --color-cyan-400: var(--color-phosphor-400); --color-cyan-500: var(--color-phosphor-500); --color-cyan-600: var(--color-phosphor-600); --color-cyan-700: var(--color-phosphor-700); --color-cyan-800: var(--color-phosphor-800); --color-cyan-900: var(--color-phosphor-900); --color-cyan-950: var(--color-phosphor-950);
+  --color-teal-50: var(--color-phosphor-50); --color-teal-100: var(--color-phosphor-100); --color-teal-200: var(--color-phosphor-200); --color-teal-300: var(--color-phosphor-300); --color-teal-400: var(--color-phosphor-400); --color-teal-500: var(--color-phosphor-500); --color-teal-600: var(--color-phosphor-600); --color-teal-700: var(--color-phosphor-700); --color-teal-800: var(--color-phosphor-800); --color-teal-900: var(--color-phosphor-900); --color-teal-950: var(--color-phosphor-950);
+  --color-sky-50: var(--color-phosphor-50); --color-sky-100: var(--color-phosphor-100); --color-sky-200: var(--color-phosphor-200); --color-sky-300: var(--color-phosphor-300); --color-sky-400: var(--color-phosphor-400); --color-sky-500: var(--color-phosphor-500); --color-sky-600: var(--color-phosphor-600); --color-sky-700: var(--color-phosphor-700); --color-sky-800: var(--color-phosphor-800); --color-sky-900: var(--color-phosphor-900); --color-sky-950: var(--color-phosphor-950);
+  --color-emerald-50: var(--color-phosphor-50); --color-emerald-100: var(--color-phosphor-100); --color-emerald-200: var(--color-phosphor-200); --color-emerald-300: var(--color-phosphor-300); --color-emerald-400: var(--color-phosphor-400); --color-emerald-500: var(--color-phosphor-500); --color-emerald-600: var(--color-phosphor-600); --color-emerald-700: var(--color-phosphor-700); --color-emerald-800: var(--color-phosphor-800); --color-emerald-900: var(--color-phosphor-900); --color-emerald-950: var(--color-phosphor-950);
+  --color-green-50: var(--color-phosphor-50); --color-green-100: var(--color-phosphor-100); --color-green-200: var(--color-phosphor-200); --color-green-300: var(--color-phosphor-300); --color-green-400: var(--color-phosphor-400); --color-green-500: var(--color-phosphor-500); --color-green-600: var(--color-phosphor-600); --color-green-700: var(--color-phosphor-700); --color-green-800: var(--color-phosphor-800); --color-green-900: var(--color-phosphor-900); --color-green-950: var(--color-phosphor-950);
+  --color-amber-50: #fff6e0; --color-amber-100: #ffeab8; --color-amber-200: #ffd98a; --color-amber-300: #ffc75a; --color-amber-400: #ffb020; --color-amber-500: #f09a00; --color-amber-600: #c47c00; --color-amber-700: #965e00; --color-amber-800: #6b4300; --color-amber-900: #452b00; --color-amber-950: #2a1a00;
+  --color-orange-50: var(--color-amber-50); --color-orange-100: var(--color-amber-100); --color-orange-200: var(--color-amber-200); --color-orange-300: var(--color-amber-300); --color-orange-400: var(--color-amber-400); --color-orange-500: var(--color-amber-500); --color-orange-600: var(--color-amber-600); --color-orange-700: var(--color-amber-700); --color-orange-800: var(--color-amber-800); --color-orange-900: var(--color-amber-900); --color-orange-950: var(--color-amber-950);
+  --color-yellow-50: var(--color-amber-50); --color-yellow-100: var(--color-amber-100); --color-yellow-200: var(--color-amber-200); --color-yellow-300: var(--color-amber-300); --color-yellow-400: var(--color-amber-400); --color-yellow-500: var(--color-amber-500); --color-yellow-600: var(--color-amber-600); --color-yellow-700: var(--color-amber-700); --color-yellow-800: var(--color-amber-800); --color-yellow-900: var(--color-amber-900); --color-yellow-950: var(--color-amber-950);
+  --color-slate-50: #e9f3ec; --color-slate-100: #d4e4d9; --color-slate-200: #b6cbbd; --color-slate-300: #93ac9c; --color-slate-400: #7fa68c; --color-slate-500: #5b7a66; --color-slate-600: #3f5848; --color-slate-700: #2a3d31; --color-slate-800: #182a1f; --color-slate-900: #0f1a13; --color-slate-950: #070d09;
+  --color-red-300: #ff9a8c; --color-red-400: #ff6a58; --color-red-500: #ff5040; --color-red-600: #d93a2c; --color-red-900: #4a120c;
 }
 
-/* ═══════════ THÈME CLAIR (par défaut) ═══════════ */
-:root {
-  --radius: 0.5rem;
-
-  /* Couleurs signal */
-  --amber-signal: oklch(0.72 0.17 55);
-  --phosphor: oklch(0.55 0.2 145);
-  --steel: oklch(0.5 0.14 235);
-
-  --background: oklch(0.97 0.005 250);
-  --foreground: oklch(0.15 0.01 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0.01 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0.01 250);
-  --primary: oklch(0.55 0.2 250);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.93 0.005 250);
-  --secondary-foreground: oklch(0.25 0.01 250);
-  --muted: oklch(0.94 0.005 250);
-  --muted-foreground: oklch(0.45 0.015 250);
-  --accent: oklch(0.92 0.01 250);
-  --accent-foreground: oklch(0.2 0.01 250);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0.01 250);
-  --input: oklch(0.91 0.005 250);
-  --ring: oklch(0.55 0.2 250);
-  --chart-1: oklch(0.55 0.2 145);
-  --chart-2: oklch(0.65 0.18 55);
-  --chart-3: oklch(0.5 0.14 235);
-  --chart-4: oklch(0.55 0.22 25);
-  --chart-5: oklch(0.6 0.15 320);
-  --sidebar: oklch(0.97 0.005 250);
-  --sidebar-foreground: oklch(0.15 0.01 250);
-  --sidebar-primary: oklch(0.55 0.2 250);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.94 0.005 250);
-  --sidebar-accent-foreground: oklch(0.2 0.01 250);
-  --sidebar-border: oklch(0.88 0.01 250);
-  --sidebar-ring: oklch(0.55 0.2 250);
-}
-
-/* ═══════════ THÈME SOMBRE ═══════════ */
+/* ═══════════ THÈME « INSTRUMENT » ═══════════
+ * Façade de transceiver : panneau noir teinté vert, gravures discrètes,
+ * phosphore P1 pour l'actif, ambre réservé aux cibles et alertes,
+ * rouge pour l'émission, les DX rares et les erreurs.
+ * Même palette en clair et en sombre : l'instrument n'a qu'un seul visage.
+ */
+:root,
 .dark {
-  --amber-signal: oklch(0.8 0.16 75);
-  --phosphor: oklch(0.82 0.2 145);
-  --steel: oklch(0.68 0.11 235);
+  --radius: 0.25rem;
 
-  --background: oklch(0.14 0.008 250);
-  --foreground: oklch(0.92 0.01 90);
-  --card: oklch(0.18 0.009 250);
-  --card-foreground: oklch(0.92 0.01 90);
-  --popover: oklch(0.16 0.009 250);
-  --popover-foreground: oklch(0.92 0.01 90);
-  --primary: oklch(0.72 0.17 55);
-  --primary-foreground: oklch(0.14 0.01 250);
-  --secondary: oklch(0.24 0.01 250);
-  --secondary-foreground: oklch(0.9 0.01 90);
-  --muted: oklch(0.22 0.008 250);
-  --muted-foreground: oklch(0.68 0.012 250);
-  --accent: oklch(0.26 0.012 250);
-  --accent-foreground: oklch(0.95 0.01 90);
-  --destructive: oklch(0.62 0.23 22);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.3 0.01 250);
-  --input: oklch(0.25 0.01 250);
-  --ring: oklch(0.72 0.17 55);
-  --chart-1: oklch(0.82 0.2 145);
-  --chart-2: oklch(0.8 0.16 75);
-  --chart-3: oklch(0.68 0.11 235);
-  --chart-4: oklch(0.62 0.23 22);
-  --chart-5: oklch(0.72 0.12 320);
-  --sidebar: oklch(0.16 0.009 250);
-  --sidebar-foreground: oklch(0.9 0.01 90);
-  --sidebar-primary: oklch(0.72 0.17 55);
-  --sidebar-primary-foreground: oklch(0.14 0.01 250);
-  --sidebar-accent: oklch(0.26 0.012 250);
-  --sidebar-accent-foreground: oklch(0.95 0.01 90);
-  --sidebar-border: oklch(0.3 0.01 250);
-  --sidebar-ring: oklch(0.72 0.17 55);
+  --panel: #050a07;      /* façade */
+  --bezel: #0b140f;      /* encadrés, cartes */
+  --bezel-2: #101c15;    /* survol, champs */
+  --engrave: #1d2f24;    /* filets, bordures */
+  --phosphor-hex: #3dff7f;
+  --amber-hex: #ffb020;
+  --tx-red: #ff5040;
+
+  --amber-signal: var(--amber-hex);
+  --phosphor: var(--phosphor-hex);
+  --steel: #6fb2a0;
+
+  --background: var(--panel);
+  --foreground: #d4eedc;
+  --card: var(--bezel);
+  --card-foreground: #d4eedc;
+  --popover: #0d1812;
+  --popover-foreground: #d4eedc;
+  --primary: var(--phosphor-hex);
+  --primary-foreground: #03140a;
+  --secondary: var(--bezel-2);
+  --secondary-foreground: #c3e3cd;
+  --muted: var(--bezel-2);
+  --muted-foreground: #7fa68c;
+  --accent: #14241a;
+  --accent-foreground: #e4f7ea;
+  --destructive: var(--tx-red);
+  --destructive-foreground: #120302;
+  --border: var(--engrave);
+  --input: #16261c;
+  --ring: var(--phosphor-hex);
+  --chart-1: var(--phosphor-hex);
+  --chart-2: var(--amber-hex);
+  --chart-3: #6fb2a0;
+  --chart-4: var(--tx-red);
+  --chart-5: #b48cff;
+  --sidebar: var(--bezel);
+  --sidebar-foreground: #d4eedc;
+  --sidebar-primary: var(--phosphor-hex);
+  --sidebar-primary-foreground: #03140a;
+  --sidebar-accent: #14241a;
+  --sidebar-accent-foreground: #e4f7ea;
+  --sidebar-border: var(--engrave);
+  --sidebar-ring: var(--phosphor-hex);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -188,28 +180,98 @@
 
 /* Surbrillance nouveau spot */
 @keyframes flash-new {
-  from { background-color: oklch(0.55 0.2 250 / 0.12); }
+  from { background-color: rgba(61, 255, 127, 0.12); }
   to { background-color: transparent; }
 }
 .dark .flash-new {
   animation: flash-new-dark 2s ease-out;
 }
 @keyframes flash-new-dark {
-  from { background-color: oklch(0.72 0.17 55 / 0.15); }
+  from { background-color: rgba(61, 255, 127, 0.12); }
   to { background-color: transparent; }
 }
 .flash-new { animation: flash-new 2s ease-out; }
 
-/* Tableau spots — lignes alternées */
-.spot-table tbody tr:nth-child(even) {
-  background-color: oklch(0.96 0.003 250);
-}
-.dark .spot-table tbody tr:nth-child(even) {
-  background-color: oklch(0.16 0.008 250);
-}
+/* Tableau spots — lignes alternées, à peine marquées */
+.spot-table tbody tr:nth-child(even) { background-color: #08110b; }
 
 /* Scrollbar fine */
 .thin-scrollbar::-webkit-scrollbar { width: 6px; }
 .thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
-.thin-scrollbar::-webkit-scrollbar-thumb { background: oklch(0.7 0 0 / 0.3); border-radius: 3px; }
-.dark .thin-scrollbar::-webkit-scrollbar-thumb { background: oklch(0.4 0 0 / 0.5); }
+.thin-scrollbar::-webkit-scrollbar-thumb { background: #1d2f24; border-radius: 3px; }
+
+/* ═══════════ AFFICHEURS LCD ═══════════
+ * L'élément signature : fréquences et heure UTC sur afficheur 7 segments,
+ * segments éteints visibles en fond, comme sur une façade réelle.
+ */
+@font-face {
+  font-family: "DSEG7 Classic";
+  src: url("/fonts/DSEG7Classic-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+.lcd {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  padding: 0.3em 0.55em 0.25em;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #020604 0%, #061109 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(0, 0, 0, 0.9),
+    inset 0 0 0 1px #12301c,
+    0 1px 0 rgba(61, 255, 127, 0.06);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.lcd-digits {
+  position: relative;
+  font-family: var(--font-lcd);
+  font-weight: 700;
+  color: var(--phosphor-hex);
+  text-shadow: 0 0 6px rgba(61, 255, 127, 0.55);
+  letter-spacing: 0.04em;
+  white-space: pre;
+}
+.lcd-digits::before {
+  content: attr(data-ghost);
+  position: absolute;
+  inset: 0;
+  color: rgba(61, 255, 127, 0.11);
+  text-shadow: none;
+  pointer-events: none;
+}
+.lcd-digits > span { position: relative; }
+.lcd-unit {
+  font-family: var(--font-mono);
+  font-size: 0.42em;
+  font-weight: 600;
+  color: #5fbf82;
+  letter-spacing: 0.08em;
+}
+.lcd[data-tone="amber"] .lcd-digits { color: var(--amber-hex); text-shadow: 0 0 6px rgba(255, 176, 32, 0.5); }
+.lcd[data-tone="amber"] .lcd-digits::before { color: rgba(255, 176, 32, 0.11); }
+.lcd[data-tone="amber"] .lcd-unit { color: #c9902a; }
+.lcd[data-tone="off"] .lcd-digits { color: rgba(61, 255, 127, 0.25); text-shadow: none; }
+
+/* Voyant d'état (LED) */
+.led {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #1d2f24;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+}
+.led[data-on="true"] { background: var(--phosphor-hex); box-shadow: 0 0 6px rgba(61, 255, 127, 0.8); }
+.led[data-tone="amber"][data-on="true"] { background: var(--amber-hex); box-shadow: 0 0 6px rgba(255, 176, 32, 0.8); }
+.led[data-tone="red"][data-on="true"] { background: var(--tx-red); box-shadow: 0 0 6px rgba(255, 80, 64, 0.8); }
+
+/* Focus clavier visible partout */
+:focus-visible { outline: 2px solid var(--phosphor-hex); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

@@ -22,7 +22,6 @@ import {
 } from "lucide-react";
 import { locatorToLatLon } from "@/lib/propagation";
 import { ForecastMap } from "@/components/ForecastMap";
-import { PremiumGate } from "@/components/PremiumGate";
 
 const SLOT_LABELS = ["00–06", "06–12", "12–18", "18–24"];
 
@@ -81,10 +80,10 @@ export default function Forecast() {
   );
 
   return (
-    <PremiumGate mode="block" featureName="Prévisions 7 jours">
+    <>
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-border bg-[oklch(0.16_0.009_250)]/95 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-3 px-3 py-2.5 sm:px-5">
           <Link
             href="/"
@@ -298,7 +297,7 @@ export default function Forecast() {
             <footer className="mt-6 border-t border-border pt-3 text-[10px] text-muted-foreground">
               <p>
                 Sources : NOAA SWPC 27-Day Outlook · NOAA Kp Forecast 3h · NOAA 3-Day Forecast ·
-                observations FT8 PSK Reporter en zone ITU 27 · modèle DX Daruma pondéré par récence, SNR et similarité Kp/SFI.
+                observations FT8 PSK Reporter en zone ITU 27 · modèle DX Hunter pondéré par récence, SNR et similarité Kp/SFI.
               </p>
               <p className="mt-1">
                 Dernière mise à jour : {new Date(data.fetchedAt).toLocaleString("fr-FR", { timeZone: "UTC" })} UTC
@@ -308,6 +307,6 @@ export default function Forecast() {
         )}
       </main>
     </div>
-    </PremiumGate>
+    </>
   );
 }

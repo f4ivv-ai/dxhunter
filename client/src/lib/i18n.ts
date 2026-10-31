@@ -1,5 +1,5 @@
 /**
- * DX Daruma — Système d'internationalisation (i18n)
+ * DX Hunter — Système d'internationalisation (i18n)
  * Langues supportées : FR, EN, DE, PL, ES, IT
  */
 
@@ -211,7 +211,7 @@ type TranslationKeys = {
 };
 
 const fr: TranslationKeys = {
-  appName: "DX Daruma",
+  appName: "DX Hunter by F4IVV",
   appSubtitle: "Le radar DX du shack · SSB prioritaire",
   utc: "UTC",
   refresh: "Actualiser",
@@ -274,7 +274,7 @@ const fr: TranslationKeys = {
   disconnected: "Déconnecté",
 
   whatsappContact: "Contacter via WhatsApp",
-  whatsappMessage: "Bonjour, j'ai une question sur DX Daruma...",
+  whatsappMessage: "Bonjour, j'ai une question sur DX Hunter...",
 
   heroTitle: "Votre radar DX en temps réel",
   heroSubtitle: "Spots DX multi-sources, alertes sporadiques, Self-Monitor WebSDR, suivi multiplicateurs — tout pour le contest et le DX.",
@@ -368,7 +368,7 @@ const fr: TranslationKeys = {
   profileLoginMsg: "Connectez-vous pour accéder à votre profil.",
   profileLoginBtn: "Se connecter",
     // Locator prompt modal
-  locatorPromptTitle: "Bienvenue sur DX Daruma !",
+  locatorPromptTitle: "Bienvenue sur DX Hunter !",
   locatorPromptSubtitle: "Pour personnaliser les calculs de propagation, distances et azimuts, veuillez entrer votre locator Maidenhead.",
   locatorPromptPlaceholder: "Ex: JN18du",
   locatorPromptHelp: "Votre locator (4 ou 6 caractères) se trouve sur QRZ.com ou via votre GPS. Il permet de calculer les distances et azimuts vers les stations DX.",
@@ -385,7 +385,7 @@ const fr: TranslationKeys = {
   sec: "s",
 };
 const en: TranslationKeys = {
-  appName: "DX Daruma",
+  appName: "DX Hunter by F4IVV",
   appSubtitle: "The shack DX radar · SSB priority",
   utc: "UTC",
   refresh: "Refresh",
@@ -448,7 +448,7 @@ const en: TranslationKeys = {
   disconnected: "Disconnected",
 
   whatsappContact: "Contact via WhatsApp",
-  whatsappMessage: "Hello, I have a question about DX Daruma...",
+  whatsappMessage: "Hello, I have a question about DX Hunter...",
 
   heroTitle: "Your real-time DX radar",
   heroSubtitle: "Multi-source DX spots, sporadic alerts, WebSDR Self-Monitor, multiplier tracking — everything for contest and DX.",
@@ -542,7 +542,7 @@ const en: TranslationKeys = {
   profileLoginMsg: "Log in to access your profile.",
   profileLoginBtn: "Log in",
   // Locator prompt modal
-  locatorPromptTitle: "Welcome to DX Daruma!",
+  locatorPromptTitle: "Welcome to DX Hunter!",
   locatorPromptSubtitle: "To customize propagation calculations, distances and bearings, please enter your Maidenhead locator.",
   locatorPromptPlaceholder: "E.g. JN18du",
   locatorPromptHelp: "Your locator (4 or 6 characters) can be found on QRZ.com or via your GPS. It is used to calculate distances and bearings to DX stations.",
@@ -559,7 +559,7 @@ const en: TranslationKeys = {
   sec: "s",
 };
 const de: TranslationKeys = {
-  appName: "DX Daruma",
+  appName: "DX Hunter by F4IVV",
   appSubtitle: "Das DX-Radar der Funkstation · SSB-Priorität",
   utc: "UTC",
   refresh: "Aktualisieren",
@@ -622,7 +622,7 @@ const de: TranslationKeys = {
   disconnected: "Getrennt",
 
   whatsappContact: "Kontakt über WhatsApp",
-  whatsappMessage: "Hallo, ich habe eine Frage zu DX Daruma...",
+  whatsappMessage: "Hallo, ich habe eine Frage zu DX Hunter...",
 
   heroTitle: "Ihr DX-Radar in Echtzeit",
   heroSubtitle: "Multi-Source DX-Spots, sporadische Alarme, WebSDR Self-Monitor, Multiplikator-Tracking — alles für Contest und DX.",
@@ -714,7 +714,7 @@ const de: TranslationKeys = {
   profileLoginMsg: "Melden Sie sich an, um auf Ihr Profil zuzugreifen.",
   profileLoginBtn: "Anmelden",
   // Locator prompt modal
-  locatorPromptTitle: "Willkommen bei DX Daruma!",
+  locatorPromptTitle: "Willkommen bei DX Hunter!",
   locatorPromptSubtitle: "Um Ausbreitungsberechnungen, Entfernungen und Peilungen anzupassen, geben Sie bitte Ihren Maidenhead-Locator ein.",
   locatorPromptPlaceholder: "z.B. JN18du",
   locatorPromptHelp: "Ihr Locator (4 oder 6 Zeichen) finden Sie auf QRZ.com oder über Ihr GPS. Er wird zur Berechnung von Entfernungen und Peilungen zu DX-Stationen verwendet.",
@@ -733,7 +733,7 @@ const de: TranslationKeys = {
   sec: "s",
 };
 const pl: TranslationKeys = {
-  appName: "DX Daruma",
+  appName: "DX Hunter by F4IVV",
   appSubtitle: "Radar DX stacji · Priorytet SSB",
   utc: "UTC",
   refresh: "Odśwież",
@@ -796,7 +796,7 @@ const pl: TranslationKeys = {
   disconnected: "Rozłączono",
 
   whatsappContact: "Kontakt przez WhatsApp",
-  whatsappMessage: "Cześć, mam pytanie o DX Daruma...",
+  whatsappMessage: "Cześć, mam pytanie o DX Hunter...",
 
   heroTitle: "Twój radar DX w czasie rzeczywistym",
   heroSubtitle: "Wieloźródłowe spoty DX, alerty sporadyczne, WebSDR Self-Monitor, śledzenie mnożników — wszystko do contestów i DX.",
@@ -889,7 +889,7 @@ const pl: TranslationKeys = {
   profileLoginMsg: "Zaloguj się, aby uzyskać dostęp do profilu.",
   profileLoginBtn: "Zaloguj się",
   // Locator prompt modal
-  locatorPromptTitle: "Witamy w DX Daruma!",
+  locatorPromptTitle: "Witamy w DX Hunter!",
   locatorPromptSubtitle: "Aby spersonalizować obliczenia propagacji, odległości i azymutów, wprowadź swój lokator Maidenhead.",
   locatorPromptPlaceholder: "Np. JN18du",
   locatorPromptHelp: "Twój lokator (4 lub 6 znaków) znajdziesz na QRZ.com lub przez GPS. Służy do obliczania odległości i azymutów do stacji DX.",
@@ -907,7 +907,7 @@ const pl: TranslationKeys = {
   sec: "s",
 };
 const es: TranslationKeys = {
-  appName: "DX Daruma",
+  appName: "DX Hunter by F4IVV",
   appSubtitle: "El radar DX de la estación · Prioridad SSB",
   utc: "UTC",
   refresh: "Actualizar",
@@ -970,7 +970,7 @@ const es: TranslationKeys = {
   disconnected: "Desconectado",
 
   whatsappContact: "Contactar por WhatsApp",
-  whatsappMessage: "Hola, tengo una pregunta sobre DX Daruma...",
+  whatsappMessage: "Hola, tengo una pregunta sobre DX Hunter...",
 
   heroTitle: "Tu radar DX en tiempo real",
   heroSubtitle: "Spots DX multi-fuente, alertas esporádicas, WebSDR Self-Monitor, seguimiento de multiplicadores — todo para contest y DX.",
@@ -1062,7 +1062,7 @@ const es: TranslationKeys = {
   profileLoginMsg: "Inicie sesión para acceder a su perfil.",
   profileLoginBtn: "Iniciar sesión",
   // Locator prompt modal
-  locatorPromptTitle: "¡Bienvenido a DX Daruma!",
+  locatorPromptTitle: "¡Bienvenido a DX Hunter!",
   locatorPromptSubtitle: "Para personalizar los cálculos de propagación, distancias y azimuts, introduce tu locator Maidenhead.",
   locatorPromptPlaceholder: "Ej. JN18du",
   locatorPromptHelp: "Tu locator (4 o 6 caracteres) se encuentra en QRZ.com o a través de tu GPS. Se utiliza para calcular distancias y azimuts hacia estaciones DX.",
@@ -1081,7 +1081,7 @@ const es: TranslationKeys = {
   sec: "s",
 };
 const it: TranslationKeys = {
-  appName: "DX Daruma",
+  appName: "DX Hunter by F4IVV",
   appSubtitle: "Il radar DX della stazione · Priorità SSB",
   utc: "UTC",
   refresh: "Aggiorna",
@@ -1144,7 +1144,7 @@ const it: TranslationKeys = {
   disconnected: "Disconnesso",
 
   whatsappContact: "Contatta via WhatsApp",
-  whatsappMessage: "Ciao, ho una domanda su DX Daruma...",
+  whatsappMessage: "Ciao, ho una domanda su DX Hunter...",
 
   heroTitle: "Il tuo radar DX in tempo reale",
   heroSubtitle: "Spot DX multi-sorgente, allerte sporadiche, WebSDR Self-Monitor, tracciamento moltiplicatori — tutto per contest e DX.",
@@ -1236,7 +1236,7 @@ const it: TranslationKeys = {
   profileLoginMsg: "Accedi per visualizzare il tuo profilo.",
   profileLoginBtn: "Accedi",
   // Locator prompt modal
-  locatorPromptTitle: "Benvenuto su DX Daruma!",
+  locatorPromptTitle: "Benvenuto su DX Hunter!",
   locatorPromptSubtitle: "Per personalizzare i calcoli di propagazione, distanze e azimut, inserisci il tuo locator Maidenhead.",
   locatorPromptPlaceholder: "Es. JN18du",
   locatorPromptHelp: "Il tuo locator (4 o 6 caratteri) si trova su QRZ.com o tramite il tuo GPS. Viene utilizzato per calcolare distanze e azimut verso le stazioni DX.",

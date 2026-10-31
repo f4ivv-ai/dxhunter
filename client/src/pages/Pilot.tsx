@@ -27,7 +27,6 @@ import { SelfMonitor } from "@/components/SelfMonitor";
 import { PilotGeneral } from "@/components/PilotGeneral";
 import { Compass, Target, CalendarClock, Headphones, ClipboardList, Activity, Gauge, Radio, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { PremiumGate } from "@/components/PremiumGate";
 import { ContestBand, ALL_CONTEST_BANDS, buildBandTimeline, BandTimelineSlot, QthCoords } from "@/lib/propagationMultiBand";
 
 type Tab = "live" | "brief" | "mult" | "timeline" | "websdr" | "selfmon" | "calib";
@@ -90,9 +89,9 @@ export default function Pilot() {
     : `${selectedBand} — par bande`;
 
   return (
-    <PremiumGate mode="block" featureName="Pilotage">
+    <>
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-30 border-b border-border bg-[oklch(0.16_0.009_250)]/95 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <NavBar
           clock={clock}
           right={
@@ -264,7 +263,7 @@ export default function Pilot() {
         PILOTAGE CONTEST · {modeLabel} · modèle de propagation indicatif — toujours confirmer à l'écoute
       </footer>
     </div>
-    </PremiumGate>
+    </>
   );
 }
 

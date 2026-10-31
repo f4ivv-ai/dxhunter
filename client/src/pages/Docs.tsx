@@ -11,8 +11,8 @@ import {
   Download,
   Terminal,
 } from "lucide-react";
+import { Brand } from "@/components/Brand";
 
-const DARUMA_LOGO = "/images/daruma-logo.jpeg";
 
 export default function Docs() {
   const { t, locale } = useI18n();
@@ -20,16 +20,12 @@ export default function Docs() {
   const docs = getDocsContent(locale);
 
   return (
-    <div className="min-h-screen bg-[oklch(0.13_0.01_250)] text-foreground">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border/50 bg-[oklch(0.13_0.01_250)]/95 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-border/50 bg-card/95 backdrop-blur-md">
         <div className="container flex items-center justify-between py-3">
           <div className="flex items-center gap-3">
-            <img src={DARUMA_LOGO} alt="Groupe Daruma" className="h-8 w-8 rounded-full" />
-            <h1 className="font-mono text-base font-bold tracking-tight">
-              DX <span className="text-primary">DARUMA</span>
-              <span className="text-muted-foreground ml-2 text-sm font-normal">{t("documentation")}</span>
-            </h1>
+            <Brand section={t("documentation")} />
           </div>
           <div className="flex items-center gap-3">
             <LanguageSelector />
@@ -96,7 +92,7 @@ export default function Docs() {
               {docs.wintestContent.map((para, j) => (
                 <p key={j} className="text-muted-foreground mb-3 text-sm leading-relaxed">{para}</p>
               ))}
-              <div className="mt-4 rounded-lg bg-[oklch(0.1_0.01_250)] p-4 font-mono text-xs text-green-400 overflow-x-auto">
+              <div className="mt-4 rounded-lg bg-background p-4 font-mono text-xs text-green-400 overflow-x-auto">
                 <pre>{docs.wintestCode}</pre>
               </div>
             </div>
@@ -105,7 +101,7 @@ export default function Docs() {
           {/* Footer */}
           <div className="text-center pt-8 border-t border-border/30">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Groupe Daruma · DX Daruma
+              © {new Date().getFullYear()} F4IVV · DX Hunter
             </p>
             <p className="text-xs text-muted-foreground mt-1">
               Contact : <a href="https://wa.me/33642038000" className="text-primary hover:underline">WhatsApp +33 6 42 03 80 00</a>
@@ -152,7 +148,7 @@ python dxhunter-cluster-relay.py
           icon: <Globe className="h-5 w-5" />,
           title: "DX Cluster — Real-time Spots",
           content: [
-            "DX Daruma aggregates DX spots from multiple sources (Spothole, DX Summit, PSK Reporter) and displays them in a unified, deduplicated real-time feed.",
+            "DX Hunter aggregates DX spots from multiple sources (Spothole, DX Summit, PSK Reporter) and displays them in a unified, deduplicated real-time feed.",
             "Spots are automatically enriched with DXCC entity, continent, rarity score, and propagation mode. SSB spots are prioritized by default.",
           ],
           steps: [
@@ -164,7 +160,7 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <Headphones className="h-5 w-5" />,
-          title: "Self-Monitor WebSDR (Premium)",
+          title: "Self-Monitor WebSDR",
           content: [
             "The Self-Monitor feature allows you to listen to your own signal on remote WebSDR receivers. This helps verify your audio quality, check for splatter, and confirm your signal is reaching distant locations.",
             "Select your operating frequency and the system will find the best WebSDR receivers based on distance and direction.",
@@ -172,7 +168,7 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <BarChart3 className="h-5 w-5" />,
-          title: "Multiplier Tracking (Premium)",
+          title: "Multiplier Tracking",
           content: [
             "Track contest multipliers in real-time with a complete grid showing all departments (REF contest) or DXCC entities (WPX, WW, IARU).",
             "Multipliers that have been spotted flash with a pulse animation. Click on any multiplier to see detailed information about frequencies, modes, and spotters.",
@@ -180,9 +176,9 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <Zap className="h-5 w-5" />,
-          title: "Propagation Alerts (Premium)",
+          title: "Propagation Alerts",
           content: [
-            "DX Daruma automatically detects sporadic propagation openings including Sporadic E (Es), TEP, Tropo, Meteor Scatter, and Aurora.",
+            "DX Hunter automatically detects sporadic propagation openings including Sporadic E (Es), TEP, Tropo, Meteor Scatter, and Aurora.",
             "When an opening is detected, a visual alert appears with direction, confidence level, and station count. VHF/UHF filters help focus on the relevant bands.",
           ],
         },
@@ -195,10 +191,10 @@ python dxhunter-cluster-relay.py
           ],
         },
       ],
-      wintestTitle: "Win-Test / DXLog Integration (Premium)",
+      wintestTitle: "Win-Test / DXLog Integration",
       wintestContent: [
-        "DX Daruma provides a WebSocket-to-Telnet relay that makes the DX cluster feed compatible with Win-Test and DXLog contest loggers.",
-        "The relay script connects to the DX Daruma WebSocket endpoint and exposes a standard Telnet DX Cluster interface on localhost:7300.",
+        "DX Hunter provides a WebSocket-to-Telnet relay that makes the DX cluster feed compatible with Win-Test and DXLog contest loggers.",
+        "The relay script connects to the DX Hunter WebSocket endpoint and exposes a standard Telnet DX Cluster interface on localhost:7300.",
       ],
       wintestCode,
     };
@@ -212,7 +208,7 @@ python dxhunter-cluster-relay.py
           icon: <Globe className="h-5 w-5" />,
           title: "DX Cluster — Echtzeit-Spots",
           content: [
-            "DX Daruma aggregiert DX-Spots aus mehreren Quellen (Spothole, DX Summit, PSK Reporter) und zeigt sie in einem einheitlichen, deduplizierten Echtzeit-Feed an.",
+            "DX Hunter aggregiert DX-Spots aus mehreren Quellen (Spothole, DX Summit, PSK Reporter) und zeigt sie in einem einheitlichen, deduplizierten Echtzeit-Feed an.",
             "Spots werden automatisch mit DXCC-Entität, Kontinent, Seltenheitsbewertung und Ausbreitungsmodus angereichert. SSB-Spots werden standardmäßig priorisiert.",
           ],
           steps: [
@@ -224,23 +220,23 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <Headphones className="h-5 w-5" />,
-          title: "Self-Monitor WebSDR (Premium)",
+          title: "Self-Monitor WebSDR",
           content: [
             "Die Self-Monitor-Funktion ermöglicht es Ihnen, Ihr eigenes Signal auf entfernten WebSDR-Empfängern zu hören. Dies hilft, Ihre Audioqualität zu überprüfen und zu bestätigen, dass Ihr Signal entfernte Standorte erreicht.",
           ],
         },
         {
           icon: <BarChart3 className="h-5 w-5" />,
-          title: "Multiplikator-Tracking (Premium)",
+          title: "Multiplikator-Tracking",
           content: [
             "Verfolgen Sie Contest-Multiplikatoren in Echtzeit mit einem vollständigen Raster aller Départements (REF-Contest) oder DXCC-Entitäten (WPX, WW, IARU).",
           ],
         },
         {
           icon: <Zap className="h-5 w-5" />,
-          title: "Ausbreitungsalarme (Premium)",
+          title: "Ausbreitungsalarme",
           content: [
-            "DX Daruma erkennt automatisch sporadische Ausbreitungsöffnungen einschließlich Sporadisch E (Es), TEP, Tropo, Meteorscatter und Aurora.",
+            "DX Hunter erkennt automatisch sporadische Ausbreitungsöffnungen einschließlich Sporadisch E (Es), TEP, Tropo, Meteorscatter und Aurora.",
           ],
         },
         {
@@ -251,9 +247,9 @@ python dxhunter-cluster-relay.py
           ],
         },
       ],
-      wintestTitle: "Win-Test / DXLog Integration (Premium)",
+      wintestTitle: "Win-Test / DXLog Integration",
       wintestContent: [
-        "DX Daruma bietet ein WebSocket-zu-Telnet-Relay, das den DX-Cluster-Feed mit Win-Test und DXLog Contest-Loggern kompatibel macht.",
+        "DX Hunter bietet ein WebSocket-zu-Telnet-Relay, das den DX-Cluster-Feed mit Win-Test und DXLog Contest-Loggern kompatibel macht.",
       ],
       wintestCode,
     };
@@ -267,7 +263,7 @@ python dxhunter-cluster-relay.py
           icon: <Globe className="h-5 w-5" />,
           title: "DX Cluster — Spoty w czasie rzeczywistym",
           content: [
-            "DX Daruma agreguje spoty DX z wielu źródeł (Spothole, DX Summit, PSK Reporter) i wyświetla je w jednolitym, zdeduplikowanym feedzie w czasie rzeczywistym.",
+            "DX Hunter agreguje spoty DX z wielu źródeł (Spothole, DX Summit, PSK Reporter) i wyświetla je w jednolitym, zdeduplikowanym feedzie w czasie rzeczywistym.",
             "Spoty są automatycznie wzbogacane o encję DXCC, kontynent, ocenę rzadkości i tryb propagacji. Spoty SSB są domyślnie priorytetyzowane.",
           ],
           steps: [
@@ -279,23 +275,23 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <Headphones className="h-5 w-5" />,
-          title: "Self-Monitor WebSDR (Premium)",
+          title: "Self-Monitor WebSDR",
           content: [
             "Funkcja Self-Monitor pozwala słuchać własnego sygnału na zdalnych odbiornikach WebSDR. Pomaga to zweryfikować jakość audio i potwierdzić, że sygnał dociera do odległych lokalizacji.",
           ],
         },
         {
           icon: <BarChart3 className="h-5 w-5" />,
-          title: "Śledzenie mnożników (Premium)",
+          title: "Śledzenie mnożników",
           content: [
             "Śledź mnożniki contestowe w czasie rzeczywistym z pełną siatką wszystkich departamentów (contest REF) lub encji DXCC (WPX, WW, IARU).",
           ],
         },
         {
           icon: <Zap className="h-5 w-5" />,
-          title: "Alerty propagacji (Premium)",
+          title: "Alerty propagacji",
           content: [
-            "DX Daruma automatycznie wykrywa sporadyczne otwarcia propagacyjne, w tym Sporadyczne E (Es), TEP, Tropo, Meteor Scatter i Aurora.",
+            "DX Hunter automatycznie wykrywa sporadyczne otwarcia propagacyjne, w tym Sporadyczne E (Es), TEP, Tropo, Meteor Scatter i Aurora.",
           ],
         },
         {
@@ -306,9 +302,9 @@ python dxhunter-cluster-relay.py
           ],
         },
       ],
-      wintestTitle: "Integracja Win-Test / DXLog (Premium)",
+      wintestTitle: "Integracja Win-Test / DXLog",
       wintestContent: [
-        "DX Daruma zapewnia relay WebSocket-do-Telnet, który czyni feed DX Cluster kompatybilnym z loggerami contestowymi Win-Test i DXLog.",
+        "DX Hunter zapewnia relay WebSocket-do-Telnet, który czyni feed DX Cluster kompatybilnym z loggerami contestowymi Win-Test i DXLog.",
       ],
       wintestCode,
     };
@@ -322,7 +318,7 @@ python dxhunter-cluster-relay.py
           icon: <Globe className="h-5 w-5" />,
           title: "DX Cluster — Spots en tiempo real",
           content: [
-            "DX Daruma agrega spots DX de múltiples fuentes (Spothole, DX Summit, PSK Reporter) y los muestra en un feed unificado y deduplicado en tiempo real.",
+            "DX Hunter agrega spots DX de múltiples fuentes (Spothole, DX Summit, PSK Reporter) y los muestra en un feed unificado y deduplicado en tiempo real.",
             "Los spots se enriquecen automáticamente con entidad DXCC, continente, puntuación de rareza y modo de propagación. Los spots SSB se priorizan por defecto.",
           ],
           steps: [
@@ -334,23 +330,23 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <Headphones className="h-5 w-5" />,
-          title: "Self-Monitor WebSDR (Premium)",
+          title: "Self-Monitor WebSDR",
           content: [
             "La función Self-Monitor le permite escuchar su propia señal en receptores WebSDR remotos. Esto ayuda a verificar la calidad de audio y confirmar que su señal llega a ubicaciones distantes.",
           ],
         },
         {
           icon: <BarChart3 className="h-5 w-5" />,
-          title: "Seguimiento de multiplicadores (Premium)",
+          title: "Seguimiento de multiplicadores",
           content: [
             "Rastree multiplicadores de concurso en tiempo real con una cuadrícula completa de todos los departamentos (concurso REF) o entidades DXCC (WPX, WW, IARU).",
           ],
         },
         {
           icon: <Zap className="h-5 w-5" />,
-          title: "Alertas de propagación (Premium)",
+          title: "Alertas de propagación",
           content: [
-            "DX Daruma detecta automáticamente aperturas de propagación esporádica incluyendo Esporádica E (Es), TEP, Tropo, Meteor Scatter y Aurora.",
+            "DX Hunter detecta automáticamente aperturas de propagación esporádica incluyendo Esporádica E (Es), TEP, Tropo, Meteor Scatter y Aurora.",
           ],
         },
         {
@@ -361,9 +357,9 @@ python dxhunter-cluster-relay.py
           ],
         },
       ],
-      wintestTitle: "Integración Win-Test / DXLog (Premium)",
+      wintestTitle: "Integración Win-Test / DXLog",
       wintestContent: [
-        "DX Daruma proporciona un relay WebSocket-a-Telnet que hace el feed DX Cluster compatible con los loggers de concurso Win-Test y DXLog.",
+        "DX Hunter proporciona un relay WebSocket-a-Telnet que hace el feed DX Cluster compatible con los loggers de concurso Win-Test y DXLog.",
       ],
       wintestCode,
     };
@@ -377,7 +373,7 @@ python dxhunter-cluster-relay.py
           icon: <Globe className="h-5 w-5" />,
           title: "DX Cluster — Spot in tempo reale",
           content: [
-            "DX Daruma aggrega spot DX da più sorgenti (Spothole, DX Summit, PSK Reporter) e li visualizza in un feed unificato e deduplicato in tempo reale.",
+            "DX Hunter aggrega spot DX da più sorgenti (Spothole, DX Summit, PSK Reporter) e li visualizza in un feed unificato e deduplicato in tempo reale.",
             "Gli spot vengono automaticamente arricchiti con entità DXCC, continente, punteggio di rarità e modo di propagazione. Gli spot SSB sono prioritizzati per impostazione predefinita.",
           ],
           steps: [
@@ -389,23 +385,23 @@ python dxhunter-cluster-relay.py
         },
         {
           icon: <Headphones className="h-5 w-5" />,
-          title: "Self-Monitor WebSDR (Premium)",
+          title: "Self-Monitor WebSDR",
           content: [
             "La funzione Self-Monitor consente di ascoltare il proprio segnale su ricevitori WebSDR remoti. Questo aiuta a verificare la qualità audio e confermare che il segnale raggiunge località distanti.",
           ],
         },
         {
           icon: <BarChart3 className="h-5 w-5" />,
-          title: "Tracciamento moltiplicatori (Premium)",
+          title: "Tracciamento moltiplicatori",
           content: [
             "Traccia i moltiplicatori di contest in tempo reale con una griglia completa di tutti i dipartimenti (contest REF) o entità DXCC (WPX, WW, IARU).",
           ],
         },
         {
           icon: <Zap className="h-5 w-5" />,
-          title: "Allerte propagazione (Premium)",
+          title: "Allerte propagazione",
           content: [
-            "DX Daruma rileva automaticamente le aperture di propagazione sporadica tra cui Sporadica E (Es), TEP, Tropo, Meteor Scatter e Aurora.",
+            "DX Hunter rileva automaticamente le aperture di propagazione sporadica tra cui Sporadica E (Es), TEP, Tropo, Meteor Scatter e Aurora.",
           ],
         },
         {
@@ -416,9 +412,9 @@ python dxhunter-cluster-relay.py
           ],
         },
       ],
-      wintestTitle: "Integrazione Win-Test / DXLog (Premium)",
+      wintestTitle: "Integrazione Win-Test / DXLog",
       wintestContent: [
-        "DX Daruma fornisce un relay WebSocket-a-Telnet che rende il feed DX Cluster compatibile con i logger di contest Win-Test e DXLog.",
+        "DX Hunter fornisce un relay WebSocket-a-Telnet che rende il feed DX Cluster compatibile con i logger di contest Win-Test e DXLog.",
       ],
       wintestCode,
     };
@@ -432,7 +428,7 @@ python dxhunter-cluster-relay.py
         icon: <Globe className="h-5 w-5" />,
         title: "DX Cluster — Spots en temps réel",
         content: [
-          "DX Daruma agrège les spots DX de multiples sources (Spothole, DX Summit, PSK Reporter) et les affiche dans un flux unifié et dédupliqué en temps réel.",
+          "DX Hunter agrège les spots DX de multiples sources (Spothole, DX Summit, PSK Reporter) et les affiche dans un flux unifié et dédupliqué en temps réel.",
           "Les spots sont automatiquement enrichis avec l'entité DXCC, le continent, le score de rareté et le mode de propagation. Les spots SSB sont priorisés par défaut.",
         ],
         steps: [
@@ -444,7 +440,7 @@ python dxhunter-cluster-relay.py
       },
       {
         icon: <Headphones className="h-5 w-5" />,
-        title: "Self-Monitor WebSDR (Premium)",
+        title: "Self-Monitor WebSDR",
         content: [
           "La fonction Self-Monitor vous permet d'écouter votre propre signal sur des récepteurs WebSDR distants. Cela aide à vérifier votre qualité audio, détecter le splatter, et confirmer que votre signal atteint des emplacements éloignés.",
           "Sélectionnez votre fréquence d'émission et le système trouvera les meilleurs récepteurs WebSDR en fonction de la distance et de la direction.",
@@ -452,7 +448,7 @@ python dxhunter-cluster-relay.py
       },
       {
         icon: <BarChart3 className="h-5 w-5" />,
-        title: "Suivi des multiplicateurs (Premium)",
+        title: "Suivi des multiplicateurs",
         content: [
           "Suivez les multiplicateurs de concours en temps réel avec une grille complète montrant tous les départements (concours REF) ou entités DXCC (WPX, WW, IARU).",
           "Les multiplicateurs qui ont été spottés clignotent avec une animation pulse. Cliquez sur n'importe quel multiplicateur pour voir les informations détaillées sur les fréquences, modes et spotteurs.",
@@ -460,9 +456,9 @@ python dxhunter-cluster-relay.py
       },
       {
         icon: <Zap className="h-5 w-5" />,
-        title: "Alertes de propagation (Premium)",
+        title: "Alertes de propagation",
         content: [
-          "DX Daruma détecte automatiquement les ouvertures de propagation sporadique incluant la Sporadique E (Es), TEP, Tropo, Meteor Scatter et Aurora.",
+          "DX Hunter détecte automatiquement les ouvertures de propagation sporadique incluant la Sporadique E (Es), TEP, Tropo, Meteor Scatter et Aurora.",
           "Quand une ouverture est détectée, une alerte visuelle apparaît avec la direction, le niveau de confiance et le nombre de stations. Les filtres VHF/UHF aident à se concentrer sur les bandes pertinentes.",
         ],
       },
@@ -475,10 +471,10 @@ python dxhunter-cluster-relay.py
         ],
       },
     ],
-    wintestTitle: "Intégration Win-Test / DXLog (Premium)",
+    wintestTitle: "Intégration Win-Test / DXLog",
     wintestContent: [
-      "DX Daruma fournit un relay WebSocket vers Telnet qui rend le flux DX Cluster compatible avec les logiciels de contest Win-Test et DXLog.",
-      "Le script relay se connecte au endpoint WebSocket de DX Daruma et expose une interface Telnet DX Cluster standard sur localhost:7300.",
+      "DX Hunter fournit un relay WebSocket vers Telnet qui rend le flux DX Cluster compatible avec les logiciels de contest Win-Test et DXLog.",
+      "Le script relay se connecte au endpoint WebSocket de DX Hunter et expose une interface Telnet DX Cluster standard sur localhost:7300.",
     ],
     wintestCode,
   };

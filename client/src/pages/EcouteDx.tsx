@@ -26,8 +26,8 @@ import { toast } from "sonner";
 import type { inferRouterOutputs } from "@trpc/server";
 import type { AppRouter } from "../../../server/routers";
 import { PRIMARY_KIWI } from "../../../shared/primaryKiwi";
+import { Brand } from "@/components/Brand";
 
-const LOGO = "/images/daruma-logo.jpeg";
 
 type PathChoice = "SP" | "LP";
 type RouterOutputs = inferRouterOutputs<AppRouter>;
@@ -207,15 +207,8 @@ export default function EcouteDx() {
           <Link href="/app" className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground hover:text-primary" title="Retour au Cluster">
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <img src={LOGO} alt="DX Daruma" className="h-9 w-9 rounded-full" />
-          <div>
-            <div className="flex items-center gap-2">
-              <Headphones className="h-5 w-5 text-cyan-400" />
-              <h1 className="font-mono text-base font-black tracking-tight">ÉCOUTE <span className="text-cyan-400">DX</span></h1>
-              <span className="rounded border border-amber-400/30 bg-amber-400/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-amber-300">ADMIN</span>
-            </div>
-            <p className="hidden text-[10px] text-muted-foreground sm:block">Recherche inversée depuis le VFO · KiwiSDR · identification Cluster</p>
-          </div>
+          <Brand section="Écoute DX" />
+          <p className="hidden max-w-xs text-[11px] leading-snug text-muted-foreground md:block">Qui émet sur la fréquence du VFO, dans la direction de l'antenne.</p>
           <div className="ml-auto hidden items-center gap-2 sm:flex">
             <StatusPill active={radioConnected} label={radioConnected ? "Flex connecté" : "Fréquence manuelle"} icon={<Radio className="h-3 w-3" />} />
             <StatusPill active={rotor.connected} label={rotor.connected ? `Rotor ${Math.round(rotor.azimuth)}°` : "Azimut manuel"} icon={<Compass className="h-3 w-3" />} />
@@ -242,7 +235,7 @@ export default function EcouteDx() {
             </a>
           </section>
 
-        <section className="overflow-hidden rounded-2xl border border-cyan-400/30 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_45%),linear-gradient(135deg,rgba(9,15,24,0.98),rgba(15,23,42,0.96))] shadow-2xl">
+        <section className="overflow-hidden rounded-2xl border border-cyan-400/30 bg-card shadow-2xl">
           <div className="border-b border-cyan-400/20 px-4 py-3">
             <div className="flex flex-wrap items-center gap-2">
               <Signal className="h-5 w-5 text-cyan-400" />

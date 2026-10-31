@@ -1,4 +1,5 @@
 import { Link, useLocation } from "wouter";
+import { Lcd } from "@/components/Lcd";
 import { cn } from "@/lib/utils";
 import { Radio, Crosshair, LogIn, LogOut, Shield, User, Crown, Settings, Download, Terminal } from "lucide-react";
 import { LanguageSelector } from "@/components/LanguageSelector";
@@ -8,12 +9,12 @@ import { getLoginUrl } from "@/const";
 import { useFlexCat } from "@/hooks/useFlexCat";
 import { useState, useEffect } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Brand } from "@/components/Brand";
 
-const LOGO = "/images/daruma-logo.jpeg";
 
 /**
  * Barre de navigation commune.
- * Inclut login/logout, badge Premium/Admin, lien profil, admin, CAT indicator + fréquence temps réel.
+ * Inclut connexion/déconnexion, lien profil, indicateur CAT + fréquence temps réel.
  */
 export function NavBar({ clock, right }: { clock: string; right?: React.ReactNode }) {
   const [loc] = useLocation();
@@ -26,7 +27,6 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
   });
 
   const isAdmin = user?.role === "admin";
-  const isPremium = isAdmin || user?.subscription === "premium";
 
   // CAT Settings state
   const [catSettingsOpen, setCatSettingsOpen] = useState(false);
@@ -39,22 +39,11 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
 
   return (
     <div className="flex items-center gap-3 px-3 py-2 sm:px-5">
-      <img src={LOGO} alt="DX Daruma" className="h-9 w-9 shrink-0 rounded-full" />
-      <div className="min-w-0">
-        <h1 className="font-mono text-base font-extrabold tracking-tight text-foreground leading-none">
-          DX<span className="text-primary"> DARUMA</span>
-        </h1>
-        <p className="hidden truncate text-[11px] text-muted-foreground sm:block">
-          {t("appSubtitle")}
-        </p>
-      </div>
+      <Brand />
 
       <nav className="ml-3 flex items-center gap-1">
         <NavLink href="/app" active={loc === "/app"} icon={Radio} label="Radar" />
         <NavLink href="/pilot" active={loc === "/pilot"} icon={Crosshair} label={t("pilot")} />
-        {user?.role === "admin" && (
-          <NavLink href="/admin" active={loc === "/admin"} icon={Shield} label="Admin" />
-        )}
       </nav>
 
       <div className="ml-auto flex items-center gap-2 sm:gap-3">
@@ -177,29 +166,11 @@ export function NavBar({ clock, right }: { clock: string; right?: React.ReactNod
         </Popover>
 
         <LanguageSelector />
-        <div className="rounded border border-border bg-card px-2.5 py-1 text-right">
-          <div className="font-mono text-sm font-bold leading-none text-primary tabular-nums">{clock}</div>
-          <div className="text-[9px] uppercase tracking-widest text-muted-foreground">UTC</div>
-        </div>
+        <Lcd value={clock.replace("Z", "")} unit="UTC" size="text-base" title="Heure UTC" />
 
         {/* Auth section */}
         {isAuthenticated ? (
           <div className="flex items-center gap-2">
-            {/* Badge Admin/Premium/Gratuit */}
-            <span
-              className={cn(
-                "hidden sm:inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide",
-                isAdmin
-                  ? "bg-red-500/20 text-red-400 border border-red-500/40"
-                  : isPremium
-                    ? "bg-amber-500/20 text-amber-400 border border-amber-500/40"
-                    : "bg-muted text-muted-foreground border border-border"
-              )}
-            >
-              {isAdmin ? <Shield className="h-3 w-3" /> : isPremium ? <Crown className="h-3 w-3" /> : null}
-              {isAdmin ? "Admin" : isPremium ? "Premium" : "Gratuit"}
-            </span>
-
             {/* User name + profile link */}
             <Link
               href="/profile"

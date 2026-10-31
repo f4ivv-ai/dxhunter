@@ -5,6 +5,7 @@
  * Fonctions : cochage "travaillé", alerte nouveau mult, export ADIF.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { Lcd } from "@/components/Lcd";
 import { useSpots } from "@/hooks/useSpots";
 import { Spot, TRACKED_BANDS, utcClock, displayMode } from "@/lib/dx";
 import { ituZoneFromLatLon, hqFromCallsign, looksLikeHQ } from "@/lib/multipliers";
@@ -371,7 +372,7 @@ export default function Multipliers() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* Header */}
-      <header className="sticky top-0 z-30 border-b border-border bg-[oklch(0.16_0.009_250)]/95 backdrop-blur-md">
+      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-3 px-3 py-2 sm:px-5">
           <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
@@ -425,10 +426,7 @@ export default function Multipliers() {
               <span className="hidden sm:inline">ADIF</span>
             </button>
             {/* Horloge */}
-            <div className="rounded border border-border bg-card px-2.5 py-1 text-right">
-              <div className="font-mono text-sm font-bold leading-none text-primary tabular-nums">{clock}</div>
-              <div className="text-[9px] uppercase tracking-widest text-muted-foreground">UTC</div>
-            </div>
+            <Lcd value={clock.replace("Z", "")} unit="UTC" size="text-base" title="Heure UTC" />
           </div>
         </div>
       </header>
