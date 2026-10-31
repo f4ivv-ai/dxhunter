@@ -306,8 +306,8 @@
   --band-160: #8b5cf6;
   --band-80: #3b82f6;
   --band-40: #06b6d4;
-  --band-20: #10b981;
-  --band-15: #f59e0b;
+  --band-20: #eab308;
+  --band-15: #f97316;
   --band-10: #f43f5e;
   --spectrum: linear-gradient(90deg, var(--band-160), var(--band-80), var(--band-40), var(--band-20), var(--band-15), var(--band-10));
 
@@ -602,8 +602,8 @@
   --band-160: #a78bfa;
   --band-80: #60a5fa;
   --band-40: #22d3ee;
-  --band-20: #34d399;
-  --band-15: #fbbf24;
+  --band-20: #facc15;
+  --band-15: #fb923c;
   --band-10: #fb7185;
 
   --amber-signal: #fbbf24;
@@ -1017,4 +1017,19 @@
   bottom: -1px;
   height: 3px;
   background: var(--spectrum);
+}
+
+/* En-têtes : léger lavis aux couleurs du spectre */
+.spectrum-header {
+  background-image: linear-gradient(90deg,
+    color-mix(in oklab, var(--band-160) 9%, transparent),
+    color-mix(in oklab, var(--band-80) 7%, transparent) 25%,
+    color-mix(in oklab, var(--band-40) 6%, transparent) 50%,
+    color-mix(in oklab, var(--band-15) 7%, transparent) 75%,
+    color-mix(in oklab, var(--band-10) 9%, transparent));
+}
+
+/* Boutons principaux : dégradé indigo → fuchsia */
+.bg-primary {
+  background-image: linear-gradient(135deg, var(--primary), color-mix(in oklab, var(--primary) 45%, #d946ef));
 }
