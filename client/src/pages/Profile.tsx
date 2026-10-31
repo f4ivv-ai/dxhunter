@@ -115,44 +115,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Subscription card */}
-        <div className="rounded-xl border border-border bg-card p-6 mb-6">
-          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <Crown className={`h-5 w-5 ${isPremium ? "text-amber-400" : "text-muted-foreground"}`} />
-            {t("profileSubscription")}
-          </h2>
-          <div className="flex items-center gap-3 mb-4">
-            <span
-              className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-sm font-bold ${
-                isPremium
-                  ? "bg-amber-500/20 text-amber-400 border border-amber-500/40"
-                  : "bg-muted text-muted-foreground border border-border"
-              }`}
-            >
-              {isPremium && <Crown className="h-4 w-4" />}
-              {isPremium ? t("profilePremium") : t("profileFree")}
-            </span>
-            {expiryDate && (
-              <span className="text-xs text-muted-foreground">
-                {t("profileExpiresOn")} {expiryDate}
-              </span>
-            )}
-          </div>
-          {!isPremium && (
-            <div className="rounded-lg bg-muted/50 p-4">
-              <p className="text-sm text-muted-foreground mb-3">
-                {t("profileUpgradeMsg")}
-              </p>
-              <Link href="/">
-                <Button variant="outline" size="sm" className="gap-1.5">
-                  <Crown className="h-3.5 w-3.5" />
-                  {t("profileViewPricing")}
-                </Button>
-              </Link>
-            </div>
-          )}
-        </div>
-
         {/* Locator card */}
         <div className="rounded-xl border border-border bg-card p-6">
           <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">

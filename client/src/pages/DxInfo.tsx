@@ -173,7 +173,7 @@ export default function DxInfo() {
   return (
     <div className="flex h-screen flex-col bg-slate-950 text-slate-100">
       {/* Header */}
-      <header className="flex shrink-0 items-center gap-3 border-b border-slate-800 bg-slate-900/80 px-4 py-2.5 backdrop-blur">
+      <header className="spectrum-header flex shrink-0 items-center gap-3 border-b border-slate-800 bg-slate-900/80 px-4 py-2.5 backdrop-blur">
         <Link href="/">
           <button className="flex items-center gap-1 rounded px-2 py-1 text-slate-400 transition hover:bg-slate-800 hover:text-slate-100">
             <ArrowLeft className="h-4 w-4" />

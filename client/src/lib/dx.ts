@@ -60,20 +60,20 @@ export type AllBand = (typeof ALL_BANDS)[number];
 
 /** Couleur associée à chaque bande (style "band map" radio). */
 export const BAND_COLORS: Record<string, string> = {
-  "160m": "#b07aff",  // violet clair — très distinct
-  "80m": "#4da6ff",   // bleu vif
+  "160m": "#8b5cf6",  // violet clair — très distinct
+  "80m": "#3b82f6",   // bleu vif
   "60m": "#6366f1",   // indigo — WARC 60m
-  "40m": "#00d4d4",   // cyan (pas vert)
-  "20m": "#f5c842",   // jaune doré (remplace vert)
-  "15m": "#ff9f1a",   // orange vif
-  "10m": "#ff5577",   // rose-rouge (pas rouge pur)
-  "30m": "#8b5cf6",   // violet — WARC
-  "17m": "#06b6d4",   // cyan — WARC
-  "12m": "#f97316",   // orange — WARC
-  "6m": "#ff44ff",    // magenta — Magic Band
-  "4m": "#44ffcc",    // turquoise
-  "2m": "#44ff44",    // vert vif
-  "70cm": "#ffff44",  // jaune vif
+  "40m": "#06b6d4",   // cyan (pas vert)
+  "20m": "#eab308",   // jaune doré (remplace vert)
+  "15m": "#f97316",   // orange vif
+  "10m": "#f43f5e",   // rose-rouge (pas rouge pur)
+  "30m": "#a855f7",   // violet — WARC
+  "17m": "#14b8a6",   // cyan — WARC
+  "12m": "#fb923c",   // orange — WARC
+  "6m": "#d946ef",    // magenta — Magic Band
+  "4m": "#10b981",    // turquoise
+  "2m": "#22c55e",    // vert vif
+  "70cm": "#84cc16",  // jaune vif
 };
 
 /**

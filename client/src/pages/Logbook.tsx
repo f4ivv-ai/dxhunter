@@ -529,7 +529,7 @@ export default function Logbook() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* ── Header ── */}
-      <header className="sticky top-0 z-30 border-b border-border bg-[oklch(0.16_0.009_250)]/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-3 px-3 py-2 sm:px-5">
           <Link href="/app" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
             <ArrowLeft className="h-4 w-4" />
@@ -681,7 +681,7 @@ export default function Logbook() {
             {/* ── Vue DESKTOP ── */}
             <div className="hidden sm:block overflow-x-auto">
               <table className="w-full border-collapse">
-                <thead className="sticky top-0 z-10 bg-[oklch(0.19_0.009_250)] text-left">
+                <thead className="sticky top-0 z-10 bg-secondary text-left">
                   <tr className="border-b border-border font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                     <th className={thCls} onClick={() => handleSort("date")}>
                       <span className="flex items-center gap-1">Date UTC <SortIcon col="date" sortBy={sortBy} sortDir={sortDir} /></span>

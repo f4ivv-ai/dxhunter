@@ -27,7 +27,6 @@ import { SelfMonitor } from "@/components/SelfMonitor";
 import { PilotGeneral } from "@/components/PilotGeneral";
 import { Compass, Target, CalendarClock, Headphones, ClipboardList, Activity, Gauge, Radio, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { PremiumGate } from "@/components/PremiumGate";
 import { ContestBand, ALL_CONTEST_BANDS, buildBandTimeline, BandTimelineSlot, QthCoords } from "@/lib/propagationMultiBand";
 
 type Tab = "live" | "brief" | "mult" | "timeline" | "websdr" | "selfmon" | "calib";
@@ -90,9 +89,9 @@ export default function Pilot() {
     : `${selectedBand} — par bande`;
 
   return (
-    <PremiumGate mode="block" featureName="Pilotage">
+    <>
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-30 border-b border-border bg-[oklch(0.16_0.009_250)]/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <NavBar
           clock={clock}
           right={
@@ -142,13 +141,13 @@ export default function Pilot() {
 
         {/* Onglets */}
         <div className="flex items-center gap-1 overflow-x-auto border-t border-border/60 px-3 py-1.5 sm:px-5">
-          <TabBtn active={tab === "live"} onClick={() => setTab("live")} icon={Compass} label="Recommandations" />
-          <TabBtn active={tab === "brief"} onClick={() => setTab("brief")} icon={ClipboardList} label="Briefing" />
-          <TabBtn active={tab === "mult"} onClick={() => setTab("mult")} icon={Target} label="Multiplicateurs" />
-          <TabBtn active={tab === "timeline"} onClick={() => setTab("timeline")} icon={CalendarClock} label="Plan 24h" />
-          <TabBtn active={tab === "websdr"} onClick={() => setTab("websdr")} icon={Headphones} label="WebSDR" />
-          <TabBtn active={tab === "selfmon"} onClick={() => setTab("selfmon")} icon={Radio} label="Self-Monitor" />
-          <TabBtn active={tab === "calib"} onClick={() => setTab("calib")} icon={Gauge} label="Calibration" />
+          <TabBtn color="#6366f1" active={tab === "live"} onClick={() => setTab("live")} icon={Compass} label="Recommandations" />
+          <TabBtn color="#0ea5e9" active={tab === "brief"} onClick={() => setTab("brief")} icon={ClipboardList} label="Briefing" />
+          <TabBtn color="#10b981" active={tab === "mult"} onClick={() => setTab("mult")} icon={Target} label="Multiplicateurs" />
+          <TabBtn color="#eab308" active={tab === "timeline"} onClick={() => setTab("timeline")} icon={CalendarClock} label="Plan 24h" />
+          <TabBtn color="#f97316" active={tab === "websdr"} onClick={() => setTab("websdr")} icon={Headphones} label="WebSDR" />
+          <TabBtn color="#f43f5e" active={tab === "selfmon"} onClick={() => setTab("selfmon")} icon={Radio} label="Self-Monitor" />
+          <TabBtn color="#a855f7" active={tab === "calib"} onClick={() => setTab("calib")} icon={Gauge} label="Calibration" />
         </div>
       </header>
 
@@ -264,7 +263,7 @@ export default function Pilot() {
         PILOTAGE CONTEST · {modeLabel} · modèle de propagation indicatif — toujours confirmer à l'écoute
       </footer>
     </div>
-    </PremiumGate>
+    </>
   );
 }
 
@@ -411,7 +410,9 @@ function TabBtn({
   onClick,
   icon: Icon,
   label,
+  color,
 }: {
+  color: string;
   active: boolean;
   onClick: () => void;
   icon: typeof Compass;
@@ -421,11 +422,12 @@ function TabBtn({
     <button
       onClick={onClick}
       className={cn(
-        "flex shrink-0 items-center gap-1.5 rounded px-2.5 py-1.5 font-mono text-[11px] font-bold uppercase tracking-wider transition-all active:scale-[0.97]",
-        active ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"
+        "flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] font-semibold transition-all active:scale-[0.97]",
+        active ? "text-white shadow-sm" : "text-foreground/75 hover:text-foreground"
       )}
+      style={active ? { background: color } : { background: `color-mix(in oklab, ${color} 10%, transparent)` }}
     >
-      <Icon className="h-3.5 w-3.5" />
+      <Icon className="h-3.5 w-3.5" style={active ? undefined : { color }} />
       {label}
     </button>
   );

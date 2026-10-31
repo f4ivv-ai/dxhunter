@@ -74,7 +74,7 @@ export function ForecastMap({ zones, userLat, userLon, className }: ForecastMapP
   }, [zones]);
 
   return (
-    <div className={cn("relative rounded-lg border border-border/50 bg-[oklch(0.12_0.005_250)] overflow-hidden", className)}>
+    <div className={cn("relative rounded-lg border border-border/50 bg-background overflow-hidden", className)}>
       <svg
         viewBox={`0 0 ${W} ${H}`}
         className="w-full h-auto"

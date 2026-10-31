@@ -40,7 +40,7 @@ export default function Admin() {
         <div className="container flex items-center justify-between py-3">
           <div className="flex items-center gap-3">
             <Shield className="h-6 w-6 text-primary" />
-            <h1 className="text-lg font-bold">Administration DX Daruma</h1>
+            <h1 className="text-lg font-bold">Administration DX Hunter</h1>
           </div>
           <a href="/app">
             <Button variant="outline" size="sm">Retour à l'app</Button>

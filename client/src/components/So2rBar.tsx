@@ -269,7 +269,7 @@ export function So2rBar() {
                   "rounded-lg px-2.5 py-2 text-left text-xs transition-all border",
                   activePreset === p.id
                     ? "bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-sm shadow-amber-500/10"
-                    : "border-transparent hover:bg-white/5 text-foreground/80 hover:text-foreground"
+                    : "border-transparent hover:bg-accent text-foreground/80 hover:text-foreground"
                 )}
               >
                 <div className="font-semibold">{p.label}</div>
@@ -291,7 +291,7 @@ export function So2rBar() {
                   "rounded-lg px-2.5 py-2 text-left text-xs transition-all border",
                   activePreset === p.id
                     ? "bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-sm shadow-amber-500/10"
-                    : "border-transparent hover:bg-white/5 text-foreground/80 hover:text-foreground"
+                    : "border-transparent hover:bg-accent text-foreground/80 hover:text-foreground"
                 )}
               >
                 <div className="font-semibold">{p.label}</div>
@@ -314,7 +314,7 @@ function DspToggle({ label, active, onClick }: { label: string; active: boolean;
         "rounded-lg px-2 py-1.5 text-xs font-bold text-center transition-all border",
         active
           ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-          : "bg-transparent text-muted-foreground border-border/40 hover:bg-white/5 hover:text-foreground"
+          : "bg-transparent text-muted-foreground border-border/40 hover:bg-accent hover:text-foreground"
       )}
     >
       {label}

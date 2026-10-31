@@ -122,7 +122,7 @@ export function SpotDetail({ spot, onClose }: Props) {
   );
 
   return (
-    <tr className="border-b border-primary/30 bg-[oklch(0.14_0.012_250)]">
+    <tr className="border-b border-primary/30 bg-background">
       <td colSpan={8} className="px-3 py-3">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0 flex-1">

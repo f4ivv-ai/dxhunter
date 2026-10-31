@@ -31,7 +31,7 @@ export function RecoPanel({ recos }: { recos: Recommendation[] }) {
         return (
           <div
             key={r.zone.id}
-            className="rounded-lg border border-border bg-[oklch(0.19_0.009_250)] p-3 transition-colors hover:border-primary/40"
+            className="rounded-lg border border-border bg-secondary p-3 transition-colors hover:border-primary/40"
           >
             <div className="flex items-start justify-between gap-2">
               <div className="min-w-0">

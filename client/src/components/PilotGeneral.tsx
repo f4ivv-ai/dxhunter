@@ -6,6 +6,7 @@
  * V7.12 : chaque carte de bande est cliquable → affiche les prévisions heure par heure
  * pour cette bande (direction, azimut, score) pour les 12 prochaines heures.
  */
+import { BAND_COLORS } from "@/lib/dx";
 import { useMemo, useState } from "react";
 import { buildGeneralTimeline, buildBandTimeline, ALL_CONTEST_BANDS, ContestBand, BandTimelineSlot, QthCoords } from "@/lib/propagationMultiBand";
 import { SolarInputs } from "@/lib/propagation";
@@ -145,25 +146,28 @@ export function PilotGeneral({ solar, spots, sw, qth }: PilotGeneralProps) {
 
       {/* Timeline des 6 prochaines heures */}
       <section className="rounded-lg border border-border bg-card p-4">
-        <h3 className="mb-3 font-mono text-xs font-bold uppercase tracking-widest text-foreground border-b border-border pb-2">
-          Prochaines 6 heures — Meilleure bande par créneau
+        <h3 className="mb-3 border-b border-border pb-2 text-sm font-semibold text-foreground">
+          Meilleure bande pour les 6 prochaines heures
         </h3>
         <div className="space-y-1">
           {timeline.slice(0, 6).map((slot, i) => (
             <div
               key={i}
               className={cn(
-                "flex items-center gap-3 rounded border px-3 py-2",
-                i === 0 ? "border-cyan-500/40 bg-cyan-500/10" : "border-border/60 bg-card/40"
+                "flex items-center gap-3 rounded-lg border border-l-4 px-3 py-2",
+                i === 0 && "ring-1"
               )}
+              style={{
+                borderColor: `color-mix(in oklab, ${BAND_COLORS[slot.bestBand] ?? "#6366f1"} 25%, var(--border))`,
+                borderLeftColor: BAND_COLORS[slot.bestBand] ?? "#6366f1",
+                background: `color-mix(in oklab, ${BAND_COLORS[slot.bestBand] ?? "#6366f1"} ${i === 0 ? 14 : 6}%, var(--card))`,
+                ["--tw-ring-color" as string]: BAND_COLORS[slot.bestBand] ?? "#6366f1",
+              }}
             >
               <div className="w-10 shrink-0 font-mono text-xs font-bold text-foreground">
                 {String(slot.hourUTC).padStart(2, "0")}h
               </div>
-              <div className={cn(
-                "shrink-0 rounded px-2 py-0.5 font-mono text-[10px] font-bold uppercase",
-                bandColorBg(slot.bestBand)
-              )}>
+              <div className="shrink-0 rounded-md px-2 py-0.5 font-mono text-[11px] font-bold text-white" style={{ background: BAND_COLORS[slot.bestBand] ?? "#6366f1" }}>
                 {slot.bestBand}
               </div>
               <div className="min-w-0 flex-1 truncate text-[11px] text-foreground/80">
@@ -173,7 +177,8 @@ export function PilotGeneral({ solar, spots, sw, qth }: PilotGeneralProps) {
                 {slot.bands.slice(0, 3).map((b) => (
                   <span
                     key={b.band}
-                    className="font-mono text-[8px] text-muted-foreground"
+                    className="rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold"
+                    style={{ color: BAND_COLORS[b.band] ?? "inherit", background: `color-mix(in oklab, ${BAND_COLORS[b.band] ?? "#6366f1"} 12%, transparent)` }}
                     title={`${b.band}: ${b.score}`}
                   >
                     {b.band}:{b.score}
@@ -256,16 +261,20 @@ function BandCard({
     <button
       onClick={onClick}
       className={cn(
-        "rounded-lg border p-3 transition-all text-left w-full cursor-pointer hover:ring-2 hover:ring-primary/30 active:scale-[0.97]",
-        isBest
-          ? "border-cyan-500/50 bg-cyan-500/10 ring-1 ring-cyan-500/30"
-          : "border-border bg-card hover:border-primary/40"
+        "relative overflow-hidden rounded-xl border p-3 pt-4 transition-all text-left w-full cursor-pointer hover:shadow-md active:scale-[0.98]",
+        isBest && "ring-2"
       )}
+      style={{
+        background: `color-mix(in oklab, ${BAND_COLORS[band] ?? "#6366f1"} ${isBest ? 16 : 9}%, var(--card))`,
+        borderColor: `color-mix(in oklab, ${BAND_COLORS[band] ?? "#6366f1"} 35%, var(--border))`,
+        ["--tw-ring-color" as string]: BAND_COLORS[band] ?? "#6366f1",
+      }}
     >
+      <span className="absolute inset-x-0 top-0 h-1" style={{ background: BAND_COLORS[band] ?? "#6366f1" }} />
       <div className="flex items-center justify-between mb-2">
-        <span className={cn("font-mono text-sm font-bold", bandColorClass(band))}>{band}</span>
+        <span className="rounded-md px-2 py-0.5 font-mono text-sm font-bold text-white" style={{ background: BAND_COLORS[band] ?? "#6366f1" }}>{band}</span>
         {isBest && (
-          <span className="rounded bg-cyan-500/20 px-1.5 py-0.5 font-mono text-[8px] font-bold uppercase text-cyan-300">
+          <span className="rounded-full px-2 py-0.5 text-[10px] font-semibold text-white" style={{ background: BAND_COLORS[band] ?? "#6366f1" }}>
             Meilleure
           </span>
         )}
@@ -285,11 +294,8 @@ function BandCard({
       <div className="mt-2 flex items-center gap-2">
         <div className="h-1.5 flex-1 rounded-full bg-border/50 overflow-hidden">
           <div
-            className={cn(
-              "h-full rounded-full transition-all",
-              score >= 65 ? "bg-phosphor/70" : score >= 40 ? "bg-primary/70" : score >= 20 ? "bg-amber-400/60" : "bg-muted/40"
-            )}
-            style={{ width: `${score}%` }}
+            className="h-full rounded-full transition-all"
+            style={{ width: `${score}%`, background: BAND_COLORS[band] ?? "#6366f1" }}
           />
         </div>
         <span className="font-mono text-[9px] text-muted-foreground">{spotCount} spots</span>

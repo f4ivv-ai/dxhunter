@@ -56,7 +56,7 @@ function SpotPopup({ spot, onClose }: { spot: Spot; onClose: () => void }) {
   const delSdr = trpc.websdr.deleteSdr.useMutation({ onSuccess: () => refetchSdrs() });
   return (
     <div
-      className="absolute z-20 w-64 rounded-lg border border-primary/40 bg-[oklch(0.14_0.01_250)] p-3 shadow-xl"
+      className="absolute z-20 w-64 rounded-lg border border-primary/40 bg-background p-3 shadow-xl"
       style={{ pointerEvents: "auto" }}
       onClick={(e) => e.stopPropagation()}
     >
@@ -418,7 +418,7 @@ export function WorldMap({ spots, hoveredId, onHover, onSelectSpot, userLocator 
           onClick={() => { setFullscreen(false); setSelectedSpot(null); }}
         >
           <div
-            className="relative w-[95vw] max-w-[1600px] rounded-xl border border-border bg-[oklch(0.13_0.01_250)] p-4 shadow-2xl"
+            className="relative w-[95vw] max-w-[1600px] rounded-xl border border-border bg-background p-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}

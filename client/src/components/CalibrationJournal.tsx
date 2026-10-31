@@ -139,12 +139,12 @@ export function CalibrationJournal() {
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)]">
           {/* Tableau jour par jour */}
           <div className="overflow-hidden rounded-lg border border-border">
-            <div className="border-b border-border bg-[oklch(0.19_0.009_250)] px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+            <div className="border-b border-border bg-secondary px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
               Progression jour par jour
             </div>
             <div className="max-h-[420px] overflow-auto">
               <table className="w-full border-collapse text-sm">
-                <thead className="sticky top-0 bg-[oklch(0.19_0.009_250)] text-left font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                <thead className="sticky top-0 bg-secondary text-left font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                   <tr>
                     <th className="px-3 py-2 font-medium">Jour</th>
                     <th className="px-2 py-2 font-medium">Date</th>
@@ -250,7 +250,7 @@ function DayDetail({ day, bandFilter }: { day: DaySummary; bandFilter: Band | "a
 
   return (
     <div className="overflow-hidden rounded-lg border border-border">
-      <div className="flex items-center justify-between border-b border-border bg-[oklch(0.19_0.009_250)] px-3 py-2">
+      <div className="flex items-center justify-between border-b border-border bg-secondary px-3 py-2">
         <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
           Détail {bandFilter === "all" ? "toutes bandes" : bandFilter} · {day.date}
         </span>
@@ -258,7 +258,7 @@ function DayDetail({ day, bandFilter }: { day: DaySummary; bandFilter: Band | "a
       </div>
       <div className="max-h-[420px] overflow-auto">
         <table className="w-full border-collapse text-sm">
-          <thead className="sticky top-0 bg-[oklch(0.19_0.009_250)] text-left font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+          <thead className="sticky top-0 bg-secondary text-left font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
             <tr>
               {bandFilter === "all" && <th className="px-2 py-2 font-medium">Bande</th>}
               <th className="px-3 py-2 font-medium">Zone</th>

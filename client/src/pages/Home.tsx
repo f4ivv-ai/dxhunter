@@ -4,6 +4,7 @@
  * Thème dual clair/sombre via variables CSS
  */
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Lcd } from "@/components/Lcd";
 import { useSpots } from "@/hooks/useSpots";
 import { Spot, ModeFamily, TRACKED_BANDS, WARC_BANDS, utcClock, fmtFreq, displayMode } from "@/lib/dx";
 import { FilterPanel, Filters } from "@/components/FilterPanel";
@@ -16,8 +17,6 @@ import { PlanTicker } from "@/components/PlanTicker";
 import { useSpaceWeather } from "@/hooks/useSpaceWeather";
 import { SelfMonitor } from "@/components/SelfMonitor";
 import { PropagationAlert } from "@/components/PropagationAlert";
-import { PremiumGate } from "@/components/PremiumGate";
-import { TrialBanner } from "@/components/TrialBanner";
 import { TargetPanel } from "@/components/TargetPanel";
 import { useTargets } from "@/hooks/useTargets";
 import { usePresence } from "@/hooks/usePresence";
@@ -39,15 +38,15 @@ import { toast } from "sonner";
 import { Link } from "wouter";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useI18n } from "@/contexts/I18nContext";
-import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { getUserQTH, bearingDistance } from "@/lib/propagation";
 import { useVisitorId } from "@/hooks/useVisitorId";
 
 import { findDxccByCallsign } from "@shared/dxccEntities";
 import { Globe } from "lucide-react";
+import { Brand } from "@/components/Brand";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
-const LOGO = "/images/daruma-logo.jpeg";
 
 const DEFAULT_FILTERS: Filters = {
   bands: new Set([...TRACKED_BANDS]),
@@ -62,7 +61,6 @@ const DEFAULT_FILTERS: Filters = {
 
 export default function Home() {
   const { t } = useI18n();
-  const { theme, toggleTheme } = useTheme();
   const { user } = useAuth();
   const visitorId = useVisitorId();
   const userQth = useMemo(() => getUserQTH(user?.locator), [user?.locator]);
@@ -206,20 +204,17 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       {/* ===== HEADER ===== */}
-      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-2 px-4 py-2">
           {/* Logo + titre */}
-          <img src={LOGO} alt="DX Daruma" className="h-8 w-8 shrink-0 rounded-full" />
-          <h1 className="font-mono text-base font-extrabold tracking-tight leading-none shrink-0">
-            DX<span className="text-primary"> DARUMA</span>
-          </h1>
+          <Brand />
 
 
           {/* Accès rapide Écoute DX — administrateur uniquement */}
           {user?.role === "admin" && (
             <Link
               href="/ecoute-dx"
-              className="hidden sm:flex ml-1 items-center gap-1.5 rounded-lg border border-cyan-400/40 bg-cyan-400/10 px-2.5 py-1.5 font-mono text-[10px] font-black uppercase tracking-wider text-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.08)] transition-all hover:border-cyan-300 hover:bg-cyan-400/20 active:scale-[0.97]"
+              className="hidden sm:flex ml-1 items-center gap-1.5 rounded-lg border border-cyan-400/40 bg-cyan-400/10 px-2.5 py-1.5 font-mono text-[10px] font-black uppercase tracking-wider text-cyan-300 shadow-[0_0_18px_rgba(61,255,127,0.08)] transition-all hover:border-cyan-300 hover:bg-cyan-400/20 active:scale-[0.97]"
               title="Recherche inversée par fréquence, direction et KiwiSDR"
             >
               <Headphones className="h-3.5 w-3.5" />
@@ -249,25 +244,13 @@ export default function Home() {
             </div>
 
             {/* Horloge UTC — compacte sur mobile */}
-            <div className="rounded-lg border border-border bg-background px-2 sm:px-3 py-1 text-center">
-              <div className="font-mono text-sm sm:text-lg font-bold text-primary tabular-nums leading-tight">{clock}</div>
-              <div className="text-[8px] sm:text-[9px] uppercase tracking-widest text-muted-foreground font-medium">UTC</div>
-            </div>
+            <Lcd value={clock.replace("Z", "")} unit="UTC" size="text-sm sm:text-lg" title="Heure UTC" />
 
             {/* Indicateurs — masqués sur mobile */}
             <div className="hidden sm:flex items-center gap-1.5">
               <ConnBadge conn={conn} lastUpdate={lastUpdate} />
               <CatIndicator />
             </div>
-
-            {/* Toggle thème */}
-            <button
-              onClick={toggleTheme}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground hover:text-primary hover:border-primary/50 transition-all active:scale-[0.95]"
-              title={theme === "dark" ? "Mode clair" : "Mode sombre"}
-            >
-              {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-            </button>
 
             {/* Refresh */}
             <button
@@ -279,6 +262,7 @@ export default function Home() {
             </button>
 
             {/* Langue — masquée sur mobile */}
+            <ThemeToggle />
             <div className="hidden sm:block">
               <LanguageSelector />
             </div>
@@ -331,8 +315,6 @@ export default function Home() {
           </div>
         </div>
       </header>
-
-      <TrialBanner />
       {filters.sporadicAlert && <PropagationAlert />}
 
       {/* ===== CORPS : 2 colonnes (spots + panneau droit) ===== */}
@@ -384,12 +366,12 @@ export default function Home() {
 
           {/* SelfMonitor — toujours visible */}
           <div className="border-b border-border bg-card px-2 sm:px-4 py-2 sm:py-3">
-            <PremiumGate mode="overlay" featureName="WebSDR">
+            <>
               <SelfMonitor
                 rigFreqMhz={radioConnected && currentFreq > 0 ? currentFreq : undefined}
                 rigMode={radioConnected ? currentMode : undefined}
               />
-            </PremiumGate>
+            </>
           </div>
 
           {/* Tableau */}
@@ -521,11 +503,15 @@ function RigIndicator({ radioConnected, currentFreq, currentMode, className = ""
   return (
     <div className={cn("items-center gap-2 ml-3 font-mono text-xs tabular-nums", className)}>
       {radioConnected && currentFreq > 0 ? (
-        <span className={cn("text-primary font-bold transition-all duration-300", freqFlash && "scale-110 brightness-150")}>
-          {currentFreq.toFixed(3)} MHz
-        </span>
+        <Lcd
+          value={currentFreq.toFixed(3).padStart(7, " ")}
+          unit="MHz"
+          size="text-sm"
+          className={cn("transition-[filter] duration-300", freqFlash && "brightness-150")}
+          title="Fréquence VFO"
+        />
       ) : (
-        <span className="text-muted-foreground/50">--- MHz</span>
+        <Lcd value="---.---" unit="MHz" size="text-sm" tone="off" title="Radio non connectée" />
       )}
       {radioConnected && currentMode && (
         <span className="text-amber-400/90 font-semibold text-[10px] ml-0.5">{currentMode.toUpperCase()}</span>

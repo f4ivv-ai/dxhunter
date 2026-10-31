@@ -63,7 +63,11 @@ export function SpotRow({ spot, isNew, isHovered, isExpanded, isWorked, isOob, u
         (isWorked || isOob) && "opacity-40"
       )}
       title={isPinned ? "QSY actif — cliquer pour voir les WebSDR" : "Cliquer pour voir les WebSDR proches et QRZ.com"}
-      style={isPinned ? { boxShadow: "inset 0 0 0 2px rgba(251,191,36,0.6)" } : undefined}
+      style={{
+        boxShadow: isPinned
+          ? `inset 3px 0 0 ${bandColor}, inset 0 0 0 2px rgba(251,191,36,0.6)`
+          : `inset 3px 0 0 ${bandColor}`,
+      }}
     >
       {/* heure */}
       <td className="px-1.5 py-1 font-mono text-[10px] text-muted-foreground whitespace-nowrap align-middle">

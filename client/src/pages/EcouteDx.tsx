@@ -26,8 +26,9 @@ import { toast } from "sonner";
 import type { inferRouterOutputs } from "@trpc/server";
 import type { AppRouter } from "../../../server/routers";
 import { PRIMARY_KIWI } from "../../../shared/primaryKiwi";
+import { Brand } from "@/components/Brand";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
-const LOGO = "/images/daruma-logo.jpeg";
 
 type PathChoice = "SP" | "LP";
 type RouterOutputs = inferRouterOutputs<AppRouter>;
@@ -202,22 +203,16 @@ export default function EcouteDx() {
   const result = searchResult;
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
+      <header className="spectrum-header sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur-md">
         <div className="flex items-center gap-3 px-4 py-2.5">
           <Link href="/app" className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-background text-muted-foreground hover:text-primary" title="Retour au Cluster">
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <img src={LOGO} alt="DX Daruma" className="h-9 w-9 rounded-full" />
-          <div>
-            <div className="flex items-center gap-2">
-              <Headphones className="h-5 w-5 text-cyan-400" />
-              <h1 className="font-mono text-base font-black tracking-tight">ÉCOUTE <span className="text-cyan-400">DX</span></h1>
-              <span className="rounded border border-amber-400/30 bg-amber-400/10 px-1.5 py-0.5 font-mono text-[9px] font-bold text-amber-300">ADMIN</span>
-            </div>
-            <p className="hidden text-[10px] text-muted-foreground sm:block">Recherche inversée depuis le VFO · KiwiSDR · identification Cluster</p>
-          </div>
+          <Brand section="Écoute DX" />
+          <p className="hidden max-w-xs text-[11px] leading-snug text-muted-foreground md:block">Qui émet sur la fréquence du VFO, dans la direction de l'antenne.</p>
           <div className="ml-auto hidden items-center gap-2 sm:flex">
             <StatusPill active={radioConnected} label={radioConnected ? "Flex connecté" : "Fréquence manuelle"} icon={<Radio className="h-3 w-3" />} />
+            <ThemeToggle />
             <StatusPill active={rotor.connected} label={rotor.connected ? `Rotor ${Math.round(rotor.azimuth)}°` : "Azimut manuel"} icon={<Compass className="h-3 w-3" />} />
           </div>
         </div>
@@ -242,7 +237,7 @@ export default function EcouteDx() {
             </a>
           </section>
 
-        <section className="overflow-hidden rounded-2xl border border-cyan-400/30 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.12),transparent_45%),linear-gradient(135deg,rgba(9,15,24,0.98),rgba(15,23,42,0.96))] shadow-2xl">
+        <section className="overflow-hidden rounded-2xl border border-cyan-400/30 bg-card shadow-2xl">
           <div className="border-b border-cyan-400/20 px-4 py-3">
             <div className="flex flex-wrap items-center gap-2">
               <Signal className="h-5 w-5 text-cyan-400" />
@@ -257,7 +252,7 @@ export default function EcouteDx() {
                 onChange={(event) => setManualFreqKhz(event.target.value)}
                 disabled={radioConnected}
                 inputMode="decimal"
-                className="h-11 w-full rounded-lg border border-white/10 bg-black/30 px-3 font-mono text-lg font-black text-cyan-300 outline-none focus:border-cyan-400 disabled:opacity-100"
+                className="h-11 w-full rounded-lg border border-border bg-background px-3 font-mono text-lg font-black text-cyan-300 outline-none focus:border-cyan-400 disabled:opacity-100"
               />
             </Field>
             <Field label="Direction antenne" hint={rotor.connected ? "Rotor réel" : "Saisie manuelle"}>
@@ -267,7 +262,7 @@ export default function EcouteDx() {
                   onChange={(event) => setManualAzimuth(event.target.value)}
                   disabled={rotor.connected}
                   inputMode="numeric"
-                  className="h-11 w-full rounded-lg border border-white/10 bg-black/30 px-3 pr-10 font-mono text-lg font-black text-amber-300 outline-none focus:border-amber-400 disabled:opacity-100"
+                  className="h-11 w-full rounded-lg border border-border bg-background px-3 pr-10 font-mono text-lg font-black text-amber-300 outline-none focus:border-amber-400 disabled:opacity-100"
                 />
                 <Compass className="absolute right-3 top-3 h-5 w-5 text-amber-400" />
               </div>
@@ -277,13 +272,13 @@ export default function EcouteDx() {
                 value={manualMode}
                 onChange={(event) => setManualMode(event.target.value)}
                 disabled={radioConnected}
-                className="h-11 w-full rounded-lg border border-white/10 bg-black/30 px-3 font-mono font-bold text-slate-100 outline-none disabled:opacity-100"
+                className="h-11 w-full rounded-lg border border-border bg-background px-3 font-mono font-bold text-slate-100 outline-none disabled:opacity-100"
               >
                 <option value="SSB">SSB</option><option value="CW">CW</option><option value="FT8">FT8</option><option value="RTTY">RTTY</option>
               </select>
             </Field>
             <Field label="Trajet" hint="±30° autour de l’axe">
-              <div className="grid h-11 grid-cols-2 rounded-lg border border-white/10 bg-black/30 p-1">
+              <div className="grid h-11 grid-cols-2 rounded-lg border border-border bg-background p-1">
                 {(["SP", "LP"] as const).map((choice) => (
                   <button key={choice} onClick={() => setPath(choice)} className={cn("rounded-md font-mono text-sm font-black transition-all active:scale-[0.97]", path === choice ? "bg-cyan-400 text-slate-950" : "text-slate-400 hover:text-white")}>{choice}</button>
                 ))}
